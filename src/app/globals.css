@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   Impacta IA Chile — design tokens (mapped to Tailwind 4 @theme)
+   Tokens become utilities automatically:
+     --color-blue-500 → bg-blue-500 / text-blue-500 / border-blue-500
+     --font-display   → font-display
+   ========================================================================== */
+
+@theme {
+  /* Brand blue (primary, signature electric blue) */
+  --color-blue-100: #CCCCFF;
+  --color-blue-200: #9999FF;
+  --color-blue-300: #6666FF;
+  --color-blue-400: #3333FF;
+  --color-blue-500: #0000FF;
+
+  /* Brand mint */
+  --color-mint-100: #D2F6F0;
+  --color-mint-200: #A5EDE1;
+  --color-mint-300: #77E4D1;
+  --color-mint-400: #4ADBC2;
+  --color-mint-500: #1DD2B3;
+
+  /* Brand magenta */
+  --color-pink-100: #FBD2E4;
+  --color-pink-200: #F8A5C9;
+  --color-pink-300: #F478AF;
+  --color-pink-400: #F14B94;
+  --color-pink-500: #ED1E79;
+
+  /* Neutrals */
+  --color-ink: #18181A;          /* primary text / black */
+  --color-ink-soft: #747476;     /* secondary text */
+  --color-ink-faint: #D1D1D1;    /* tertiary / hairline */
+  --color-paper: #FFFFFF;        /* primary surface */
+  --color-paper-soft: #F5F5F5;   /* off-white surface */
+  --color-night: #0E0E10;        /* dark surface (hero, form, números) */
+
+  /* Tier accents */
+  --color-tier-diamond: #8E8AF5;
+  --color-tier-gold: #C9A24C;
+  --color-tier-platinum: #BFBFBF;
+
+  /* Type families — wired to next/font CSS variables (set in layout.tsx) */
+  --font-display: var(--font-fh-lecturis), "Google Sans Flex", system-ui, sans-serif;
+  --font-display-rounded: var(--font-fh-lecturis-rounded), var(--font-fh-lecturis), system-ui, sans-serif;
+  --font-body: var(--font-google-sans-flex), system-ui, -apple-system, sans-serif;
+
+  /* Easing tokens (used by Framer Motion + CSS transitions) */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emph: cubic-bezier(0.3, 0, 0, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ==========================================================================
+   Base globals
+   ========================================================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--color-blue-500); color: #fff; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.35); }
+
+/* ==========================================================================
+   Animation keyframes used across components
+   ========================================================================== */
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes scrollIndicator {
+  0%, 100% { transform: scaleY(0.4); transform-origin: top; }
+  50%      { transform: scaleY(1);   transform-origin: top; }
+}
+
+@keyframes typingDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+/* ==========================================================================
+   Reusable utilities (wrap Tailwind compositions that recur enough to abstract)
+   ========================================================================== */
+
+@utility shimmer-text {
+  background: linear-gradient(120deg, #1DD2B3 0%, #6666FF 30%, #ED1E79 60%, #1DD2B3 90%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 8s linear infinite;
+}
+
+@utility eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@utility eyebrow-on-dark {
+  color: rgba(255, 255, 255, 0.6);
 }
