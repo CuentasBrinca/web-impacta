@@ -230,18 +230,20 @@ function FormCard({
         <div className="flex flex-wrap gap-2 mt-1.5">
           {formInteresOptions.map((o) => {
             const active = form.interes === o;
+            const pulsing = active && pulseKey > 0;
             return (
               <motion.button
                 type="button"
                 key={o}
                 onClick={() => update("interes", o)}
                 aria-pressed={active}
+                // 3-cycle bounce, slightly larger, slow ease in-out — feels deliberate
                 animate={
-                  active && pulseKey > 0
-                    ? { scale: [1, 1.06, 1] }
+                  pulsing
+                    ? { scale: [1, 1.09, 1, 1.06, 1, 1.04, 1] }
                     : { scale: 1 }
                 }
-                transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
+                transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1], times: [0, 0.18, 0.36, 0.54, 0.72, 0.86, 1] }}
                 className={[
                   "relative px-[18px] py-2.5 rounded-full font-[var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
                   active
@@ -249,20 +251,49 @@ function FormCard({
                     : "bg-transparent text-white/70 border-white/25 hover:text-white hover:border-white/50",
                 ].join(" ")}
               >
-                {o}
+                {/* Soft glow halo behind the chip during the pulse */}
                 <AnimatePresence>
-                  {active && pulseKey > 0 && (
+                  {pulsing && (
                     <motion.span
-                      key={pulseKey}
+                      key={`glow-${pulseKey}`}
                       aria-hidden
-                      className="absolute inset-0 rounded-full pointer-events-none"
-                      style={{ border: "1px solid rgba(255,255,255,0.6)" }}
-                      initial={{ scale: 1, opacity: 0.55 }}
-                      animate={{ scale: 1.6, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1.1, ease: [0.2, 0, 0, 1] }}
+                      className="absolute inset-[-4px] rounded-full pointer-events-none"
+                      style={{
+                        boxShadow: "0 0 0 0 rgba(255,255,255,0.5)",
+                      }}
+                      initial={{ boxShadow: "0 0 0 0 rgba(255,255,255,0.55)" }}
+                      animate={{
+                        boxShadow: [
+                          "0 0 0 0 rgba(255,255,255,0.55)",
+                          "0 0 0 12px rgba(255,255,255,0.25)",
+                          "0 0 0 6px rgba(255,255,255,0.35)",
+                          "0 0 0 14px rgba(255,255,255,0.18)",
+                          "0 0 0 8px rgba(255,255,255,0.22)",
+                          "0 0 0 0 rgba(255,255,255,0)",
+                        ],
+                      }}
+                      exit={{ boxShadow: "0 0 0 0 rgba(255,255,255,0)" }}
+                      transition={{ duration: 2.4, ease: "easeOut", times: [0, 0.2, 0.4, 0.6, 0.8, 1] }}
                     />
                   )}
+                </AnimatePresence>
+
+                <span className="relative z-10">{o}</span>
+
+                {/* 3 staggered pulse rings — give the moment air to breathe */}
+                <AnimatePresence>
+                  {pulsing && [0, 1, 2].map((i) => (
+                    <motion.span
+                      key={`ring-${pulseKey}-${i}`}
+                      aria-hidden
+                      className="absolute inset-0 rounded-full pointer-events-none"
+                      style={{ border: "1.5px solid rgba(255,255,255,0.7)" }}
+                      initial={{ scale: 1, opacity: 0.7 }}
+                      animate={{ scale: 1.85, opacity: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1.4, ease: [0.2, 0, 0, 1], delay: i * 0.32 }}
+                    />
+                  ))}
                 </AnimatePresence>
               </motion.button>
             );
