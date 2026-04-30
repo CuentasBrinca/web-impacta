@@ -52,7 +52,7 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
       ``,
       `Recibimos tu pre-registro a ${event.name} (${event.city}, ${event.monthYear}).`,
       ``,
-      `Te escribiremos primero cuando se publique el programa, los speakers y la pre-venta de cupos (early bird –30%).`,
+      `Te escribiremos primero cuando se publique el programa, los speakers y los detalles para asegurar tu invitación (los cupos son limitados y curados).`,
       ``,
       `Si necesitas algo antes, escríbenos a ${event.contact.general}.`,
       ``,

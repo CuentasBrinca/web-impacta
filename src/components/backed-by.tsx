@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { partners } from "@/lib/content";
+import { partners, type Partner } from "@/lib/content";
 
 export function BackedBy() {
   return (
@@ -10,25 +10,40 @@ export function BackedBy() {
             <div className="eyebrow">Con el respaldo de</div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 sm:gap-x-10 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8 sm:gap-x-8 items-center">
             {partners.map((p) => (
-              <div
-                key={p.name}
-                className="flex items-center justify-center"
-                title={`${p.name} — ${p.note}`}
-              >
-                <Image
-                  src={p.logo}
-                  alt={p.name}
-                  width={p.width}
-                  height={p.height}
-                  className="h-10 sm:h-12 w-auto object-contain max-w-full opacity-80 hover:opacity-100 transition-opacity duration-200"
-                />
-              </div>
+              <PartnerSlot key={p.name} partner={p} />
             ))}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function PartnerSlot({ partner }: { partner: Partner }) {
+  if (partner.logo) {
+    return (
+      <div className="flex items-center justify-center" title={`${partner.name} — ${partner.note}`}>
+        <Image
+          src={partner.logo}
+          alt={partner.name}
+          width={partner.width ?? 240}
+          height={partner.height ?? 80}
+          className="h-9 sm:h-10 w-auto object-contain max-w-full opacity-80 hover:opacity-100 transition-opacity duration-200"
+        />
+      </div>
+    );
+  }
+  // Wordmark fallback: pending logo
+  return (
+    <div
+      className="flex items-center justify-center h-9 sm:h-10"
+      title={`${partner.name} — ${partner.note}`}
+    >
+      <span className="font-[var(--font-display)] font-bold text-base sm:text-lg tracking-[-0.02em] text-ink-soft whitespace-nowrap">
+        {partner.name}
+      </span>
+    </div>
   );
 }

@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ButtonLink } from "@/components/ui/button";
+import { Button, ButtonLink } from "@/components/ui/button";
 import { event } from "@/lib/content";
+import { dispatchFormIntent } from "@/lib/form-intent";
 
 const EASE = [0.2, 0, 0, 1] as const;
 
@@ -98,9 +99,9 @@ export function Hero() {
             <ButtonLink href="#form" variant="primary" size="lg">
               Quiero participar →
             </ButtonLink>
-            <ButtonLink href="#form" variant="ghost-dark" size="lg">
+            <Button variant="ghost-dark" size="lg" onClick={() => dispatchFormIntent("Sponsor")}>
               Ser sponsor
-            </ButtonLink>
+            </Button>
           </div>
         </motion.div>
 

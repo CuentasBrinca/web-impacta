@@ -30,8 +30,18 @@ export const navItems = [
 /**
  * Logos go in /public/img/partners/. Aspect ratios vary, so each entry
  * declares its intrinsic width/height — the layout normalizes by height.
+ * Set logo: null to render a text wordmark fallback (used until the asset
+ * arrives).
  */
-export const partners = [
+export type Partner = {
+  readonly name: string;
+  readonly note: string;
+  readonly logo: string | null;
+  readonly width?: number;
+  readonly height?: number;
+};
+
+export const partners: readonly Partner[] = [
   {
     name: "CORFO",
     note: "Respaldo institucional",
@@ -39,10 +49,22 @@ export const partners = [
     width: 904, height: 282,
   },
   {
+    // PENDING: drop /img/partners/brinca.png + /img/partners/brinca-black.png
+    // and update logo path here.
+    name: "Brinca",
+    note: "Organizador",
+    logo: null,
+  },
+  {
     name: "Chile Global Ventures",
     note: "Red diáspora tech",
     logo: "/img/partners/chile-global-ventures.svg",
     width: 2142, height: 755,
+  },
+  {
+    name: "SCAI-Lab",
+    note: "Centro de IA",
+    logo: null, // pendiente — confirmado por user que aún no tiene logo
   },
   {
     name: "Universidad Adolfo Ibáñez",
@@ -56,7 +78,7 @@ export const partners = [
     logo: "/img/partners/diario-financiero.png",
     width: 1200, height: 630,
   },
-] as const;
+];
 
 // PLACEHOLDER — replace with real data from the Chile AI adoption study
 export const problemaStats = [
@@ -67,8 +89,20 @@ export const problemaStats = [
 
 export const ejes = [
   {
-    id: "adoptar",
+    id: "innovar",
     n: "01",
+    title: "Innovar",
+    sub: "Emprender con IA",
+    desc:
+      "Startups, MVPs y la práctica del vibe-coding. Cómo construir productos nuevos sobre modelos generativos en 2026.",
+    icon: "/img/icon-innovar.png",
+    color: "#B11362",
+    tint: "var(--color-pink-100)",
+    tags: ["Startups IA", "Vibe-coding", "Producto"],
+  },
+  {
+    id: "adoptar",
+    n: "02",
     title: "Adoptar",
     sub: "IA en la empresa",
     desc:
@@ -80,7 +114,7 @@ export const ejes = [
   },
   {
     id: "escalar",
-    n: "02",
+    n: "03",
     title: "Escalar",
     sub: "Con I+D",
     desc:
@@ -89,18 +123,6 @@ export const ejes = [
     color: "#0F8A75",
     tint: "var(--color-mint-100)",
     tags: ["Supercómputo", "Ley I+D", "Datasets"],
-  },
-  {
-    id: "innovar",
-    n: "03",
-    title: "Innovar",
-    sub: "Emprender con IA",
-    desc:
-      "Startups, MVPs y la práctica del vibe-coding. Cómo construir productos nuevos sobre modelos generativos en 2026.",
-    icon: "/img/icon-innovar.png",
-    color: "#B11362",
-    tint: "var(--color-pink-100)",
-    tags: ["Startups IA", "Vibe-coding", "Producto"],
   },
 ] as const;
 
@@ -121,9 +143,14 @@ export const profiles = [
     desc: "Vibe-coding, MVPs en semanas y la mecánica de escalar startups nativas IA en 2026.",
   },
   {
+    role: "Gerente de Personas / Transformación",
+    what: "Cultura y adopción",
+    desc: "Cómo lograr que la IA se use de verdad. Reskilling, change management y el rol de RRHH como motor de la transformación.",
+  },
+  {
     role: "Director de Innovación",
     what: "Adopción a escala",
-    desc: "Change management, gobernanza y la conversación honesta con áreas de negocio.",
+    desc: "Gobernanza, portafolio y la conversación honesta con áreas de negocio.",
   },
 ] as const;
 
@@ -147,19 +174,31 @@ export const formInteresOptions = ["Asistir", "Speaker", "Sponsor", "Media"] as 
 export type FormInteres = (typeof formInteresOptions)[number];
 
 export const formBenefits = [
-  { dot: "var(--color-mint-500)", txt: "Acceso prioritario a pre-venta (early bird –30%)" },
+  { dot: "var(--color-mint-500)", txt: "Prioridad para asegurar tu cupo en la primera ola de invitaciones" },
   { dot: "var(--color-blue-300)", txt: "Programa completo y line-up de speakers en mayo" },
   { dot: "var(--color-pink-500)", txt: "Newsletter mensual con casos chilenos de IA" },
 ] as const;
 
-export const footerColumns = [
+/**
+ * Footer link `intent` flags the Footer to render this entry as a button
+ * that pre-selects a form interest before scrolling — surfaces a clearer
+ * path for sponsors / media reaching out.
+ */
+export type FooterLink = {
+  readonly t: string;
+  readonly a: string;
+  readonly intent?: FormInteres;
+};
+
+export const footerColumns: ReadonlyArray<{ readonly h: string; readonly l: ReadonlyArray<FooterLink> }> = [
   {
     h: "El evento",
     l: [
       { t: "Pre-regístrate", a: "#form" },
       { t: "Los 3 ejes",     a: "#ejes" },
       { t: "Para quién",     a: "#para-quien" },
-      { t: "Sponsorship",    a: "#form" },
+      { t: "Quiero ser sponsor",  a: "#form", intent: "Sponsor" },
+      { t: "Soy media",           a: "#form", intent: "Media" },
     ],
   },
   {
@@ -178,4 +217,4 @@ export const footerColumns = [
       { t: "YouTube",      a: "#" },
     ],
   },
-] as const;
+];

@@ -41,8 +41,8 @@ export default function CodigoEticaPage() {
 
       <h2>Consecuencias</h2>
       <p>
-        Las violaciones a este código pueden resultar en una advertencia, expulsión del evento sin reembolso, y/o
-        prohibición de participar en futuras ediciones. La decisión la toma el equipo organizador.
+        Las violaciones a este código pueden resultar en una advertencia, expulsión del evento, y/o prohibición
+        de participar en futuras ediciones. La decisión la toma el equipo organizador.
       </p>
 
       <p>

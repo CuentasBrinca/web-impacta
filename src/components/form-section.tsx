@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { formInteresOptions, formBenefits, type FormInteres } from "@/lib/content";
 import { preRegister } from "@/app/actions/pre-register";
+import { FORM_INTENT_EVENT, type FormIntentDetail } from "@/lib/form-intent";
 
 type FormState = {
   nombre: string;
@@ -31,9 +33,29 @@ export function FormSection() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // pulseKey changes whenever an external "set-form-intent" event fires —
+  // remounting the chip's highlight ring re-triggers its animation.
+  const [pulseKey, setPulseKey] = useState(0);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   const update = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
+
+  // Listen for clicks from the hero / footer that pre-select an interest.
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<FormIntentDetail>).detail;
+      if (!detail?.interes) return;
+      setForm((f) => ({ ...f, interes: detail.interes }));
+      setPulseKey((k) => k + 1);
+      // Smooth-scroll the form into view, with a small offset so the heading is visible
+      requestAnimationFrame(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    };
+    window.addEventListener(FORM_INTENT_EVENT, handler);
+    return () => window.removeEventListener(FORM_INTENT_EVENT, handler);
+  }, []);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -52,6 +74,7 @@ export function FormSection() {
   return (
     <section
       id="form"
+      ref={sectionRef}
       className="relative overflow-hidden bg-night text-white px-6 sm:px-10 py-24 sm:py-32"
     >
       <Image
@@ -84,7 +107,7 @@ export function FormSection() {
               Sé parte de Impacta IA.
             </h2>
             <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
-              Los cupos son limitados. Deja tus datos y serás el primero en acceder al programa, speakers y pre-venta.
+              Los cupos son limitados y curados. Deja tus datos y serás el primero en saber del programa, los speakers y cómo asegurar tu invitación.
             </p>
             <ul className="flex flex-col gap-3.5 list-none p-0 m-0">
               {formBenefits.map((b) => (
@@ -107,6 +130,7 @@ export function FormSection() {
               submit={submit}
               submitting={submitting}
               error={error}
+              pulseKey={pulseKey}
             />
           )}
         </div>
@@ -144,12 +168,14 @@ function FormCard({
   submit,
   submitting,
   error,
+  pulseKey,
 }: {
   form: FormState;
   update: <K extends keyof FormState>(k: K, v: FormState[K]) => void;
   submit: (e: FormEvent) => void;
   submitting: boolean;
   error: string | null;
+  pulseKey: number;
 }) {
   return (
     <form onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -205,20 +231,40 @@ function FormCard({
           {formInteresOptions.map((o) => {
             const active = form.interes === o;
             return (
-              <button
+              <motion.button
                 type="button"
                 key={o}
                 onClick={() => update("interes", o)}
                 aria-pressed={active}
+                animate={
+                  active && pulseKey > 0
+                    ? { scale: [1, 1.06, 1] }
+                    : { scale: 1 }
+                }
+                transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
                 className={[
-                  "px-[18px] py-2.5 rounded-full font-[var(--font-body)] text-sm transition-all duration-150 border cursor-pointer",
+                  "relative px-[18px] py-2.5 rounded-full font-[var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
                   active
                     ? "bg-white text-ink border-white"
                     : "bg-transparent text-white/70 border-white/25 hover:text-white hover:border-white/50",
                 ].join(" ")}
               >
                 {o}
-              </button>
+                <AnimatePresence>
+                  {active && pulseKey > 0 && (
+                    <motion.span
+                      key={pulseKey}
+                      aria-hidden
+                      className="absolute inset-0 rounded-full pointer-events-none"
+                      style={{ border: "1px solid rgba(255,255,255,0.6)" }}
+                      initial={{ scale: 1, opacity: 0.55 }}
+                      animate={{ scale: 1.6, opacity: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 1.1, ease: [0.2, 0, 0, 1] }}
+                    />
+                  )}
+                </AnimatePresence>
+              </motion.button>
             );
           })}
         </div>

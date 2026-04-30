@@ -10,17 +10,41 @@ export function Ejes() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="ejes" className="bg-paper-soft overflow-hidden px-6 sm:px-10 py-24 sm:py-32">
-      <div className="mx-auto max-w-[1280px]">
+    <section id="ejes" className="relative bg-paper-soft overflow-hidden px-6 sm:px-10 py-24 sm:py-32">
+      {/* Subtle grain — gives the off-white background tactile depth without competing with content */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.45]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+          mixBlendMode: "multiply",
+        }}
+      />
+      {/* Soft radial accent — lifts the section subtly without a hard color shift */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute"
+        style={{
+          left: "-15%",
+          top: "10%",
+          width: "55%",
+          height: "60%",
+          background:
+            "radial-gradient(ellipse at center, rgba(0,0,255,0.05) 0%, rgba(0,0,255,0) 65%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1280px]">
         <div className="max-w-[920px] mb-16">
           <div className="eyebrow">Tres ejes · un objetivo</div>
           <h2
             className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4"
             style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
           >
-            Adopta. Escala.
+            Innova. Adopta.
             <br />
-            Innova.
+            Escala.
           </h2>
           <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[620px]">
             Que la IA funcione en tu empresa. Tres tracks paralelos durante dos días — escoge tu camino o cruza entre ellos.

@@ -1,4 +1,5 @@
 import { programa } from "@/lib/content";
+import { ShareButton } from "@/components/share-button";
 
 export function QueVasAVivir() {
   return (
@@ -16,45 +17,32 @@ export function QueVasAVivir() {
               inmersión en IA aplicada.
             </h2>
           </div>
-          <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0 max-w-[360px]">
-            Programa completo en junio. Pre-regístrate para recibirlo primero — y para acceder a la pre-venta de cupos.
-          </p>
+          <div className="flex flex-col gap-4 max-w-[360px]">
+            <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
+              Programa completo en junio. Pre-regístrate para recibirlo primero — y para asegurar tu cupo en la primera ola de invitaciones.
+            </p>
+            <ShareButton />
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-ink bg-paper">
-          {programa.map((it, i) => {
-            const col = i % 3;
-            const row = Math.floor(i / 3);
-            return (
-              <div
-                key={it.title}
-                className={[
-                  "p-8 sm:p-10 flex flex-col gap-3 min-h-[220px]",
-                  // Right border (md/lg only)
-                  col < 2 ? "lg:border-r lg:border-ink-faint" : "",
-                  // 2-col grid borders
-                  i % 2 === 0 ? "md:border-r md:border-ink-faint lg:border-r-0" : "",
-                  // Bottom border for first row(s) - keep simple: border-b on every cell, then remove on last
-                  i < programa.length - 1 ? "border-b border-ink-faint" : "",
-                  // On lg, remove bottom border for last row (i.e. last 3 cells)
-                  i >= programa.length - 3 ? "lg:border-b-0" : "",
-                  // Restore lg right border based on col index
-                  col < 2 ? "lg:border-r lg:border-ink-faint" : "lg:border-r-0",
-                  row < Math.floor((programa.length - 1) / 3) ? "lg:border-b lg:border-ink-faint" : "",
-                ].join(" ")}
-              >
-                <div className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-blue-500">
-                  {it.tag}
-                </div>
-                <h3 className="font-[var(--font-display)] text-2xl sm:text-[28px] font-bold tracking-[-0.02em] m-0 text-ink">
-                  {it.title}
-                </h3>
-                <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
-                  {it.desc}
-                </p>
+        {/* Grid de programa: bg de la grilla actúa como líneas (gap-px), cada celda en bg-paper. */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink-faint border border-ink overflow-hidden">
+          {programa.map((it) => (
+            <div
+              key={it.title}
+              className="bg-paper p-8 sm:p-10 flex flex-col gap-3 min-h-[220px]"
+            >
+              <div className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-blue-500">
+                {it.tag}
               </div>
-            );
-          })}
+              <h3 className="font-[var(--font-display)] text-2xl sm:text-[28px] font-bold tracking-[-0.02em] m-0 text-ink">
+                {it.title}
+              </h3>
+              <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
+                {it.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

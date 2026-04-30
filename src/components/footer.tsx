@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { footerColumns, event } from "@/lib/content";
+import { FooterIntentLink } from "@/components/footer-link";
 
 export function Footer() {
   return (
@@ -50,12 +51,16 @@ export function Footer() {
               <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
                 {col.l.map((li) => (
                   <li key={li.t}>
-                    <a
-                      href={li.a}
-                      className="font-[var(--font-body)] text-sm text-white no-underline transition-colors duration-150 hover:text-mint-500"
-                    >
-                      {li.t}
-                    </a>
+                    {li.intent ? (
+                      <FooterIntentLink intent={li.intent}>{li.t}</FooterIntentLink>
+                    ) : (
+                      <a
+                        href={li.a}
+                        className="font-[var(--font-body)] text-sm text-white no-underline transition-colors duration-150 hover:text-mint-500"
+                      >
+                        {li.t}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>

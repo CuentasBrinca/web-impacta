@@ -34,7 +34,7 @@ export default function PrivacidadPage() {
 
       <h2>3. Finalidad del tratamiento</h2>
       <ul>
-        <li>Enviarte información sobre el evento Impacta IA (programa, speakers, pre-venta)</li>
+        <li>Enviarte información sobre el evento Impacta IA (programa, speakers, confirmación de cupo)</li>
         <li>Curar el listado de asistentes según seniority e industria</li>
         <li>Comunicarnos contigo si solicitaste ser speaker, sponsor o media</li>
         <li>Cumplir obligaciones legales</li>

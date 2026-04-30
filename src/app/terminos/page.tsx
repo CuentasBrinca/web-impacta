@@ -21,16 +21,18 @@ export default function TerminosPage() {
         el sitio.
       </p>
 
-      <h2>2. Pre-registro</h2>
+      <h2>2. Pre-registro y cupos</h2>
       <p>
-        El pre-registro no constituye una garantía de inscripción al evento. Los cupos son limitados (400) y la
-        confirmación final depende de un proceso de curaduría basado en seniority y mezcla de industrias.
+        Impacta IA es un evento curado por invitación, con cupos limitados (400). El pre-registro no constituye
+        una garantía de participación: la confirmación final depende de un proceso de curaduría basado en
+        seniority, función ejecutiva y mezcla intencional de industrias.
       </p>
 
-      <h2>3. Pre-venta y reembolsos</h2>
+      <h2>3. Confirmación de cupo</h2>
       <p>
-        Las condiciones de pre-venta, precios, descuentos early bird y política de reembolso se publicarán en
-        esta misma URL antes de la apertura de la pre-venta. [PLACEHOLDER — completar antes de pre-venta.]
+        Las condiciones específicas para confirmar tu invitación (formato, fechas y, en su caso, contribución
+        económica) se comunicarán por correo a las personas pre-registradas, antes de la confirmación. [PLACEHOLDER
+        — completar cuando se definan condiciones definitivas.]
       </p>
 
       <h2>4. Propiedad intelectual</h2>
