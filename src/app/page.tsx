@@ -1,6 +1,7 @@
 import { Nav } from "@/components/nav";
 import { Hero } from "@/components/hero";
 import { CursorGlow } from "@/components/cursor-glow";
+import { EventJsonLd } from "@/components/event-json-ld";
 import { BackedBy } from "@/components/backed-by";
 import { Problema } from "@/components/problema";
 import { Ejes } from "@/components/ejes";
@@ -13,6 +14,7 @@ import { Footer } from "@/components/footer";
 export default function HomePage() {
   return (
     <>
+      <EventJsonLd />
       <CursorGlow />
       <Nav />
       <main>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { formInteresOptions, formBenefits, type FormInteres } from "@/lib/content";
+import { preRegister } from "@/app/actions/pre-register";
 
 type FormState = {
   nombre: string;
@@ -12,6 +13,7 @@ type FormState = {
   cargo: string;
   interes: FormInteres;
   consent: boolean;
+  website: string; // honeypot
 };
 
 const INITIAL: FormState = {
@@ -21,6 +23,7 @@ const INITIAL: FormState = {
   cargo: "",
   interes: "Asistir",
   consent: false,
+  website: "",
 };
 
 export function FormSection() {
@@ -32,18 +35,18 @@ export function FormSection() {
   const update = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 
-  // Placeholder submit — F3 wires this to the server action.
   const submit = async (e: FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
     setError(null);
-    if (!form.consent) {
-      setError("Necesitamos tu consentimiento para procesar tu inscripción.");
-      return;
-    }
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 600));
+    const result = await preRegister(form);
     setSubmitting(false);
-    setSent(true);
+    if (result.ok) {
+      setSent(true);
+    } else {
+      setError(result.error);
+    }
   };
 
   return (
@@ -150,6 +153,21 @@ function FormCard({
 }) {
   return (
     <form onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {/* Honeypot — hidden from humans (a11y + visual). Bots fill it; server rejects. */}
+      <div aria-hidden className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden" tabIndex={-1}>
+        <label>
+          Sitio web (no rellenar)
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            value={form.website}
+            onChange={(e) => update("website", e.target.value)}
+          />
+        </label>
+      </div>
+
       <Field label="Nombre" className="sm:col-span-2">
         <input
           type="text" required placeholder="Tu nombre" autoComplete="name"
