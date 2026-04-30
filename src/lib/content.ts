@@ -27,12 +27,35 @@ export const navItems = [
   { label: "Partners", href: "#partners" },
 ] as const;
 
+/**
+ * Logos go in /public/img/partners/. Aspect ratios vary, so each entry
+ * declares its intrinsic width/height — the layout normalizes by height.
+ */
 export const partners = [
-  { name: "CORFO",       note: "Respaldo institucional" },
-  { name: "Brinca",      note: "Organizador" },
-  { name: "ChileGlobal", note: "Red diáspora tech" },
-  { name: "SCAI-Lab",    note: "Centro de IA" },
-  { name: "UAI",         note: "Universidad Adolfo Ibáñez" },
+  {
+    name: "CORFO",
+    note: "Respaldo institucional",
+    logo: "/img/partners/corfo.png",
+    width: 904, height: 282,
+  },
+  {
+    name: "Chile Global Ventures",
+    note: "Red diáspora tech",
+    logo: "/img/partners/chile-global-ventures.svg",
+    width: 2142, height: 755,
+  },
+  {
+    name: "Universidad Adolfo Ibáñez",
+    note: "Dirección de Innovación",
+    logo: "/img/partners/uai.png",
+    width: 1920, height: 480,
+  },
+  {
+    name: "Diario Financiero",
+    note: "Media partner",
+    logo: "/img/partners/diario-financiero.png",
+    width: 1200, height: 630,
+  },
 ] as const;
 
 // PLACEHOLDER — replace with real data from the Chile AI adoption study
