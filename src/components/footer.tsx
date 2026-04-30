@@ -44,7 +44,11 @@ export function Footer() {
           </div>
 
           {footerColumns.map((col) => (
-            <div key={col.h}>
+            <div
+              key={col.h}
+              id={col.h === "Contacto" ? "contacto" : undefined}
+              className={col.h === "Contacto" ? "scroll-mt-28" : undefined}
+            >
               <div className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/65 mb-4">
                 {col.h}
               </div>

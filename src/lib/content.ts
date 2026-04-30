@@ -24,7 +24,7 @@ export const navItems = [
   { label: "El evento", href: "#evento" },
   { label: "Ejes", href: "#ejes" },
   { label: "Para quién", href: "#para-quien" },
-  { label: "Partners", href: "#partners" },
+  { label: "Contacto", href: "#contacto" },
 ] as const;
 
 /**
