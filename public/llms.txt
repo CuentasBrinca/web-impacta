@@ -1,0 +1,67 @@
+# Impacta IA Chile
+
+> Primera conferencia de inteligencia artificial para ejecutivos C-suite en Chile. Santiago, septiembre 2026. 400 cupos curados.
+
+Impacta IA es un evento por invitación curada (no venta abierta de tickets) producido por Brinca con el respaldo de CORFO, Chile Global Ventures, SCAI-Lab, Universidad Adolfo Ibáñez y Diario Financiero. Reúne a 400 ejecutivos C-level de empresas chilenas que están adoptando, escalando o innovando con inteligencia artificial. Se desarrolla en formato presencial durante dos días en Santiago.
+
+## El evento
+
+- **Nombre**: Impacta IA Chile
+- **Edición**: Primera (2026)
+- **Fecha**: Septiembre 2026 (fechas exactas por confirmar)
+- **Lugar**: Santiago, Chile
+- **Formato**: 2 días presencial
+- **Cupos**: 400, exclusivo C-level (curado)
+- **Idioma**: Español (es-CL)
+- **Organizador**: Brinca (https://brinca.global)
+- **Modelo de participación**: pre-registro → curaduría → invitación
+
+## Tres ejes temáticos
+
+- **Innovar — Emprender con IA**: startups, MVPs, vibe-coding y la práctica de construir productos nuevos sobre modelos generativos en 2026.
+- **Adoptar — IA en la empresa**: casos reales, paneles por función ejecutiva y mediciones concretas de ROI. Para equipos que están dando los primeros pasos con IA generativa.
+- **Escalar — Con I+D**: supercómputo, Ley I+D, datasets nacionales y la infraestructura que sostiene la IA a escala industrial.
+
+## Para quién
+
+- CEO / Gerente General — estrategia: cuándo, cuánto y cómo invertir en IA.
+- CTO / CIO / CDO — implementación: arquitecturas, equipos y operación.
+- Founder / Emprendedor — construir con IA: vibe-coding, MVPs y escala de startups nativas IA.
+- Gerente de Personas / Transformación — cultura y adopción: reskilling, change management.
+- Director de Innovación — adopción a escala: gobernanza, portafolio y conversación con áreas de negocio.
+
+## Programa (formato)
+
+- Keynotes — voces internacionales de referencia mundial en IA aplicada.
+- Paneles — mesas paralelas por función ejecutiva, casos reales sin teoría.
+- Challenge briefs — grupos curados resuelven un brief real de una empresa chilena.
+- Demos — implementaciones funcionando con código y métricas a la vista.
+- Networking — cenas curadas por industria, solo decision-makers.
+- Afterparty — cierre exclusivo para construir alianzas.
+
+## Partners
+
+- **CORFO** — respaldo institucional
+- **Brinca** — organizador
+- **Chile Global Ventures** — red diáspora tech
+- **SCAI-Lab** — centro de IA
+- **Universidad Adolfo Ibáñez** — Dirección de Innovación
+- **Diario Financiero** — media partner
+
+## Contacto
+
+- General: hola@impactaia.cl
+- Sponsorship: sponsors@impactaia.cl
+- Prensa: prensa@impactaia.cl
+
+## Páginas
+
+- [Inicio + pre-registro](https://www.impactaia.cl/)
+- [Política de privacidad (Ley 21.719 Chile)](https://www.impactaia.cl/privacidad)
+- [Términos de uso](https://www.impactaia.cl/terminos)
+- [Código de ética](https://www.impactaia.cl/codigo-etica)
+
+## Optional
+
+- Más información del organizador en [brinca.global](https://brinca.global)
+- Sitemap completo: https://www.impactaia.cl/sitemap.xml

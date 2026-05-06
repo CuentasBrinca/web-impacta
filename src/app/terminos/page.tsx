@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Términos de uso · Impacta IA",
   description: "Términos y condiciones del sitio impactaia.cl y del evento Impacta IA Chile.",
   robots: { index: true, follow: true },
+  alternates: { canonical: "/terminos" },
 };
 
 export default function TerminosPage() {

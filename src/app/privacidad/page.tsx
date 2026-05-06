@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Política de privacidad · Impacta IA",
   description: "Cómo tratamos tus datos personales conforme a la Ley 21.719 (Chile).",
   robots: { index: true, follow: true },
+  alternates: { canonical: "/privacidad" },
 };
 
 export default function PrivacidadPage() {

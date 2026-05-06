@@ -40,7 +40,8 @@ const googleSansFlex = localFont({
   ],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://impactaia.cl";
+// Canonical URL is www (apex 307-redirects to www).
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.impactaia.cl";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Código de ética · Impacta IA",
   description: "Reglas de convivencia, conducta esperada y mecanismos de reporte para asistentes, speakers y staff.",
   robots: { index: true, follow: true },
+  alternates: { canonical: "/codigo-etica" },
 };
 
 export default function CodigoEticaPage() {
