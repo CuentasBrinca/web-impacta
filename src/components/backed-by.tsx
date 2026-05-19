@@ -2,6 +2,7 @@ import Image from "next/image";
 import { partners, type Partner } from "@/lib/content";
 
 export function BackedBy() {
+  const visible = partners.filter((p) => !p.hidden);
   return (
     <section className="bg-paper text-ink px-6 sm:px-10 py-16 sm:py-20 border-y border-ink-faint">
       <div className="mx-auto max-w-[1280px]">
@@ -10,8 +11,8 @@ export function BackedBy() {
             <div className="eyebrow">Con el respaldo de</div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8 sm:gap-x-8 items-center">
-            {partners.map((p) => (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 sm:gap-x-8 items-center">
+            {visible.map((p) => (
               <PartnerSlot key={p.name} partner={p} />
             ))}
           </div>

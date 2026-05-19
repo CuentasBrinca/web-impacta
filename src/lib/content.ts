@@ -39,6 +39,8 @@ export type Partner = {
   readonly logo: string | null;
   readonly width?: number;
   readonly height?: number;
+  /** Set true to omit from the BackedBy section without losing the entry. */
+  readonly hidden?: boolean;
 };
 
 export const partners: readonly Partner[] = [
@@ -47,6 +49,7 @@ export const partners: readonly Partner[] = [
     note: "Respaldo institucional",
     logo: "/img/partners/corfo.png",
     width: 904, height: 282,
+    hidden: true, // oculto por ahora — flip a false cuando se confirme
   },
   {
     // PENDING: drop /img/partners/brinca.png + /img/partners/brinca-black.png
@@ -77,6 +80,7 @@ export const partners: readonly Partner[] = [
     note: "Media partner",
     logo: "/img/partners/diario-financiero.png",
     width: 1200, height: 630,
+    hidden: true, // oculto por ahora — flip a false cuando se confirme
   },
 ];
 

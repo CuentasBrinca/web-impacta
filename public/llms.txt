@@ -2,7 +2,7 @@
 
 > Primera conferencia de inteligencia artificial para ejecutivos C-suite en Chile. Santiago, septiembre 2026. 400 cupos curados.
 
-Impacta IA es un evento por invitación curada (no venta abierta de tickets) producido por Brinca con el respaldo de CORFO, Chile Global Ventures, SCAI-Lab, Universidad Adolfo Ibáñez y Diario Financiero. Reúne a 400 ejecutivos C-level de empresas chilenas que están adoptando, escalando o innovando con inteligencia artificial. Se desarrolla en formato presencial durante dos días en Santiago.
+Impacta IA es un evento por invitación curada (no venta abierta de tickets) producido por Brinca con el respaldo de Chile Global Ventures, SCAI-Lab y Universidad Adolfo Ibáñez. Reúne a 400 ejecutivos C-level de empresas chilenas que están adoptando, escalando o innovando con inteligencia artificial. Se desarrolla en formato presencial durante dos días en Santiago.
 
 ## El evento
 
@@ -41,12 +41,10 @@ Impacta IA es un evento por invitación curada (no venta abierta de tickets) pro
 
 ## Partners
 
-- **CORFO** — respaldo institucional
 - **Brinca** — organizador
 - **Chile Global Ventures** — red diáspora tech
 - **SCAI-Lab** — centro de IA
 - **Universidad Adolfo Ibáñez** — Dirección de Innovación
-- **Diario Financiero** — media partner
 
 ## Contacto
 

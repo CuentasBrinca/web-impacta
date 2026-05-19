@@ -57,10 +57,10 @@ export function EventJsonLd() {
           "@type": "BusinessAudience",
           audienceType: "C-suite executives",
         },
-        // Highlighted partners / sponsors
+        // Sponsors mostrados públicamente — debe coincidir con BackedBy
+        // (CORFO y Diario Financiero pendientes de confirmación, ocultos por ahora)
         sponsor: [
           { "@id": orgId },
-          { "@type": "Organization", name: "CORFO", url: "https://www.corfo.cl" },
           {
             "@type": "Organization",
             name: "Chile Global Ventures",
@@ -72,11 +72,6 @@ export function EventJsonLd() {
             url: "https://www.uai.cl",
           },
           { "@type": "Organization", name: "SCAI-Lab" },
-          {
-            "@type": "Organization",
-            name: "Diario Financiero",
-            url: "https://www.df.cl",
-          },
         ],
       },
       {
