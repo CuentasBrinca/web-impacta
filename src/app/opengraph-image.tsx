@@ -97,7 +97,7 @@ export default function OGImage() {
             fontWeight: 500,
           }}
         >
-          <span style={{ color: "#fff" }}>Santiago · Septiembre 2026</span>
+          <span style={{ color: "#fff" }}>Fundación Chile, Santiago · 2 y 3 de septiembre 2026</span>
           <span style={{ color: "rgba(255,255,255,0.65)" }}>400 cupos · C-level</span>
         </div>
       </div>

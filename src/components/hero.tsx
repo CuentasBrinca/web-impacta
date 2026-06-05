@@ -9,10 +9,10 @@ import { dispatchFormIntent } from "@/lib/form-intent";
 const EASE = [0.2, 0, 0, 1] as const;
 
 const heroMeta = [
-  { lbl: "FECHA",   val: event.monthYear },
-  { lbl: "CIUDAD",  val: event.city },
-  { lbl: "FORMATO", val: event.format },
-  { lbl: "CUPOS",   val: event.capacity },
+  { lbl: "FECHA",   val: event.dates,  sub: undefined },
+  { lbl: "LUGAR",   val: event.venue,  sub: event.venueAddress },
+  { lbl: "FORMATO", val: event.format, sub: undefined },
+  { lbl: "CUPOS",   val: event.capacity, sub: undefined },
 ] as const;
 
 export function Hero() {
@@ -65,7 +65,7 @@ export function Hero() {
             {event.edition}
           </span>
           <span className="text-[13px] tracking-wide text-white/55">
-            {event.city} · {event.monthYear}
+            {event.venue}, Santiago · {event.dates}
           </span>
         </div>
 
@@ -120,19 +120,14 @@ export function Hero() {
               <div className="font-[var(--font-display)] text-lg font-medium text-white mt-2 tracking-tight">
                 {m.val}
               </div>
+              {m.sub && (
+                <div className="font-[var(--font-body)] text-xs text-white/55 leading-snug mt-1">
+                  {m.sub}
+                </div>
+              )}
             </div>
           ))}
         </motion.div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-[11px] font-semibold tracking-[0.18em] uppercase text-white/45">
-        <span>Desliza</span>
-        <span
-          aria-hidden
-          className="block w-px h-7 bg-white/35"
-          style={{ animation: "scrollIndicator 2s ease-in-out infinite" }}
-        />
       </div>
     </header>
   );

@@ -11,6 +11,9 @@ export const event = {
   edition: "Primera edición · 2026",
   city: "Santiago, Chile",
   monthYear: "Septiembre 2026",
+  dates: "2 y 3 de septiembre 2026",
+  venue: "Fundación Chile",
+  venueAddress: "Av. Parque Antonio Rabat Sur 6165, Vitacura, Santiago",
   format: "2 días · presencial",
   capacity: "400 — exclusivo C-level",
   contact: {
@@ -162,7 +165,7 @@ export const numeros = [
   { num: 400, suffix: "",  lbl: "ejecutivos C-level", note: "Curados, exclusivo" },
   { num: 12,  suffix: "+", lbl: "industrias",         note: "Banca, retail, salud, minería..." },
   { num: 3,   suffix: "",  lbl: "ejes temáticos",     note: "Adoptar · Escalar · Innovar" },
-  { num: 2,   suffix: "",  lbl: "días de inmersión",  note: "Septiembre 2026" },
+  { num: 2,   suffix: "",  lbl: "días de inmersión",  note: "2 y 3 de septiembre" },
 ] as const;
 
 export const programa = [

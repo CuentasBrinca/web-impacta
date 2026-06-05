@@ -72,7 +72,7 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
     text: [
       `Hola ${input.nombre.split(" ")[0]},`,
       ``,
-      `Recibimos tu pre-registro a ${event.name} (${event.city}, ${event.monthYear}).`,
+      `Recibimos tu pre-registro a ${event.name} (${event.venue}, Santiago · ${event.dates}).`,
       ``,
       `Te escribiremos primero cuando se publique el programa, los speakers y los detalles para asegurar tu invitación (los cupos son limitados y curados).`,
       ``,

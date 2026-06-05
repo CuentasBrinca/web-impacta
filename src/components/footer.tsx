@@ -25,7 +25,7 @@ export function Footer() {
           >
             Santiago.
             <br />
-            <span className="text-white/45">{event.monthYear}.</span>
+            <span className="text-white/45">{event.dates}.</span>
           </h2>
         </div>
 
@@ -40,6 +40,11 @@ export function Footer() {
             />
             <p className="font-[var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
               La conferencia de IA para quienes toman decisiones. Un evento de Brinca, con el respaldo de CORFO.
+            </p>
+            <p className="font-[var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
+              <span className="text-white">{event.venue}</span>
+              <br />
+              {event.venueAddress}
             </p>
           </div>
 

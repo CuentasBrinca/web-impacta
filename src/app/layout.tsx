@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Impacta IA · La conferencia de IA para quienes toman decisiones",
   description:
-    "Primera conferencia de inteligencia artificial para ejecutivos C-suite en Chile. Santiago, septiembre 2026. 400 cupos.",
+    "Primera conferencia de inteligencia artificial para ejecutivos C-suite en Chile. Fundación Chile, Santiago · 2 y 3 de septiembre 2026. 400 cupos.",
   openGraph: {
     type: "website",
     locale: "es_CL",
@@ -55,11 +55,11 @@ export const metadata: Metadata = {
     siteName: "Impacta IA Chile",
     title: "Impacta IA · La conferencia de IA para quienes toman decisiones",
     description:
-      "Primera conferencia de IA para ejecutivos C-suite en Chile. Santiago, septiembre 2026. 400 cupos curados.",
+      "Primera conferencia de IA para ejecutivos C-suite en Chile. Fundación Chile, Santiago · 2 y 3 de septiembre 2026. 400 cupos curados.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Impacta IA · Santiago · Septiembre 2026",
+    title: "Impacta IA · Fundación Chile, Santiago · 2 y 3 sep 2026",
     description: "La conferencia de IA para quienes toman decisiones.",
   },
   robots: { index: true, follow: true },

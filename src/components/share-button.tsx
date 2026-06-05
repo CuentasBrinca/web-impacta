@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SHARE_TEXT =
-  "Impacta IA · Conferencia de IA para C-suite · Santiago · Septiembre 2026. Pre-regístrate aquí:";
+  "Impacta IA · Conferencia de IA para C-suite · Fundación Chile, Santiago · 2 y 3 de septiembre 2026. Pre-regístrate aquí:";
 
 const SITE_URL =
   typeof window !== "undefined" ? window.location.origin : "https://impactaia.cl";

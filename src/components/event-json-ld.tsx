@@ -4,8 +4,8 @@ import { event } from "@/lib/content";
  * schema.org @graph — multiple typed entities cross-referenced via @id.
  * Combines Event + Organization (Brinca) + WebSite for richer AI/SEO ingestion.
  *
- * Dates and offer are placeholders — update when venue + exact dates and the
- * registration model are confirmed.
+ * Offer/registration model is still a placeholder — update when the
+ * registration model is confirmed. Dates and venue are confirmed.
  */
 export function EventJsonLd() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.impactaia.cl";
@@ -22,17 +22,18 @@ export function EventJsonLd() {
         name: `${event.name} Chile`,
         description:
           "Primera conferencia de inteligencia artificial para ejecutivos C-suite en Chile. Adoptar, escalar e innovar con IA.",
-        // PLACEHOLDER — replace with confirmed dates
-        startDate: "2026-09-01",
-        endDate: "2026-09-02",
+        startDate: "2026-09-02",
+        endDate: "2026-09-03",
         eventStatus: "https://schema.org/EventScheduled",
         eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
         location: {
           "@type": "Place",
-          name: "Santiago, Chile",
+          name: "Fundación Chile",
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Santiago",
+            streetAddress: "Av. Parque Antonio Rabat Sur 6165",
+            addressLocality: "Vitacura",
+            addressRegion: "Región Metropolitana",
             addressCountry: "CL",
           },
         },
@@ -118,7 +119,7 @@ export function EventJsonLd() {
         url: siteUrl,
         name: "Impacta IA",
         description:
-          "Sitio oficial del evento Impacta IA Chile — conferencia de IA para C-suite, Santiago, septiembre 2026.",
+          "Sitio oficial del evento Impacta IA Chile — conferencia de IA para C-suite, Fundación Chile, Santiago, 2 y 3 de septiembre 2026.",
         inLanguage: "es-CL",
         publisher: { "@id": orgId },
         about: { "@id": eventId },
