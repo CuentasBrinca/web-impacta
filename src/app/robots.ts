@@ -10,7 +10,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.impactaia.cl";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: "*", allow: "/" },
+      { userAgent: "*", allow: "/", disallow: "/admin/" },
       { userAgent: "GPTBot", allow: "/" },
       { userAgent: "ChatGPT-User", allow: "/" },
       { userAgent: "OAI-SearchBot", allow: "/" },
