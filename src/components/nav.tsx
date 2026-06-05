@@ -25,7 +25,7 @@ export function Nav() {
           : "px-8 py-5 bg-transparent border-b border-transparent",
       ].join(" ")}
     >
-      <a href="#top" className="flex items-center gap-2.5 no-underline" aria-label="Impacta IA Chile · Inicio">
+      <a href="/#top" className="flex items-center gap-2.5 no-underline" aria-label="Impacta IA Chile · Inicio">
         <Image
           src="/img/logo-horizontal-white.png"
           alt="Impacta IA Chile"
@@ -46,14 +46,14 @@ export function Nav() {
             {it.label}
           </a>
         ))}
-        <ButtonLink href="#form" variant="inverse" size="sm">
+        <ButtonLink href="/#form" variant="inverse" size="sm">
           Quiero participar →
         </ButtonLink>
       </div>
 
       {/* Mobile CTA */}
       <div className="md:hidden">
-        <ButtonLink href="#form" variant="inverse" size="sm">
+        <ButtonLink href="/#form" variant="inverse" size="sm">
           Participar →
         </ButtonLink>
       </div>

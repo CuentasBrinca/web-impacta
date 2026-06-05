@@ -23,11 +23,14 @@ export const event = {
   },
 } as const;
 
+// Anclas root-relative (`/#…`) para que la nav funcione también desde las
+// páginas legales (/terminos, /privacidad, /codigo-etica): llevan a la home
+// y bajan a la sección. En la home son scroll suave sin recargar.
 export const navItems = [
-  { label: "El evento", href: "#evento" },
-  { label: "Ejes", href: "#ejes" },
-  { label: "Para quién", href: "#para-quien" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "El evento", href: "/#evento" },
+  { label: "Ejes", href: "/#ejes" },
+  { label: "Para quién", href: "/#para-quien" },
+  { label: "Contacto", href: "/#contacto" },
 ] as const;
 
 /**
@@ -201,11 +204,11 @@ export const footerColumns: ReadonlyArray<{ readonly h: string; readonly l: Read
   {
     h: "El evento",
     l: [
-      { t: "Pre-regístrate", a: "#form" },
-      { t: "Los 3 ejes",     a: "#ejes" },
-      { t: "Para quién",     a: "#para-quien" },
-      { t: "Quiero ser sponsor",  a: "#form", intent: "Sponsor" },
-      { t: "Soy media",           a: "#form", intent: "Media" },
+      { t: "Pre-regístrate", a: "/#form" },
+      { t: "Los 3 ejes",     a: "/#ejes" },
+      { t: "Para quién",     a: "/#para-quien" },
+      { t: "Quiero ser sponsor",  a: "/#form", intent: "Sponsor" },
+      { t: "Soy media",           a: "/#form", intent: "Media" },
     ],
   },
   {

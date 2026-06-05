@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { formInteresOptions, formBenefits, type FormInteres } from "@/lib/content";
 import { preRegister } from "@/app/actions/pre-register";
-import { FORM_INTENT_EVENT, type FormIntentDetail } from "@/lib/form-intent";
+import { FORM_INTENT_EVENT, takePendingFormIntent, type FormIntentDetail } from "@/lib/form-intent";
 
 type FormState = {
   nombre: string;
@@ -40,6 +40,16 @@ export function FormSection() {
 
   const update = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
+
+  // Apply an intent stashed before navigating here from a page without the
+  // form (e.g. footer "Quiero ser sponsor" on /terminos). The browser already
+  // scrolls to #form via the hash; we just preselect + pulse the chip.
+  useEffect(() => {
+    const pending = takePendingFormIntent();
+    if (!pending) return;
+    setForm((f) => ({ ...f, interes: pending }));
+    setPulseKey((k) => k + 1);
+  }, []);
 
   // Listen for clicks from the hero / footer that pre-select an interest.
   useEffect(() => {
