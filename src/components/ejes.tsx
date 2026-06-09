@@ -59,8 +59,7 @@ export function Ejes() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.18 }}
               transition={{ duration: 0.7, ease: EASE, delay: 0.08 * (idx + 1) }}
-              whileHover={reduced ? undefined : { y: -6 }}
-              className="bg-paper border border-ink rounded-2xl p-8 flex flex-col gap-4 min-h-[480px] relative overflow-hidden cursor-default transition-shadow duration-200 hover:shadow-[0_20px_40px_rgba(24,24,26,0.10)]"
+              className="bg-paper border border-ink rounded-2xl p-8 flex flex-col gap-4 min-h-[480px] relative overflow-hidden cursor-default"
             >
               <div
                 className="font-[var(--font-display)] text-sm font-bold tracking-[0.12em]"
