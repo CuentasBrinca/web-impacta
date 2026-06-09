@@ -13,6 +13,7 @@ import { Ejes } from "@/components/ejes";
 import { ParaQuien } from "@/components/para-quien";
 import { Numeros } from "@/components/numeros";
 import { QueVasAVivir } from "@/components/que-vas-a-vivir";
+import { Organizador } from "@/components/organizador";
 import { FormSection } from "@/components/form-section";
 import { Footer } from "@/components/footer";
 
@@ -30,6 +31,7 @@ export default function HomePage() {
         <ParaQuien />
         <Numeros />
         <QueVasAVivir />
+        <Organizador />
         <FormSection />
       </main>
       <Footer />

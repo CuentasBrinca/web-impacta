@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { footerColumns, event } from "@/lib/content";
+import { footerColumns, event, organizer } from "@/lib/content";
 import { FooterIntentLink } from "@/components/footer-link";
 
 export function Footer() {
@@ -46,6 +46,26 @@ export function Footer() {
               <br />
               {event.venueAddress}
             </p>
+
+            {/* Lockup del organizador — Brinca con logo enlazado. */}
+            <a
+              href={organizer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={`${organizer.name} — organizador de Impacta IA`}
+              className="inline-flex items-center gap-3 mt-7 group"
+            >
+              <span className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/45">
+                Producido por
+              </span>
+              <Image
+                src={organizer.logoLight}
+                alt={organizer.name}
+                width={organizer.width}
+                height={organizer.height}
+                className="h-6 w-auto opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+              />
+            </a>
           </div>
 
           {footerColumns.map((col) => (
@@ -78,7 +98,17 @@ export function Footer() {
         </div>
 
         <div className="pt-7 flex flex-wrap justify-between items-center gap-4 font-[var(--font-body)] text-xs text-ink-soft">
-          <div>© {new Date().getFullYear()} Impacta IA · Un evento de Brinca</div>
+          <div>
+            © {new Date().getFullYear()} Impacta IA · Un evento de{" "}
+            <a
+              href={organizer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/65 hover:text-mint-500 transition-colors"
+            >
+              {organizer.name}
+            </a>
+          </div>
           <div className="flex gap-6">
             <a href="/terminos" className="text-white/65 hover:text-white">Términos</a>
             <a href="/privacidad" className="text-white/65 hover:text-white">Privacidad</a>

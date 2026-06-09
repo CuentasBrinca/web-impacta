@@ -34,10 +34,39 @@ export const navItems = [
 ] as const;
 
 /**
+ * Brinca es el ORGANIZADOR del evento — no un patrocinador. Se trata aparte
+ * de `partners` (que son respaldos) para no diluir su rol en la grilla.
+ * Fuente única de los datos de marca de Brinca en el sitio.
+ *
+ * - `logoDark`  → sobre fondos claros (BackedBy, bloque "Detrás de…").
+ * - `logoLight` → sobre fondos oscuros (footer).
+ * - `url`       → con UTM para atribuir el tráfico que Impacta IA deriva a Brinca.
+ *
+ * Copy y datos verificados en https://www.brinca.com (jun 2026).
+ */
+export const organizer = {
+  name: "Brinca",
+  url: "https://www.brinca.com/?utm_source=impactaia&utm_medium=referral&utm_campaign=impacta-ia-2026",
+  logoDark: "/img/partners/brinca-black.png",
+  logoLight: "/img/partners/brinca-white.webp",
+  width: 171,
+  height: 47,
+  tagline: "Atrévete a dar el salto.",
+  blurb:
+    "Impacta IA nace en Brinca, la consultora chilena de innovación, estrategia, gestión del cambio e inteligencia artificial. Desde 2010 acompañamos a grandes organizaciones a transformarse con IA aplicada — combinando creatividad, método y excelencia.",
+  pillars: ["Creatividad", "Método", "Excelencia"] as const,
+  stats: [
+    { num: "+15", lbl: "años transformando grandes organizaciones" },
+    { num: "+50", lbl: "empresas acompañadas en su transformación" },
+    { num: "3", lbl: "frentes: estrategia, I+D e inteligencia artificial" },
+  ],
+} as const;
+
+/**
  * Logos go in /public/img/partners/. Aspect ratios vary, so each entry
  * declares its intrinsic width/height — the layout normalizes by height.
  * Set logo: null to render a text wordmark fallback (used until the asset
- * arrives).
+ * arrives). Brinca NO va aquí — es el organizador (ver `organizer`).
  */
 export type Partner = {
   readonly name: string;
@@ -56,13 +85,6 @@ export const partners: readonly Partner[] = [
     logo: "/img/partners/corfo.png",
     width: 904, height: 282,
     hidden: true, // oculto por ahora — flip a false cuando se confirme
-  },
-  {
-    // PENDING: drop /img/partners/brinca.png + /img/partners/brinca-black.png
-    // and update logo path here.
-    name: "Brinca",
-    note: "Organizador",
-    logo: null,
   },
   {
     name: "Chile Global Ventures",
