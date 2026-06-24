@@ -22,14 +22,14 @@ export function BackedBy() {
               target="_blank"
               rel="noopener noreferrer"
               title={`${organizer.name} — organizador de Impacta IA`}
-              className="inline-flex items-center group mt-6"
+              className="inline-flex items-center group mt-[14px]"
             >
               <Image
                 src={organizer.logoDark}
                 alt={organizer.name}
                 width={organizer.width}
                 height={organizer.height}
-                className="h-11 sm:h-14 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200"
+                className="h-9 sm:h-12 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-200"
               />
             </a>
           </div>

@@ -47,10 +47,10 @@ export const navItems = [
 export const organizer = {
   name: "Brinca",
   url: "https://www.brinca.com/?utm_source=impactaia&utm_medium=referral&utm_campaign=impacta-ia-2026",
-  logoDark: "/img/partners/brinca-black.png",
-  logoLight: "/img/partners/brinca-white.webp",
-  width: 171,
-  height: 47,
+  logoDark: "/img/partners/brinca.svg",
+  logoLight: "/img/partners/brinca-white.svg",
+  width: 136,
+  height: 37,
   tagline: "Atrévete a dar el salto.",
   blurb:
     "Impacta IA nace en Brinca, la consultora chilena de innovación, estrategia, gestión del cambio e inteligencia artificial. Desde 2010 acompañamos a grandes organizaciones a transformarse con IA aplicada — combinando creatividad, método y excelencia.",
@@ -185,6 +185,66 @@ export const profiles = [
     desc: "Gobernanza, portafolio y la conversación honesta con áreas de negocio.",
   },
 ] as const;
+
+/**
+ * Speakers por día. `photo: null` → placeholder gris (aún sin foto).
+ * Drop fotos en /public/img/speakers/ y apunta `photo` cuando lleguen.
+ */
+export type Speaker = {
+  readonly name: string;
+  readonly role: string;
+  readonly photo: string | null;
+};
+
+export const speakerDays = ["Día 1", "Día 2"] as const;
+export type SpeakerDay = (typeof speakerDays)[number];
+
+export const speakersByDay: Record<SpeakerDay, readonly Speaker[]> = {
+  "Día 1": [
+    {
+      name: "Stefano Puntoni",
+      role: "Codirector del programa de investigación sobre Inteligencia Artificial humana de Wharton.",
+      photo: null,
+    },
+    {
+      name: "Daniel Strode",
+      role: "Autor Bestseller “La ventaja del Innovador”.",
+      photo: null,
+    },
+    {
+      name: "Nombre Apellido",
+      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+      photo: null,
+    },
+    {
+      name: "Nombre Apellido",
+      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      photo: null,
+    },
+  ],
+  "Día 2": [
+    {
+      name: "Nombre Apellido",
+      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+      photo: null,
+    },
+    {
+      name: "Nombre Apellido",
+      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      photo: null,
+    },
+    {
+      name: "Nombre Apellido",
+      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
+      photo: null,
+    },
+    {
+      name: "Nombre Apellido",
+      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      photo: null,
+    },
+  ],
+};
 
 export const numeros = [
   { num: 400, suffix: "",  lbl: "ejecutivos C-level", note: "Curados, exclusivo" },
