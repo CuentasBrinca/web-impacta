@@ -12,7 +12,7 @@ export {
 export type { Status, Registration, Filters } from "@/lib/admin-shared";
 
 const SELECT_COLS =
-  "id, created_at, nombre, email, empresa, cargo, interes, consent, source, status, notes";
+  "id, created_at, nombre, email, empresa, cargo, area, motivacion, interes, consent, source, status, notes";
 
 /** Fetch registrations (newest first) matching the given filters. */
 export async function fetchRegistrations(filters: Filters): Promise<Registration[]> {

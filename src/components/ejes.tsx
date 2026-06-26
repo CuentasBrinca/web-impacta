@@ -36,15 +36,13 @@ export function Ejes() {
       />
 
       <div className="relative mx-auto max-w-[1280px]">
-        <div className="max-w-[920px] mb-16">
+        <div className="max-w-[1180px] mb-16">
           <div className="eyebrow">Tres ejes · un objetivo</div>
           <h2
-            className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4"
-            style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
+            className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4 whitespace-nowrap"
+            style={{ fontSize: "clamp(24px, 6.5vw, 74px)" }}
           >
-            Innova. Adopta.
-            <br />
-            Escala.
+            Innova. Adopta. Escala.
           </h2>
           <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[620px]">
             Que la IA funcione en tu empresa. Tres tracks paralelos durante dos días — escoge tu camino o cruza entre ellos.

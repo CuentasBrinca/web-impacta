@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { formInteresOptions } from "@/lib/content";
+import { formInteresOptions, formNivelOptions, formAreaOptions } from "@/lib/content";
 
 /**
  * Validation schema for the pre-registration form.
@@ -8,8 +8,10 @@ import { formInteresOptions } from "@/lib/content";
 export const preRegistrationSchema = z.object({
   nombre: z.string().trim().min(2, "Nombre muy corto").max(200),
   email: z.email("Email inválido").trim().toLowerCase().max(320),
-  empresa: z.string().trim().min(2, "Empresa muy corta").max(200),
-  cargo: z.string().trim().min(2, "Cargo muy corto").max(200),
+  empresa: z.string().trim().min(2, "Organización muy corta").max(200),
+  nivel: z.enum(formNivelOptions, { error: "Selecciona tu nivel de responsabilidad" }),
+  area: z.enum(formAreaOptions, { error: "Selecciona el área a la que perteneces" }),
+  motivacion: z.string().trim().max(1000).optional().default(""),
   interes: z.enum(formInteresOptions),
   consent: z.literal(true, {
     error: "Necesitamos tu consentimiento para procesar tu inscripción.",

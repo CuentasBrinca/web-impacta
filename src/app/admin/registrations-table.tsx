@@ -20,7 +20,7 @@ const dateFmt = new Intl.DateTimeFormat("es-CL", {
 });
 
 const interesStyles: Record<string, string> = {
-  Asistir: "bg-blue-100 text-blue-500",
+  Asistente: "bg-blue-100 text-blue-500",
   Speaker: "bg-mint-100 text-[#0F8A75]",
   Sponsor: "bg-pink-100 text-pink-500",
   Media: "bg-paper-soft text-ink-soft ring-1 ring-ink-faint",
@@ -52,7 +52,8 @@ export function RegistrationsTable({ rows }: { rows: Registration[] }) {
             <th className="px-4 py-3 font-semibold">Nombre</th>
             <th className="px-4 py-3 font-semibold">Email</th>
             <th className="px-4 py-3 font-semibold">Empresa</th>
-            <th className="px-4 py-3 font-semibold">Cargo</th>
+            <th className="px-4 py-3 font-semibold">Nivel</th>
+            <th className="px-4 py-3 font-semibold">Área</th>
             <th className="px-4 py-3 font-semibold">Interés</th>
             <th className="px-4 py-3 font-semibold">Estado</th>
             <th className="px-4 py-3 font-semibold">Notas</th>
@@ -80,6 +81,7 @@ function Row({ r }: { r: Registration }) {
       </td>
       <td className="px-4 py-3">{r.empresa}</td>
       <td className="px-4 py-3 text-ink-soft">{r.cargo}</td>
+      <td className="px-4 py-3 text-ink-soft">{r.area ?? "—"}</td>
       <td className="px-4 py-3">
         <span
           className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${

@@ -52,7 +52,10 @@ export async function preRegister(input: unknown): Promise<FormResult> {
     nombre: data.nombre,
     email: data.email,
     empresa: data.empresa,
-    cargo: data.cargo,
+    // `cargo` (columna legacy) almacena el nivel de responsabilidad.
+    cargo: data.nivel,
+    area: data.area,
+    motivacion: data.motivacion || null,
     interes: data.interes,
     consent: data.consent,
     source: "landing-form",

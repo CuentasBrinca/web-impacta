@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { speakerDays, speakersByDay, type SpeakerDay, type Speaker } from "@/lib/content";
+import { speakerDays, speakersByDay, countryFlags, type SpeakerDay, type Speaker } from "@/lib/content";
 
 export function Speakers() {
   const [day, setDay] = useState<SpeakerDay>(speakerDays[0]);
@@ -63,7 +63,7 @@ export function Speakers() {
 
 function SpeakerCard({ speaker }: { speaker: Speaker }) {
   return (
-    <article className="flex flex-col">
+    <article className="flex flex-col h-full">
       <div className="aspect-square w-full overflow-hidden bg-[#D9D9D9]">
         {speaker.photo && (
           <Image
@@ -81,6 +81,24 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
       <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-white/60 m-0">
         {speaker.role}
       </p>
+      {speaker.country && (
+        <div className="mt-auto pt-5">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 py-1.5 pl-1.5 pr-4">
+            {countryFlags[speaker.country] && (
+              <Image
+                src={countryFlags[speaker.country]}
+                alt=""
+                width={22}
+                height={22}
+                className="h-[22px] w-[22px] rounded-full shrink-0"
+              />
+            )}
+            <span className="font-[var(--font-body)] text-[13px] text-white/80">
+              {speaker.country}
+            </span>
+          </span>
+        </div>
+      )}
     </article>
   );
 }

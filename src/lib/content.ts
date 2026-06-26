@@ -63,52 +63,43 @@ export const organizer = {
 } as const;
 
 /**
- * Logos go in /public/img/partners/. Aspect ratios vary, so each entry
- * declares its intrinsic width/height — the layout normalizes by height.
- * Set logo: null to render a text wordmark fallback (used until the asset
- * arrives). Brinca NO va aquí — es el organizador (ver `organizer`).
+ * Logos de partners agrupados por rol, tal como aparecen en la sección
+ * "BackedBy". Cada logo declara su tamaño intrínseco; el layout normaliza por
+ * altura. Archivos en /public/img/partners/.
  */
-export type Partner = {
+export type PartnerLogo = {
   readonly name: string;
-  readonly note: string;
-  readonly logo: string | null;
-  readonly width?: number;
-  readonly height?: number;
-  /** Set true to omit from the BackedBy section without losing the entry. */
-  readonly hidden?: boolean;
+  readonly logo: string;
+  readonly width: number;
+  readonly height: number;
 };
 
-export const partners: readonly Partner[] = [
+export type PartnerGroup = {
+  readonly label: string;
+  /** "attribution" → etiqueta centrada en minúscula (ej. CORFO). */
+  readonly variant?: "attribution";
+  readonly logos: readonly PartnerLogo[];
+};
+
+export const partnerGroups: readonly PartnerGroup[] = [
   {
-    name: "CORFO",
-    note: "Respaldo institucional",
-    logo: "/img/partners/corfo.png",
-    width: 904, height: 282,
-    hidden: true, // oculto por ahora — flip a false cuando se confirme
+    label: "Organizan",
+    logos: [
+      { name: "Brinca", logo: "/img/partners/brinca.svg", width: 136, height: 37 },
+      { name: "Chile Global Ventures", logo: "/img/partners/chile-global-ventures.png", width: 336, height: 80 },
+    ],
   },
   {
-    name: "Chile Global Ventures",
-    note: "Red diáspora tech",
-    logo: "/img/partners/chile-global-ventures.svg",
-    width: 2142, height: 755,
+    label: "Proyecto apoyado por",
+    logos: [{ name: "CORFO", logo: "/img/partners/corfo.png", width: 270, height: 96 }],
   },
   {
-    name: "SCAI-Lab",
-    note: "Centro de IA",
-    logo: null, // pendiente — confirmado por user que aún no tiene logo
+    label: "Colaboran",
+    logos: [{ name: "Universidad Adolfo Ibáñez", logo: "/img/partners/uai.png", width: 360, height: 82 }],
   },
   {
-    name: "Universidad Adolfo Ibáñez",
-    note: "Dirección de Innovación",
-    logo: "/img/partners/uai.png",
-    width: 1920, height: 480,
-  },
-  {
-    name: "Diario Financiero",
-    note: "Media partner",
-    logo: "/img/partners/diario-financiero.png",
-    width: 1200, height: 630,
-    hidden: true, // oculto por ahora — flip a false cuando se confirme
+    label: "Media partner",
+    logos: [{ name: "Diario Financiero", logo: "/img/partners/diario-financiero.png", width: 98, height: 85 }],
   },
 ];
 
@@ -194,6 +185,12 @@ export type Speaker = {
   readonly name: string;
   readonly role: string;
   readonly photo: string | null;
+  readonly country: string;
+};
+
+/** Banderas circulares por país (en /public/img/flags/). */
+export const countryFlags: Record<string, string> = {
+  Argentina: "/img/flags/ar.svg",
 };
 
 export const speakerDays = ["Día 1", "Día 2"] as const;
@@ -205,21 +202,25 @@ export const speakersByDay: Record<SpeakerDay, readonly Speaker[]> = {
       name: "Stefano Puntoni",
       role: "Codirector del programa de investigación sobre Inteligencia Artificial humana de Wharton.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Daniel Strode",
       role: "Autor Bestseller “La ventaja del Innovador”.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Nombre Apellido",
       role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Nombre Apellido",
       role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       photo: null,
+      country: "Argentina",
     },
   ],
   "Día 2": [
@@ -227,21 +228,25 @@ export const speakersByDay: Record<SpeakerDay, readonly Speaker[]> = {
       name: "Nombre Apellido",
       role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Nombre Apellido",
       role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Nombre Apellido",
       role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
       photo: null,
+      country: "Argentina",
     },
     {
       name: "Nombre Apellido",
       role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       photo: null,
+      country: "Argentina",
     },
   ],
 };
@@ -262,8 +267,32 @@ export const programa = [
   { tag: "Afterparty",        title: "Cierre exclusivo",      desc: "Espacio íntimo para cerrar negocios y construir alianzas." },
 ] as const;
 
-export const formInteresOptions = ["Asistir", "Speaker", "Sponsor", "Media"] as const;
+export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
 export type FormInteres = (typeof formInteresOptions)[number];
+
+/** Opciones del dropdown "Nivel de responsabilidad". */
+export const formNivelOptions = [
+  "C-Level (CEO, CTO, CFO, etc.)",
+  "Vicepresidente / VP",
+  "Director / Directora",
+  "Gerente / Jefatura",
+  "Otro",
+] as const;
+export type FormNivel = (typeof formNivelOptions)[number];
+
+/** Opciones del dropdown "Área a la que pertenece". */
+export const formAreaOptions = [
+  "Dirección general / Estrategia",
+  "Tecnología / TI",
+  "Innovación / I+D",
+  "Datos / IA",
+  "Operaciones",
+  "Finanzas / Administración",
+  "Comercial / Marketing",
+  "Personas / RR.HH.",
+  "Otra",
+] as const;
+export type FormArea = (typeof formAreaOptions)[number];
 
 export const formBenefits = [
   { dot: "var(--color-mint-500)", txt: "Prioridad para asegurar tu cupo en la primera ola de invitaciones" },

@@ -23,7 +23,7 @@ const FROM_ADDRESS = "Impacta IA <hola@correo.impactaia.cl>";
 
 /** Reply-to inbox per intent type — surfaces the right Brinca person. */
 const REPLY_TO_BY_INTENT: Record<FormInteres, string> = {
-  Asistir: event.contact.general,  // hola@impactaia.cl
+  Asistente: event.contact.general,  // hola@impactaia.cl
   Speaker: event.contact.general,  // hola@impactaia.cl
   Sponsor: event.contact.sponsors, // sponsors@impactaia.cl
   Media:   event.contact.press,    // prensa@impactaia.cl
@@ -48,11 +48,13 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
     replyTo: input.email,
     subject: `[Impacta IA] Nuevo pre-registro · ${input.interes} · ${input.empresa}`,
     text: [
-      `Nombre:   ${input.nombre}`,
-      `Email:    ${input.email}`,
-      `Empresa:  ${input.empresa}`,
-      `Cargo:    ${input.cargo}`,
-      `Interés:  ${input.interes}`,
+      `Nombre:       ${input.nombre}`,
+      `Email:        ${input.email}`,
+      `Organización: ${input.empresa}`,
+      `Nivel:        ${input.nivel}`,
+      `Área:         ${input.area}`,
+      `Interés:      ${input.interes}`,
+      ...(input.motivacion ? [``, `Motivación:`, input.motivacion] : []),
       ``,
       `Consent (Ley 21.719): ${input.consent ? "sí" : "no"}`,
       ``,

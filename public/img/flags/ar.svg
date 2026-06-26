@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="ar-circle"><circle cx="12" cy="12" r="12"/></clipPath>
+  </defs>
+  <g clip-path="url(#ar-circle)">
+    <rect x="0" y="0" width="24" height="8" fill="#74ACDF"/>
+    <rect x="0" y="8" width="24" height="8" fill="#FFFFFF"/>
+    <rect x="0" y="16" width="24" height="8" fill="#74ACDF"/>
+    <circle cx="12" cy="12" r="2.3" fill="#F6B40E"/>
+    <circle cx="12" cy="12" r="2.3" fill="none" stroke="#E0A106" stroke-width="0.4"/>
+  </g>
+</svg>

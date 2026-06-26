@@ -4,7 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { formInteresOptions, formBenefits, type FormInteres } from "@/lib/content";
+import {
+  formInteresOptions,
+  formNivelOptions,
+  formAreaOptions,
+  formBenefits,
+  type FormInteres,
+} from "@/lib/content";
 import { preRegister } from "@/app/actions/pre-register";
 import { FORM_INTENT_EVENT, takePendingFormIntent, type FormIntentDetail } from "@/lib/form-intent";
 
@@ -12,8 +18,10 @@ type FormState = {
   nombre: string;
   email: string;
   empresa: string;
-  cargo: string;
+  nivel: string;
+  area: string;
   interes: FormInteres;
+  motivacion: string;
   consent: boolean;
   website: string; // honeypot
 };
@@ -22,8 +30,10 @@ const INITIAL: FormState = {
   nombre: "",
   email: "",
   empresa: "",
-  cargo: "",
-  interes: "Asistir",
+  nivel: "",
+  area: "",
+  interes: "Asistente",
+  motivacion: "",
   consent: false,
   website: "",
 };
@@ -88,7 +98,7 @@ export function FormSection() {
       className="relative overflow-hidden bg-night text-white px-6 sm:px-10 py-24 sm:py-32"
     >
       <Image
-        src="/img/bg-photo-2.png"
+        src="/img/bg-photo-6.png"
         alt=""
         fill
         sizes="100vw"
@@ -204,15 +214,15 @@ function FormCard({
         </label>
       </div>
 
-      <Field label="Nombre" className="sm:col-span-2">
+      <Field label="Nombre" required className="sm:col-span-2">
         <input
-          type="text" required placeholder="Tu nombre" autoComplete="name"
+          type="text" required placeholder="Nombre y Apellido" autoComplete="name"
           value={form.nombre}
           onChange={(e) => update("nombre", e.target.value)}
         />
       </Field>
 
-      <Field label="Email corporativo">
+      <Field label="Email corporativo" required>
         <input
           type="email" required placeholder="nombre@empresa.cl" autoComplete="email"
           value={form.email}
@@ -220,7 +230,7 @@ function FormCard({
         />
       </Field>
 
-      <Field label="Empresa">
+      <Field label="Organización" required>
         <input
           type="text" required placeholder="Empresa" autoComplete="organization"
           value={form.empresa}
@@ -228,15 +238,21 @@ function FormCard({
         />
       </Field>
 
-      <Field label="Cargo" className="sm:col-span-2">
-        <input
-          type="text" required placeholder="CEO, CTO, Director de Innovación..." autoComplete="organization-title"
-          value={form.cargo}
-          onChange={(e) => update("cargo", e.target.value)}
-        />
-      </Field>
+      <SelectField
+        label="Nivel de responsabilidad" required
+        value={form.nivel}
+        onChange={(v) => update("nivel", v)}
+        options={formNivelOptions}
+      />
 
-      <Field label="Quiero participar como" className="sm:col-span-2">
+      <SelectField
+        label="Área a la que pertenece" required
+        value={form.area}
+        onChange={(v) => update("area", v)}
+        options={formAreaOptions}
+      />
+
+      <Field label="Quiero participar como" required className="sm:col-span-2">
         <div className="flex flex-wrap gap-2 mt-1.5">
           {formInteresOptions.map((o) => {
             const active = form.interes === o;
@@ -311,6 +327,14 @@ function FormCard({
         </div>
       </Field>
 
+      <Field label="Motivación para asistir" className="sm:col-span-2">
+        <input
+          type="text" placeholder="Respuesta abierta" maxLength={1000}
+          value={form.motivacion}
+          onChange={(e) => update("motivacion", e.target.value)}
+        />
+      </Field>
+
       {/* Ley 21.719 / GDPR explicit consent */}
       <label className="sm:col-span-2 flex items-start gap-3 cursor-pointer select-none">
         <input
@@ -336,10 +360,7 @@ function FormCard({
         </div>
       )}
 
-      <div className="sm:col-span-2 mt-4 flex flex-wrap items-center justify-between gap-4">
-        <span className="font-[var(--font-body)] text-xs text-white/50">
-          Al enviar, aceptas nuestra política de privacidad.
-        </span>
+      <div className="sm:col-span-2 mt-4 flex justify-end">
         <Button type="submit" variant="inverse" size="lg" disabled={submitting}>
           {submitting ? "Enviando..." : "Quiero participar →"}
         </Button>
@@ -351,20 +372,77 @@ function FormCard({
 function Field({
   label,
   children,
+  required = false,
   className = "",
 }: {
   label: string;
   children: React.ReactNode;
+  required?: boolean;
   className?: string;
 }) {
   return (
     <label className={`flex flex-col gap-1.5 ${className}`}>
       <span className="font-[var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60">
         {label}
+        {required && <span className="text-pink-500 ml-0.5">*</span>}
       </span>
       <div className="[&_input]:w-full [&_input]:bg-transparent [&_input]:border-0 [&_input]:border-b [&_input]:border-white/25 [&_input]:text-white [&_input]:font-[var(--font-body)] [&_input]:text-base [&_input]:py-2.5 [&_input]:outline-none [&_input]:transition-colors [&_input::placeholder]:text-white/35 [&_input:focus]:border-white">
         {children}
       </div>
     </label>
+  );
+}
+
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+  required = false,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: readonly string[];
+  required?: boolean;
+  className?: string;
+}) {
+  const empty = value === "";
+  return (
+    <Field label={label} required={required} className={className}>
+      <div className="relative">
+        <select
+          required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={[
+            "w-full appearance-none cursor-pointer bg-transparent border-0 border-b border-white/25",
+            "font-[var(--font-body)] text-base py-2.5 pr-8 outline-none transition-colors",
+            "focus:border-white [&>option]:text-ink",
+            empty ? "text-white/35" : "text-white",
+          ].join(" ")}
+        >
+          <option value="" disabled>
+            Seleccione una opción
+          </option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+        <svg
+          aria-hidden
+          viewBox="0 0 20 20"
+          className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 h-4 w-4 text-white/55"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        >
+          <path d="M6 8l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </Field>
   );
 }
