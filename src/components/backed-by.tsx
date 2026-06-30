@@ -19,15 +19,17 @@ function PartnerGroupBlock({ group }: { group: PartnerGroup }) {
   const attribution = group.variant === "attribution";
   return (
     <div className={`flex flex-col gap-5 ${attribution ? "items-center" : "items-start"}`}>
-      <div
-        className={
-          attribution
-            ? "font-[var(--font-body)] text-[11px] font-medium tracking-[0.02em] text-ink-soft text-center"
-            : "eyebrow"
-        }
-      >
-        {group.label}
-      </div>
+      {!group.hideLabel && (
+        <div
+          className={
+            attribution
+              ? "font-[var(--font-body)] text-[11px] font-medium tracking-[0.02em] text-ink-soft text-center"
+              : "eyebrow"
+          }
+        >
+          {group.label}
+        </div>
+      )}
       <div className="flex items-center gap-8 sm:gap-10">
         {group.logos.map((l) => (
           <Image
@@ -37,7 +39,7 @@ function PartnerGroupBlock({ group }: { group: PartnerGroup }) {
             width={l.width}
             height={l.height}
             title={l.name}
-            className="h-9 sm:h-11 w-auto object-contain"
+            className={`${l.sizeClass ?? "h-9 sm:h-11"} w-auto object-contain`}
           />
         ))}
       </div>

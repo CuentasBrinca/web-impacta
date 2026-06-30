@@ -72,12 +72,16 @@ export type PartnerLogo = {
   readonly logo: string;
   readonly width: number;
   readonly height: number;
+  /** Sobrescribe el tamaño por defecto del logo (clases Tailwind de altura). */
+  readonly sizeClass?: string;
 };
 
 export type PartnerGroup = {
   readonly label: string;
   /** "attribution" → etiqueta centrada en minúscula (ej. CORFO). */
   readonly variant?: "attribution";
+  /** Oculta la etiqueta (p.ej. cuando el texto ya viene dentro del logo). */
+  readonly hideLabel?: boolean;
   readonly logos: readonly PartnerLogo[];
 };
 
@@ -91,7 +95,8 @@ export const partnerGroups: readonly PartnerGroup[] = [
   },
   {
     label: "Proyecto apoyado por",
-    logos: [{ name: "CORFO", logo: "/img/partners/corfo.png", width: 270, height: 96 }],
+    hideLabel: true, // El texto "Proyecto apoyado por" ya viene dentro del logo de CORFO.
+    logos: [{ name: "CORFO", logo: "/img/partners/corfo-v2.png", width: 276, height: 125, sizeClass: "h-[52px] sm:h-[64px]" }],
   },
   {
     label: "Colaboran",

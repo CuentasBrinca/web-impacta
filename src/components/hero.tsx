@@ -51,7 +51,7 @@ export function Hero() {
             initial={reduced ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="font-[var(--font-fh-lecturis-rounded)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[16ch] m-0"
+            className="font-[var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[16ch] m-0"
             style={{ fontSize: "clamp(40px, 7.2vw, 118px)" }}
           >
             La conferencia
