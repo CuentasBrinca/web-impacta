@@ -9,6 +9,8 @@ import {
   formNivelOptions,
   formAreaOptions,
   formBenefits,
+  NIVEL_OTRO,
+  AREA_OTRO,
   type FormInteres,
 } from "@/lib/content";
 import { preRegister } from "@/app/actions/pre-register";
@@ -19,7 +21,9 @@ type FormState = {
   email: string;
   empresa: string;
   nivel: string;
+  nivelOtro: string;
   area: string;
+  areaOtro: string;
   interes: FormInteres;
   motivacion: string;
   consent: boolean;
@@ -31,7 +35,9 @@ const INITIAL: FormState = {
   email: "",
   empresa: "",
   nivel: "",
+  nivelOtro: "",
   area: "",
+  areaOtro: "",
   interes: "Asistente",
   motivacion: "",
   consent: false,
@@ -127,7 +133,7 @@ export function FormSection() {
               Sé parte de Impacta IA.
             </h2>
             <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
-              Los cupos son limitados y curados. Deja tus datos y serás el primero en saber del programa, los speakers y cómo asegurar tu invitación.
+              Los cupos son limitados y cuidadosamente seleccionados. Deja tus datos y serás el primero en conocer el programa, los speakers y cómo asegurar tu invitación.
             </p>
             <ul className="flex flex-col gap-3.5 list-none p-0 m-0">
               {formBenefits.map((b) => (
@@ -251,6 +257,26 @@ function FormCard({
         onChange={(v) => update("area", v)}
         options={formAreaOptions}
       />
+
+      {form.nivel === NIVEL_OTRO && (
+        <Field label="Especifica tu cargo" required className="sm:col-span-2">
+          <input
+            type="text" required placeholder="Tu cargo" maxLength={200}
+            value={form.nivelOtro}
+            onChange={(e) => update("nivelOtro", e.target.value)}
+          />
+        </Field>
+      )}
+
+      {form.area === AREA_OTRO && (
+        <Field label="Especifica tu área" required className="sm:col-span-2">
+          <input
+            type="text" required placeholder="Tu área" maxLength={200}
+            value={form.areaOtro}
+            onChange={(e) => update("areaOtro", e.target.value)}
+          />
+        </Field>
+      )}
 
       <Field label="Quiero participar como" required className="sm:col-span-2">
         <div className="flex flex-wrap gap-2 mt-1.5">

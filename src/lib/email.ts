@@ -1,6 +1,6 @@
 import "server-only";
 import { Resend } from "resend";
-import { event } from "@/lib/content";
+import { event, NIVEL_OTRO, AREA_OTRO } from "@/lib/content";
 import type { FormInteres } from "@/lib/content";
 import type { PreRegistrationInput } from "@/lib/schema";
 
@@ -38,6 +38,9 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
   const resend = new Resend(apiKey);
   const internalTo = process.env.NOTIFICATION_TO_EMAIL ?? "francisco.martinez@brinca.global";
   const userReplyTo = REPLY_TO_BY_INTENT[input.interes];
+  // Si el nivel/área es "Otro", mostramos el texto que escribió el usuario.
+  const nivelTxt = input.nivel === NIVEL_OTRO ? `${input.nivel}: ${input.nivelOtro}` : input.nivel;
+  const areaTxt = input.area === AREA_OTRO ? `${input.area}: ${input.areaOtro}` : input.area;
 
   // 1. Internal notification → Brinca team gets pinged with the new lead.
   //    Reply-To = the form submitter, so hitting "Responder" in Gmail goes
@@ -51,8 +54,8 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
       `Nombre:       ${input.nombre}`,
       `Email:        ${input.email}`,
       `Organización: ${input.empresa}`,
-      `Nivel:        ${input.nivel}`,
-      `Área:         ${input.area}`,
+      `Nivel:        ${nivelTxt}`,
+      `Área:         ${areaTxt}`,
       `Interés:      ${input.interes}`,
       ...(input.motivacion ? [``, `Motivación:`, input.motivacion] : []),
       ``,

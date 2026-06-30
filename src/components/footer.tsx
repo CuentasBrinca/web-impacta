@@ -63,7 +63,7 @@ export function Footer() {
                 alt={organizer.name}
                 width={organizer.width}
                 height={organizer.height}
-                className="h-6 w-auto opacity-80 group-hover:opacity-100 transition-opacity duration-200"
+                className="h-[28px] w-auto opacity-80 group-hover:opacity-100 transition-opacity duration-200"
               />
             </a>
           </div>

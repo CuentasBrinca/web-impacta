@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { NIVEL_OTRO, AREA_OTRO } from "@/lib/content";
 import { preRegistrationSchema, type FormResult } from "@/lib/schema";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendPreRegistrationEmails } from "@/lib/email";
@@ -52,9 +53,9 @@ export async function preRegister(input: unknown): Promise<FormResult> {
     nombre: data.nombre,
     email: data.email,
     empresa: data.empresa,
-    // `cargo` (columna legacy) almacena el nivel de responsabilidad.
-    cargo: data.nivel,
-    area: data.area,
+    // `cargo` (columna legacy) almacena el nivel; si es "Otro", el texto libre.
+    cargo: data.nivel === NIVEL_OTRO ? data.nivelOtro : data.nivel,
+    area: data.area === AREA_OTRO ? data.areaOtro : data.area,
     motivacion: data.motivacion || null,
     interes: data.interes,
     consent: data.consent,

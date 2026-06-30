@@ -270,27 +270,38 @@ export const programa = [
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
 export type FormInteres = (typeof formInteresOptions)[number];
 
+/** Opción que dispara un campo de texto abierto en el formulario. */
+export const NIVEL_OTRO = "Otro";
+
 /** Opciones del dropdown "Nivel de responsabilidad". */
 export const formNivelOptions = [
-  "C-Level (CEO, CTO, CFO, etc.)",
-  "Vicepresidente / VP",
-  "Director / Directora",
-  "Gerente / Jefatura",
-  "Otro",
+  "Gerente General / CEO",
+  "Director(a)",
+  "Gerente",
+  "Subgerente",
+  "Jefatura / Líder",
+  "Coordinador(a)",
+  "Profesional / Especialista",
+  "Consultor(a)",
+  NIVEL_OTRO,
 ] as const;
 export type FormNivel = (typeof formNivelOptions)[number];
 
+/** Opción que dispara un campo de texto abierto para el área. */
+export const AREA_OTRO = "Otro";
+
 /** Opciones del dropdown "Área a la que pertenece". */
 export const formAreaOptions = [
-  "Dirección general / Estrategia",
-  "Tecnología / TI",
-  "Innovación / I+D",
-  "Datos / IA",
+  "Recursos Humanos",
+  "Tecnología de la Información (TI)",
+  "Innovación",
+  "Finanzas",
+  "Gerencia General",
   "Operaciones",
-  "Finanzas / Administración",
-  "Comercial / Marketing",
-  "Personas / RR.HH.",
-  "Otra",
+  "Comercial / Ventas",
+  "Marketing",
+  "Transformación Digital",
+  AREA_OTRO,
 ] as const;
 export type FormArea = (typeof formAreaOptions)[number];
 

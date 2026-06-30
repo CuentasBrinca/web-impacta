@@ -104,7 +104,7 @@ export function Numeros() {
           className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-16 text-white max-w-[16ch]"
           style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
         >
-          Escala íntima.
+          Formato cercano.
           <br />
           Conversaciones reales.
         </h2>
