@@ -123,7 +123,7 @@ export const ejes = [
     sub: "Emprender con IA",
     desc:
       "Startups, MVPs y la práctica del vibe-coding. Cómo construir productos nuevos sobre modelos generativos en 2026.",
-    icon: "/img/icon-innovar.png",
+    icon: "/img/icon-innovar-v2.png",
     color: "#B11362",
     tint: "var(--color-pink-100)",
     tags: ["Startups IA", "Vibe-coding", "Producto"],
@@ -135,7 +135,7 @@ export const ejes = [
     sub: "IA en la empresa",
     desc:
       "Casos reales, paneles por función y mediciones concretas de ROI. Para equipos que están dando los primeros pasos con IA generativa.",
-    icon: "/img/icon-adoptar.png",
+    icon: "/img/icon-adoptar-v2.png",
     color: "var(--color-blue-500)",
     tint: "var(--color-blue-100)",
     tags: ["Casos reales", "ROI por función", "Change management"],
@@ -144,10 +144,10 @@ export const ejes = [
     id: "escalar",
     n: "03",
     title: "Escalar",
-    sub: "Con I+D",
+    sub: "IA con I+D",
     desc:
       "Supercómputo, Ley I+D, datasets nacionales y la infraestructura que sostiene la IA a escala industrial.",
-    icon: "/img/icon-escalar.png",
+    icon: "/img/icon-escalar-v2.png",
     color: "#0F8A75",
     tint: "var(--color-mint-100)",
     tags: ["Supercómputo", "Ley I+D", "Datasets"],
@@ -191,7 +191,13 @@ export type Speaker = {
   readonly role: string;
   readonly photo: string | null;
   readonly country: string;
+  /** Tema/track de la charla — usado por el filtro en la página /speakers. */
+  readonly tema?: SpeakerTema;
 };
+
+/** Temas (tracks) de las charlas — alineados a los tres ejes del evento. */
+export const speakerTemas = ["Innovación", "Adopción", "Escalamiento"] as const;
+export type SpeakerTema = (typeof speakerTemas)[number];
 
 /** Banderas circulares por país (en /public/img/flags/). */
 export const countryFlags: Record<string, string> = {
@@ -201,59 +207,42 @@ export const countryFlags: Record<string, string> = {
 export const speakerDays = ["Día 1", "Día 2"] as const;
 export type SpeakerDay = (typeof speakerDays)[number];
 
+/** Texto de relleno para oradores de ejemplo. */
+const ROLE_LOREM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.";
+
+/** Genera N oradores placeholder, rotando el tema entre los tres ejes. */
+function placeholderSpeakers(count: number, temaOffset = 0): Speaker[] {
+  return Array.from({ length: count }, (_, i) => ({
+    name: "Nombre Apellido",
+    role: ROLE_LOREM,
+    photo: null,
+    country: "Argentina",
+    tema: speakerTemas[(temaOffset + i) % speakerTemas.length],
+  }));
+}
+
 export const speakersByDay: Record<SpeakerDay, readonly Speaker[]> = {
+  // 2 oradores reales + 18 placeholders = 20.
   "Día 1": [
     {
       name: "Stefano Puntoni",
       role: "Codirector del programa de investigación sobre Inteligencia Artificial humana de Wharton.",
       photo: null,
       country: "Argentina",
+      tema: "Innovación",
     },
     {
       name: "Daniel Strode",
       role: "Autor Bestseller “La ventaja del Innovador”.",
       photo: null,
       country: "Argentina",
+      tema: "Innovación",
     },
-    {
-      name: "Nombre Apellido",
-      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
-      photo: null,
-      country: "Argentina",
-    },
-    {
-      name: "Nombre Apellido",
-      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      photo: null,
-      country: "Argentina",
-    },
+    ...placeholderSpeakers(18, 0),
   ],
-  "Día 2": [
-    {
-      name: "Nombre Apellido",
-      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
-      photo: null,
-      country: "Argentina",
-    },
-    {
-      name: "Nombre Apellido",
-      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      photo: null,
-      country: "Argentina",
-    },
-    {
-      name: "Nombre Apellido",
-      role: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
-      photo: null,
-      country: "Argentina",
-    },
-    {
-      name: "Nombre Apellido",
-      role: "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      photo: null,
-      country: "Argentina",
-    },
-  ],
+  // 20 placeholders.
+  "Día 2": placeholderSpeakers(20, 1),
 };
 
 export const numeros = [

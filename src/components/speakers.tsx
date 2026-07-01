@@ -1,12 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
-import { speakerDays, speakersByDay, countryFlags, type SpeakerDay, type Speaker } from "@/lib/content";
+import { speakerDays, speakersByDay, type SpeakerDay } from "@/lib/content";
+import { SpeakerCard } from "@/components/speaker-card";
+import { ButtonLink } from "@/components/ui/button";
 
 export function Speakers() {
   const [day, setDay] = useState<SpeakerDay>(speakerDays[0]);
-  const speakers = speakersByDay[day];
+  // El home muestra solo un adelanto; el listado completo está en /speakers.
+  const speakers = speakersByDay[day].slice(0, 4);
 
   return (
     <section id="speakers" className="bg-night text-white px-6 sm:px-10 py-24 sm:py-32 scroll-mt-24">
@@ -56,49 +58,14 @@ export function Speakers() {
             <SpeakerCard key={`${day}-${i}`} speaker={s} />
           ))}
         </div>
+
+        {/* CTA → página con todos los oradores */}
+        <div className="mt-16 flex justify-center">
+          <ButtonLink href="/speakers" variant="ghost-dark" size="lg">
+            Ver todos los Speakers →
+          </ButtonLink>
+        </div>
       </div>
     </section>
-  );
-}
-
-function SpeakerCard({ speaker }: { speaker: Speaker }) {
-  return (
-    <article className="flex flex-col h-full">
-      <div className="aspect-square w-full overflow-hidden bg-[#D9D9D9]">
-        {speaker.photo && (
-          <Image
-            src={speaker.photo}
-            alt={speaker.name}
-            width={600}
-            height={600}
-            className="h-full w-full object-cover"
-          />
-        )}
-      </div>
-      <h3 className="font-[var(--font-body)] text-xl font-bold text-white mt-5 mb-2">
-        {speaker.name}
-      </h3>
-      <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-white/60 m-0">
-        {speaker.role}
-      </p>
-      {speaker.country && (
-        <div className="mt-auto pt-5">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 py-1.5 pl-1.5 pr-4">
-            {countryFlags[speaker.country] && (
-              <Image
-                src={countryFlags[speaker.country]}
-                alt=""
-                width={22}
-                height={22}
-                className="h-[22px] w-[22px] rounded-full shrink-0"
-              />
-            )}
-            <span className="font-[var(--font-body)] text-[13px] text-white/80">
-              {speaker.country}
-            </span>
-          </span>
-        </div>
-      )}
-    </article>
   );
 }
