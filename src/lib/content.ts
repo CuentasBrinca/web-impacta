@@ -253,12 +253,12 @@ export const numeros = [
 ] as const;
 
 export const programa = [
-  { tag: "Keynotes",          title: "Voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo." },
-  { tag: "Paneles",           title: "Por función ejecutiva", desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales." },
-  { tag: "Challenge briefs",  title: "Trabajo en equipos",    desc: "Grupos curados resuelven un brief real de una empresa chilena." },
-  { tag: "Demos",             title: "IA en vivo",            desc: "Implementaciones que ya están funcionando — código y métricas a la vista." },
-  { tag: "Networking",        title: "Mesas C-level",         desc: "Cenas curadas por industria. Solo decision-makers, sin observadores." },
-  { tag: "Afterparty",        title: "Cierre exclusivo",      desc: "Espacio íntimo para cerrar negocios y construir alianzas." },
+  { tag: "Keynotes",          title: "Voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.png" },
+  { tag: "Paneles",           title: "Por función ejecutiva", desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.png" },
+  { tag: "Challenge briefs",  title: "Trabajo en equipos",    desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.png" },
+  { tag: "Demos",             title: "IA en vivo",            desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.png"   },
+  { tag: "Networking",        title: "Mesas C-level",         desc: "Cenas curadas por industria. Solo decision-makers, sin observadores.",                 img: "/img/Group-4.png" },
+  { tag: "Afterparty",        title: "Cierre exclusivo",      desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.png" },
 ] as const;
 
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
