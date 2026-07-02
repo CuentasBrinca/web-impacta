@@ -9,7 +9,7 @@ export function QueVasAVivir() {
           <div className="max-w-[760px]">
             <div className="eyebrow">El formato</div>
             <h2
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4"
+              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4"
               style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
             >
               Dos días de
@@ -18,7 +18,7 @@ export function QueVasAVivir() {
             </h2>
           </div>
           <div className="flex flex-col gap-4 max-w-[360px]">
-            <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
+            <p className="font-[family-name:var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
               Programa completo en junio. Pre-regístrate para recibirlo primero — y para asegurar tu cupo en la primera ola de invitaciones.
             </p>
             <ShareButton />
@@ -32,13 +32,13 @@ export function QueVasAVivir() {
               key={it.title}
               className="bg-paper p-8 sm:p-10 flex flex-col gap-3 min-h-[220px]"
             >
-              <div className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-blue-500">
+              <div className="font-[family-name:var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-blue-500">
                 {it.tag}
               </div>
-              <h3 className="font-[var(--font-display)] text-2xl sm:text-[28px] font-bold tracking-[-0.02em] m-0 text-ink">
+              <h3 className="font-[family-name:var(--font-display)] text-2xl sm:text-[28px] font-bold tracking-[-0.02em] m-0 text-ink">
                 {it.title}
               </h3>
-              <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
+              <p className="font-[family-name:var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
                 {it.desc}
               </p>
             </div>

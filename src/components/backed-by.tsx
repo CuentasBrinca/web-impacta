@@ -23,7 +23,7 @@ function PartnerGroupBlock({ group }: { group: PartnerGroup }) {
         <div
           className={
             attribution
-              ? "font-[var(--font-body)] text-[11px] font-medium tracking-[0.02em] text-ink-soft text-center"
+              ? "font-[family-name:var(--font-body)] text-[11px] font-medium tracking-[0.02em] text-ink-soft text-center"
               : "eyebrow"
           }
         >

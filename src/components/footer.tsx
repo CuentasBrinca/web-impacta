@@ -20,7 +20,7 @@ export function Footer() {
         {/* Big closing statement */}
         <div className="pb-16 mb-12 border-b border-white/10">
           <h2
-            className="font-[var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] m-0 max-w-[12ch] text-white"
+            className="font-[family-name:var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] m-0 max-w-[12ch] text-white"
             style={{ fontSize: "clamp(48px, 7vw, 112px)" }}
           >
             Santiago.
@@ -38,10 +38,10 @@ export function Footer() {
               height={32}
               className="h-8 w-auto"
             />
-            <p className="font-[var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
+            <p className="font-[family-name:var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
               La conferencia de IA para quienes toman decisiones. Un evento de Brinca, con el respaldo de CORFO.
             </p>
-            <p className="font-[var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
+            <p className="font-[family-name:var(--font-body)] text-sm text-white/65 leading-[1.6] mt-4 max-w-[360px]">
               <span className="text-white">{event.venue}</span>
               <br />
               {event.venueAddress}
@@ -55,7 +55,7 @@ export function Footer() {
               title={`${organizer.name} — organizador de Impacta IA`}
               className="inline-flex items-center gap-3 mt-7 group"
             >
-              <span className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/45">
+              <span className="font-[family-name:var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/45">
                 Producido por
               </span>
               <Image
@@ -74,7 +74,7 @@ export function Footer() {
               id={col.h === "Contacto" ? "contacto" : undefined}
               className={col.h === "Contacto" ? "scroll-mt-28" : undefined}
             >
-              <div className="font-[var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/65 mb-4">
+              <div className="font-[family-name:var(--font-body)] text-[11px] font-bold tracking-[0.18em] uppercase text-white/65 mb-4">
                 {col.h}
               </div>
               <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
@@ -85,7 +85,7 @@ export function Footer() {
                     ) : (
                       <a
                         href={li.a}
-                        className="font-[var(--font-body)] text-sm text-white no-underline transition-colors duration-150 hover:text-mint-500"
+                        className="font-[family-name:var(--font-body)] text-sm text-white no-underline transition-colors duration-150 hover:text-mint-500"
                       >
                         {li.t}
                       </a>
@@ -97,7 +97,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="pt-7 flex flex-wrap justify-between items-center gap-4 font-[var(--font-body)] text-xs text-ink-soft">
+        <div className="pt-7 flex flex-wrap justify-between items-center gap-4 font-[family-name:var(--font-body)] text-xs text-ink-soft">
           <div>
             © {new Date().getFullYear()} Impacta IA · Un evento de{" "}
             <a

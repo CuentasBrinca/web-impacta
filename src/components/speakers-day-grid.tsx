@@ -34,7 +34,7 @@ export function SpeakersDayGrid() {
             id="tema-filter"
             value={tema}
             onChange={(e) => setTema(e.target.value as TemaFilter)}
-            className="appearance-none cursor-pointer rounded-full border border-white/35 bg-transparent text-white font-[var(--font-body)] text-base font-medium pl-6 pr-12 py-2.5 outline-none transition-colors hover:border-white/70 focus:border-white [&>option]:text-ink"
+            className="appearance-none cursor-pointer rounded-full border border-white/35 bg-transparent text-white font-[family-name:var(--font-body)] text-base font-medium pl-6 pr-12 py-2.5 outline-none transition-colors hover:border-white/70 focus:border-white [&>option]:text-ink"
           >
             <option value="Todos">Todos los temas</option>
             {speakerTemas.map((t) => (
@@ -71,7 +71,7 @@ export function SpeakersDayGrid() {
                 aria-selected={active}
                 onClick={() => setDay(d)}
                 className={[
-                  "font-[var(--font-body)] text-base font-medium rounded-full px-7 py-2.5 transition-colors duration-150 cursor-pointer",
+                  "font-[family-name:var(--font-body)] text-base font-medium rounded-full px-7 py-2.5 transition-colors duration-150 cursor-pointer",
                   active
                     ? "bg-pink-500 text-white border border-pink-500"
                     : "bg-transparent text-white border border-white/35 hover:border-white/70",
@@ -92,7 +92,7 @@ export function SpeakersDayGrid() {
           ))}
         </div>
       ) : (
-        <p className="font-[var(--font-body)] text-white/60 py-12">
+        <p className="font-[family-name:var(--font-body)] text-white/60 py-12">
           No hay oradores para esta combinación de filtros.
         </p>
       )}

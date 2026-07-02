@@ -9,12 +9,12 @@ export function Problema() {
           <Reveal>
             <div className="eyebrow">El contexto</div>
             <h2
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6"
+              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6"
               style={{ fontSize: "clamp(36px, 5vw, 72px)" }}
             >
               La IA está transformando todas las industrias.
             </h2>
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[460px] mb-6">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[460px] mb-6">
               Pero en Chile, la adopción empresarial apenas comienza.
               <br />
               Impacta IA reúne a quienes están cerrando esa brecha.
@@ -24,7 +24,7 @@ export function Problema() {
                 className="w-2 h-2 rounded-full bg-mint-500"
                 style={{ boxShadow: "0 0 0 4px rgba(29,210,179,0.2)" }}
               />
-              <span className="font-[var(--font-body)] text-[13px] font-medium text-ink">
+              <span className="font-[family-name:var(--font-body)] text-[13px] font-medium text-ink">
                 Datos preliminares — informe completo en mayo
               </span>
             </div>
@@ -41,12 +41,12 @@ export function Problema() {
                   ].join(" ")}
                 >
                   <div
-                    className="font-[var(--font-display)] font-bold leading-none tracking-[-0.04em] sm:min-w-[180px]"
+                    className="font-[family-name:var(--font-display)] font-bold leading-none tracking-[-0.04em] sm:min-w-[180px]"
                     style={{ fontSize: "clamp(48px, 6vw, 80px)", color: s.color }}
                   >
                     {s.num}
                   </div>
-                  <div className="font-[var(--font-body)] text-base leading-[1.4] text-ink">
+                  <div className="font-[family-name:var(--font-body)] text-base leading-[1.4] text-ink">
                     {s.lbl}
                   </div>
                 </div>

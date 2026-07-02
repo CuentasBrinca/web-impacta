@@ -21,12 +21,12 @@ export default function SpeakersPage() {
           <div className="mx-auto max-w-[1280px]">
             <div className="eyebrow text-white/60">El line-up</div>
             <h1
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 text-white max-w-[18ch]"
+              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 text-white max-w-[18ch]"
               style={{ fontSize: "clamp(44px, 7vw, 104px)" }}
             >
               Todos los Speakers.
             </h1>
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/75 max-w-[620px] mt-6">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/75 max-w-[620px] mt-6">
               Más de 80 oradores — líderes globales y referentes en IA aplicada — durante dos días de programa.
             </p>
           </div>

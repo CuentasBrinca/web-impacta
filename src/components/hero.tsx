@@ -23,14 +23,14 @@ export function Hero() {
       id="top"
       className="relative min-h-screen overflow-hidden flex flex-col bg-[#161618] text-white px-6 sm:px-10 pt-28 sm:pt-36 pb-12 sm:pb-16"
     >
-      {/* Background image — molecule graphic (dark left, molecules right) */}
+      {/* Background image — Impacta texture */}
       <Image
-        src="/img/bg-photo-2.png"
+        src="/img/fondo-textura-impacta.png"
         alt=""
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[30%_28%] scale-110 pointer-events-none select-none"
+        className="object-cover object-top pointer-events-none select-none"
       />
 
       {/* Bottom gradient for type contrast over the stats row */}
@@ -51,7 +51,7 @@ export function Hero() {
             initial={reduced ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="font-[var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[16ch] m-0"
+            className="font-[family-name:var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[16ch] m-0"
             style={{ fontSize: "clamp(40px, 7.2vw, 118px)" }}
           >
             La conferencia
@@ -68,7 +68,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease: EASE, delay: 0.16 }}
             className="mt-5 sm:mt-7 max-w-[600px]"
           >
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 m-0">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 m-0">
               400 ejecutivos C-level. Dos días de inmersión en IA aplicada — sin teoría, sin clichés. Adopta. Escala. Innova.
             </p>
             <div className="flex flex-wrap gap-3 mt-8 justify-center sm:justify-end">
@@ -92,7 +92,7 @@ export function Hero() {
           {heroMeta.map((m) => (
             <div key={m.value}>
               <div
-                className="font-[var(--font-display)] font-bold text-white leading-[1.05] tracking-[-0.02em]"
+                className="font-[family-name:var(--font-display)] font-bold text-white leading-[1.05] tracking-[-0.02em]"
                 style={{ fontSize: m.big ? "clamp(28px, 2.8vw, 40px)" : "clamp(19px, 1.6vw, 22px)" }}
               >
                 {m.value}
@@ -104,7 +104,7 @@ export function Hero() {
                 )}
               </div>
               {m.sub && (
-                <div className="font-[var(--font-body)] text-[13px] text-white/55 leading-snug mt-2 max-w-[230px]">
+                <div className="font-[family-name:var(--font-body)] text-[13px] text-white/55 leading-snug mt-2 max-w-[230px]">
                   {m.sub}
                 </div>
               )}

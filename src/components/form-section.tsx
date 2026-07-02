@@ -127,17 +127,17 @@ export function FormSection() {
           <div>
             <div className="eyebrow text-white/60">Pre-registro</div>
             <h2
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6 text-white"
+              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6 text-white"
               style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
             >
               Sé parte de Impacta IA.
             </h2>
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
               Los cupos son limitados y cuidadosamente seleccionados. Deja tus datos y serás el primero en conocer el programa, los speakers y cómo asegurar tu invitación.
             </p>
             <ul className="flex flex-col gap-3.5 list-none p-0 m-0">
               {formBenefits.map((b) => (
-                <li key={b.txt} className="flex items-center gap-3 font-[var(--font-body)] text-sm text-white/70">
+                <li key={b.txt} className="flex items-center gap-3 font-[family-name:var(--font-body)] text-sm text-white/70">
                   <span
                     aria-hidden
                     className="w-2 h-2 rounded-full shrink-0"
@@ -169,7 +169,7 @@ function SuccessCard({ email }: { email: string }) {
   return (
     <div className="border border-white/20 p-12 sm:p-14 rounded-2xl bg-white/[0.03]">
       <div
-        className="font-[var(--font-display)] font-bold tracking-[-0.03em] mb-4"
+        className="font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] mb-4"
         style={{
           fontSize: "clamp(40px, 5vw, 56px)",
           background: "linear-gradient(120deg, #1DD2B3, #6666FF)",
@@ -181,7 +181,7 @@ function SuccessCard({ email }: { email: string }) {
       >
         Listo.
       </div>
-      <p className="font-[var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
+      <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
         Recibimos tu interés. Te escribiremos a <strong className="text-white">{email}</strong> con la próxima actualización del programa.
       </p>
     </div>
@@ -297,7 +297,7 @@ function FormCard({
                 }
                 transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1], times: [0, 0.18, 0.36, 0.54, 0.72, 0.86, 1] }}
                 className={[
-                  "relative px-[18px] py-2.5 rounded-full font-[var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
+                  "relative px-[18px] py-2.5 rounded-full font-[family-name:var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
                   active
                     ? "bg-white text-ink border-white"
                     : "bg-transparent text-white/70 border-white/25 hover:text-white hover:border-white/50",
@@ -369,7 +369,7 @@ function FormCard({
           onChange={(e) => update("consent", e.target.checked)}
           className="mt-1 w-4 h-4 accent-blue-500 cursor-pointer"
         />
-        <span className="font-[var(--font-body)] text-xs text-white/65 leading-[1.55]">
+        <span className="font-[family-name:var(--font-body)] text-xs text-white/65 leading-[1.55]">
           Acepto que Brinca trate mis datos para enviarme información sobre Impacta IA, conforme a la
           {" "}
           <a href="/privacidad" className="text-white underline underline-offset-2 hover:text-mint-500">
@@ -408,11 +408,11 @@ function Field({
 }) {
   return (
     <label className={`flex flex-col gap-1.5 ${className}`}>
-      <span className="font-[var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60">
+      <span className="font-[family-name:var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60">
         {label}
         {required && <span className="text-pink-500 ml-0.5">*</span>}
       </span>
-      <div className="[&_input]:w-full [&_input]:bg-transparent [&_input]:border-0 [&_input]:border-b [&_input]:border-white/25 [&_input]:text-white [&_input]:font-[var(--font-body)] [&_input]:text-base [&_input]:py-2.5 [&_input]:outline-none [&_input]:transition-colors [&_input::placeholder]:text-white/35 [&_input:focus]:border-white">
+      <div className="[&_input]:w-full [&_input]:bg-transparent [&_input]:border-0 [&_input]:border-b [&_input]:border-white/25 [&_input]:text-white [&_input]:font-[family-name:var(--font-body)] [&_input]:text-base [&_input]:py-2.5 [&_input]:outline-none [&_input]:transition-colors [&_input::placeholder]:text-white/35 [&_input:focus]:border-white">
         {children}
       </div>
     </label>
@@ -444,7 +444,7 @@ function SelectField({
           onChange={(e) => onChange(e.target.value)}
           className={[
             "w-full appearance-none cursor-pointer bg-transparent border-0 border-b border-white/25",
-            "font-[var(--font-body)] text-base py-2.5 pr-8 outline-none transition-colors",
+            "font-[family-name:var(--font-body)] text-base py-2.5 pr-8 outline-none transition-colors",
             "focus:border-white [&>option]:text-ink",
             empty ? "text-white/35" : "text-white",
           ].join(" ")}

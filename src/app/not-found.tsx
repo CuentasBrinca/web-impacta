@@ -26,18 +26,18 @@ export default function NotFound() {
 
         <div className="relative text-center max-w-[640px]">
           <div
-            className="font-[var(--font-display)] font-bold leading-none tracking-[-0.04em]"
+            className="font-[family-name:var(--font-display)] font-bold leading-none tracking-[-0.04em]"
             style={{ fontSize: "clamp(96px, 18vw, 240px)" }}
           >
             <span className="shimmer-text">404</span>
           </div>
           <h1
-            className="font-[var(--font-display)] font-bold leading-tight tracking-[-0.02em] mt-6"
+            className="font-[family-name:var(--font-display)] font-bold leading-tight tracking-[-0.02em] mt-6"
             style={{ fontSize: "clamp(28px, 4vw, 44px)" }}
           >
             Esta página tomó un camino que no llega a ninguna parte.
           </h1>
-          <p className="font-[var(--font-body)] text-base sm:text-lg leading-relaxed text-white/70 mt-6">
+          <p className="font-[family-name:var(--font-body)] text-base sm:text-lg leading-relaxed text-white/70 mt-6">
             Pero el evento sigue su rumbo. Volvamos al inicio.
           </p>
 

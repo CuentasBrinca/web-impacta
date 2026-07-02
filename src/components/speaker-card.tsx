@@ -15,10 +15,10 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
           />
         )}
       </div>
-      <h3 className="font-[var(--font-body)] text-xl font-bold text-white mt-5 mb-2">
+      <h3 className="font-[family-name:var(--font-body)] text-xl font-bold text-white mt-5 mb-2">
         {speaker.name}
       </h3>
-      <p className="font-[var(--font-body)] text-[15px] leading-[1.5] text-white/60 m-0">
+      <p className="font-[family-name:var(--font-body)] text-[15px] leading-[1.5] text-white/60 m-0">
         {speaker.role}
       </p>
       {(speaker.country || speaker.tema) && (
@@ -34,13 +34,13 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
                   className="h-[22px] w-[22px] rounded-full shrink-0"
                 />
               )}
-              <span className="font-[var(--font-body)] text-[13px] text-white/80">
+              <span className="font-[family-name:var(--font-body)] text-[13px] text-white/80">
                 {speaker.country}
               </span>
             </span>
           )}
           {speaker.tema && (
-            <span className="inline-flex items-center rounded-full border border-white/25 px-4 py-1.5 font-[var(--font-body)] text-[13px] text-white/80">
+            <span className="inline-flex items-center rounded-full border border-white/25 px-4 py-1.5 font-[family-name:var(--font-body)] text-[13px] text-white/80">
               {speaker.tema}
             </span>
           )}

@@ -1,0 +1,1 @@
+- [Tailwind v4 font-family arbitrary](tailwind-v4-font-family-arbitrary.md) — usa `font-[family-name:var(--font-*)]`, no `font-[var(--font-*)]` (compila a font-weight)

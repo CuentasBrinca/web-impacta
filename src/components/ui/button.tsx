@@ -6,7 +6,7 @@ type Size = "sm" | "md" | "lg";
 
 const base =
   "relative overflow-hidden inline-flex items-center justify-center gap-2 " +
-  "font-[var(--font-body)] font-semibold rounded-full border whitespace-nowrap " +
+  "font-[family-name:var(--font-body)] font-semibold rounded-full border whitespace-nowrap " +
   "transition-all duration-200 ease-[var(--ease-standard)] cursor-pointer";
 
 const sizes: Record<Size, string> = {

@@ -16,7 +16,7 @@ export function Speakers() {
         {/* Encabezado + toggle de día */}
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6 mb-14">
           <h2
-            className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] m-0 text-white"
+            className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] m-0 text-white"
             style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
           >
             Conversaciones reales
@@ -39,7 +39,7 @@ export function Speakers() {
                   aria-selected={active}
                   onClick={() => setDay(d)}
                   className={[
-                    "font-[var(--font-body)] text-base font-medium rounded-full px-7 py-2.5 transition-colors duration-150 cursor-pointer",
+                    "font-[family-name:var(--font-body)] text-base font-medium rounded-full px-7 py-2.5 transition-colors duration-150 cursor-pointer",
                     active
                       ? "bg-pink-500 text-white border border-pink-500"
                       : "bg-transparent text-white border border-white/35 hover:border-white/70",

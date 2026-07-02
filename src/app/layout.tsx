@@ -4,6 +4,19 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
+// Funnel Display — display typeface for titles (self-hosted, variable weight).
+const funnelDisplay = localFont({
+  variable: "--font-funnel-display",
+  display: "swap",
+  src: [
+    {
+      path: "./fonts/FunnelDisplay-VariableFont_wght.ttf",
+      weight: "300 800",
+      style: "normal",
+    },
+  ],
+});
+
 /**
  * FH Lecturis — display typeface (paid, self-hosted).
  * BLOCKER pre-launch: confirm web license is in place.
@@ -71,7 +84,7 @@ export default function RootLayout({
   return (
     <html
       lang="es-CL"
-      className={`${fhLecturis.variable} ${fhLecturisRounded.variable} ${googleSansFlex.variable}`}
+      className={`${fhLecturis.variable} ${fhLecturisRounded.variable} ${googleSansFlex.variable} ${funnelDisplay.variable}`}
     >
       <body>
         {children}

@@ -17,7 +17,7 @@ export function Organizador() {
           <div>
             <div className="eyebrow text-white/60">El organizador</div>
             <h2
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 text-white max-w-[14ch]"
+              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 text-white max-w-[14ch]"
               style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
             >
               Detrás de Impacta IA está Brinca.
@@ -25,7 +25,7 @@ export function Organizador() {
           </div>
 
           <div className="flex flex-col gap-7 max-w-[520px]">
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.5] text-white/85 m-0">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.5] text-white/85 m-0">
               {organizer.blurb}
             </p>
 
@@ -33,7 +33,7 @@ export function Organizador() {
               {organizer.pillars.map((p) => (
                 <li
                   key={p}
-                  className="font-[var(--font-body)] text-[13px] font-medium text-white/80 border border-white/20 rounded-full px-4 py-1.5"
+                  className="font-[family-name:var(--font-body)] text-[13px] font-medium text-white/80 border border-white/20 rounded-full px-4 py-1.5"
                 >
                   {p}
                 </li>
@@ -52,7 +52,7 @@ export function Organizador() {
                 href={organizer.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-[var(--font-body)] text-base font-medium text-mint-500 no-underline hover:text-mint-300 transition-colors duration-150 inline-flex items-center gap-1.5"
+                className="font-[family-name:var(--font-body)] text-base font-medium text-mint-500 no-underline hover:text-mint-300 transition-colors duration-150 inline-flex items-center gap-1.5"
               >
                 Conoce Brinca
                 <span aria-hidden>↗</span>
@@ -73,12 +73,12 @@ export function Organizador() {
               ].join(" ")}
             >
               <div
-                className="font-[var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] text-white"
+                className="font-[family-name:var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] text-white"
                 style={{ fontSize: "clamp(48px, 6vw, 88px)" }}
               >
                 {s.num}
               </div>
-              <div className="font-[var(--font-body)] text-[15px] leading-[1.45] text-white/60 mt-3 max-w-[28ch]">
+              <div className="font-[family-name:var(--font-body)] text-[15px] leading-[1.45] text-white/60 mt-3 max-w-[28ch]">
                 {s.lbl}
               </div>
             </div>
