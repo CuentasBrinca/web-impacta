@@ -91,7 +91,7 @@ export function Numeros() {
       className="relative overflow-hidden bg-night text-white px-6 sm:px-10 py-24 sm:py-32"
     >
       <Image
-        src="/img/bg-photo-4.png"
+        src="/img/bg-photo-4.webp"
         alt=""
         fill
         sizes="100vw"

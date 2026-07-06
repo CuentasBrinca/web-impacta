@@ -9,7 +9,7 @@ export function Footer() {
       className="relative overflow-hidden bg-ink text-white px-6 sm:px-10 pt-20 pb-8"
     >
       <Image
-        src="/img/bg-photo-5.png"
+        src="/img/bg-photo-5.webp"
         alt=""
         fill
         sizes="100vw"

@@ -228,10 +228,10 @@ function placeholderSpeakers(count: number, temaOffset = 0): Speaker[] {
 
 /** Fotos disponibles de los primeros speakers (info real pendiente). */
 const speakerPhotos = [
-  "/img/speakers/Speaker 1.png",
-  "/img/speakers/Speaker 2.png",
-  "/img/speakers/Speaker 3.png",
-  "/img/speakers/Speaker 4.png",
+  "/img/speakers/speaker-1.webp",
+  "/img/speakers/speaker-2.webp",
+  "/img/speakers/speaker-3.webp",
+  "/img/speakers/speaker-4.webp",
 ] as const;
 
 /** Asigna las fotos disponibles a los primeros speakers de la lista. */
@@ -291,12 +291,12 @@ export const numeros = [
 ] as const;
 
 export const programa = [
-  { tag: "Keynotes",          title: "Keynotes con voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.png" },
-  { tag: "Paneles",           title: "Paneles por función ejecutiva",      desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.png" },
-  { tag: "Challenge briefs",  title: "Challenge Briefs en equipo",         desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.png" },
-  { tag: "Demos",             title: "Talleres de IA",                     desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.png"   },
-  { tag: "Networking",        title: "Matchmaking y networking",           desc: "Rondas de conexión dirigida entre empresas, proveedores y startups.",                 img: "/img/Group-4.png" },
-  { tag: "Afterparty",        title: "Afterparty: cierre exclusivo",       desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.png" },
+  { tag: "Keynotes",          title: "Keynotes con voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.webp" },
+  { tag: "Paneles",           title: "Paneles por función ejecutiva",      desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.webp" },
+  { tag: "Challenge briefs",  title: "Challenge Briefs en equipo",         desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.webp" },
+  { tag: "Demos",             title: "Talleres de IA",                     desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.webp"   },
+  { tag: "Networking",        title: "Matchmaking y networking",           desc: "Rondas de conexión dirigida entre empresas, proveedores y startups.",                 img: "/img/Group-4.webp" },
+  { tag: "Afterparty",        title: "Afterparty: cierre exclusivo",       desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.webp" },
 ] as const;
 
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;

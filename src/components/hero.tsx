@@ -25,7 +25,7 @@ export function Hero() {
     >
       {/* Background image — Impacta texture */}
       <Image
-        src="/img/fondo-textura-impacta.png"
+        src="/img/fondo-textura-impacta.webp"
         alt=""
         fill
         priority

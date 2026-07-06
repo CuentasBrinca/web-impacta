@@ -34,7 +34,7 @@ export function QueVasAVivir() {
       <section className="relative overflow-hidden bg-night px-6 sm:px-10 py-16 sm:py-24">
         {/* Textura de fondo (líneas azules) */}
         <Image
-          src="/img/Mask group (1).png"
+          src="/img/mask-group.webp"
           alt=""
           fill
           sizes="100vw"
