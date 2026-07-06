@@ -75,7 +75,7 @@ export async function GET(request: Request) {
   header.eachCell((cell) => {
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0000FF" } };
   });
-  ws.autoFilter = { from: "A1", to: "J1" };
+  ws.autoFilter = { from: "A1", to: "L1" };
 
   const buf = await wb.xlsx.writeBuffer();
 

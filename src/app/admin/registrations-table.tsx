@@ -45,7 +45,7 @@ export function RegistrationsTable({ rows }: { rows: Registration[] }) {
 
   return (
     <div className="mt-4 overflow-x-auto rounded-xl bg-paper ring-1 ring-ink-faint">
-      <table className="w-full min-w-[960px] border-collapse text-sm">
+      <table className="w-full min-w-[1080px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-ink-faint text-left text-[0.7rem] uppercase tracking-wide text-ink-soft">
             <th className="px-4 py-3 font-semibold">Fecha</th>
@@ -54,6 +54,7 @@ export function RegistrationsTable({ rows }: { rows: Registration[] }) {
             <th className="px-4 py-3 font-semibold">Empresa</th>
             <th className="px-4 py-3 font-semibold">Nivel</th>
             <th className="px-4 py-3 font-semibold">Área</th>
+            <th className="px-4 py-3 font-semibold">Motivación</th>
             <th className="px-4 py-3 font-semibold">Interés</th>
             <th className="px-4 py-3 font-semibold">Estado</th>
             <th className="px-4 py-3 font-semibold">Notas</th>
@@ -82,6 +83,15 @@ function Row({ r }: { r: Registration }) {
       <td className="px-4 py-3">{r.empresa}</td>
       <td className="px-4 py-3 text-ink-soft">{r.cargo}</td>
       <td className="px-4 py-3 text-ink-soft">{r.area ?? "—"}</td>
+      <td className="max-w-[260px] px-4 py-3 text-ink-soft">
+        {r.motivacion ? (
+          <span className="line-clamp-2 whitespace-pre-wrap" title={r.motivacion}>
+            {r.motivacion}
+          </span>
+        ) : (
+          "—"
+        )}
+      </td>
       <td className="px-4 py-3">
         <span
           className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${
