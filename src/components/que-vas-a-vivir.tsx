@@ -6,7 +6,7 @@ export function QueVasAVivir() {
   return (
     <>
       {/* Cabecera — sobre superficie clara */}
-      <section className="bg-paper-soft px-6 sm:px-10 pt-24 sm:pt-32 pb-16 sm:pb-20">
+      <section id="formatos" className="bg-paper-soft px-6 sm:px-10 pt-24 sm:pt-32 pb-16 sm:pb-20 scroll-mt-24">
         <div className="mx-auto max-w-[1280px]">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-[760px]">
@@ -61,7 +61,6 @@ export function QueVasAVivir() {
 
                 {/* Contenido */}
                 <div className="flex flex-col gap-3 p-8 sm:p-9">
-                  <div className="eyebrow eyebrow-on-dark">{it.tag}</div>
                   <h3 className="font-[family-name:var(--font-display)] text-2xl sm:text-[26px] font-bold tracking-[-0.02em] m-0 text-white">
                     {it.title}
                   </h3>

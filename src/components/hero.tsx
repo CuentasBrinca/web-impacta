@@ -51,12 +51,12 @@ export function Hero() {
             initial={reduced ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
-            className="font-[family-name:var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[16ch] m-0"
-            style={{ fontSize: "clamp(40px, 7.2vw, 118px)" }}
+            className="font-[family-name:var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[30ch] m-0"
+            style={{ fontSize: "clamp(34px, 5.4vw, 72px)" }}
           >
-            La conferencia
+            La conferencia de inteligencia
             <br />
-            de IA para quienes
+            artificial para quienes
             <br />
             <span className="shimmer-text">toman decisiones.</span>
           </motion.h1>
@@ -66,12 +66,12 @@ export function Hero() {
             initial={reduced ? false : { opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.16 }}
-            className="mt-5 sm:mt-7 max-w-[600px]"
+            className="mt-5 sm:mt-7 max-w-[960px]"
           >
-            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 m-0">
-              400 ejecutivos C-level. Dos días de inmersión en IA aplicada — sin teoría, sin clichés. Adopta. Escala. Innova.
+            <p className="font-[family-name:var(--font-body)] text-[clamp(15px,1.12vw,18px)] leading-[1.5] text-white/85 m-0">
+              Un evento para líderes que están definiendo el futuro de sus organizaciones con inteligencia artificial. Dos días de inmersión en IA aplicada, casos reales y networking estratégico. Cupos limitados.
             </p>
-            <div className="flex flex-wrap gap-3 mt-8 justify-center sm:justify-end">
+            <div className="flex flex-wrap gap-3 mt-8 justify-center sm:justify-end max-w-[600px]">
               <ButtonLink href="#form" variant="primary" size="lg">
                 Quiero participar →
               </ButtonLink>

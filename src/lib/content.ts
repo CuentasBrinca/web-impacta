@@ -28,9 +28,10 @@ export const event = {
 // y bajan a la sección. En la home son scroll suave sin recargar.
 export const navItems = [
   { label: "El evento", href: "/#evento" },
-  { label: "Ejes", href: "/#ejes" },
+  { label: "Ejes temáticos", href: "/#ejes" },
   { label: "Para quién", href: "/#para-quien" },
-  { label: "Contacto", href: "/#contacto" },
+  { label: "Speakers", href: "/#speakers" },
+  { label: "Formatos", href: "/#formatos" },
 ] as const;
 
 /**
@@ -202,6 +203,9 @@ export type SpeakerTema = (typeof speakerTemas)[number];
 /** Banderas circulares por país (en /public/img/flags/). */
 export const countryFlags: Record<string, string> = {
   Argentina: "/img/flags/ar.svg",
+  Italia: "/img/flags/it.svg",
+  "Reino Unido": "/img/flags/gb.svg",
+  Chile: "/img/flags/cl.svg",
 };
 
 export const speakerDays = ["Día 1", "Día 2"] as const;
@@ -222,27 +226,61 @@ function placeholderSpeakers(count: number, temaOffset = 0): Speaker[] {
   }));
 }
 
+/** Fotos disponibles de los primeros speakers (info real pendiente). */
+const speakerPhotos = [
+  "/img/speakers/Speaker 1.png",
+  "/img/speakers/Speaker 2.png",
+  "/img/speakers/Speaker 3.png",
+  "/img/speakers/Speaker 4.png",
+] as const;
+
+/** Asigna las fotos disponibles a los primeros speakers de la lista. */
+function withPhotos(
+  speakers: Speaker[],
+  photos: readonly string[] = speakerPhotos,
+): Speaker[] {
+  return speakers.map((s, i) =>
+    i < photos.length ? { ...s, photo: photos[i] } : s,
+  );
+}
+
+// 4 oradores reales (con foto) + 16 placeholders = 20.
+const speakersDia1: readonly Speaker[] = withPhotos([
+  {
+    name: "Stefano Puntoni",
+    role: "Codirector del programa de investigación sobre inteligencia artificial humana de Wharton.",
+    photo: null,
+    country: "Italia",
+    tema: "Innovación",
+  },
+  {
+    name: "Daniel Strode",
+    role: "Autor del best seller “La ventaja del innovador”. Experto en transformación del trabajo en la era de la IA.",
+    photo: null,
+    country: "Reino Unido",
+    tema: "Innovación",
+  },
+  {
+    name: "Jeannette Escudero",
+    role: "Directora Ejecutiva Talento Digital para Chile. Experta en innovación y desarrollo de equipos para la adopción tecnológica.",
+    photo: null,
+    country: "Chile",
+    tema: "Escalamiento",
+  },
+  {
+    name: "Nicolás Rivas",
+    role: "Líder de datos, inteligencia de negocios e inteligencia artificial en startups, Gerente de Soluciones IA en Brinca.",
+    photo: null,
+    country: "Chile",
+    tema: "Adopción",
+  },
+  ...placeholderSpeakers(16, 2),
+]);
+
 export const speakersByDay: Record<SpeakerDay, readonly Speaker[]> = {
-  // 2 oradores reales + 18 placeholders = 20.
-  "Día 1": [
-    {
-      name: "Stefano Puntoni",
-      role: "Codirector del programa de investigación sobre Inteligencia Artificial humana de Wharton.",
-      photo: null,
-      country: "Argentina",
-      tema: "Innovación",
-    },
-    {
-      name: "Daniel Strode",
-      role: "Autor Bestseller “La ventaja del Innovador”.",
-      photo: null,
-      country: "Argentina",
-      tema: "Innovación",
-    },
-    ...placeholderSpeakers(18, 0),
-  ],
-  // 20 placeholders.
-  "Día 2": placeholderSpeakers(20, 1),
+  "Día 1": speakersDia1,
+  // Día 2 replica el mismo contenido del Día 1.
+  "Día 2": speakersDia1,
 };
 
 export const numeros = [
@@ -253,12 +291,12 @@ export const numeros = [
 ] as const;
 
 export const programa = [
-  { tag: "Keynotes",          title: "Voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.png" },
-  { tag: "Paneles",           title: "Por función ejecutiva", desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.png" },
-  { tag: "Challenge briefs",  title: "Trabajo en equipos",    desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.png" },
-  { tag: "Demos",             title: "IA en vivo",            desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.png"   },
-  { tag: "Networking",        title: "Mesas C-level",         desc: "Cenas curadas por industria. Solo decision-makers, sin observadores.",                 img: "/img/Group-4.png" },
-  { tag: "Afterparty",        title: "Cierre exclusivo",      desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.png" },
+  { tag: "Keynotes",          title: "Keynotes con voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.png" },
+  { tag: "Paneles",           title: "Paneles por función ejecutiva",      desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.png" },
+  { tag: "Challenge briefs",  title: "Challenge Briefs en equipo",         desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.png" },
+  { tag: "Demos",             title: "Talleres de IA",                     desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.png"   },
+  { tag: "Networking",        title: "Matchmaking y networking",           desc: "Rondas de conexión dirigida entre empresas, proveedores y startups.",                 img: "/img/Group-4.png" },
+  { tag: "Afterparty",        title: "Afterparty: cierre exclusivo",       desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.png" },
 ] as const;
 
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
@@ -338,9 +376,9 @@ export const footerColumns: ReadonlyArray<{ readonly h: string; readonly l: Read
   {
     h: "Síguenos",
     l: [
-      { t: "LinkedIn",     a: "#" },
-      { t: "Twitter / X",  a: "#" },
-      { t: "YouTube",      a: "#" },
+      { t: "LinkedIn",  a: "https://www.linkedin.com/company/brincaglobal/" },
+      { t: "Instagram", a: "https://www.instagram.com/brinca.global/" },
+      { t: "Facebook",  a: "https://www.facebook.com/brinca.global" },
     ],
   },
 ];

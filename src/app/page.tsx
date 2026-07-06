@@ -12,7 +12,6 @@ import { Problema } from "@/components/problema";
 import { Ejes } from "@/components/ejes";
 import { ParaQuien } from "@/components/para-quien";
 import { Speakers } from "@/components/speakers";
-import { Numeros } from "@/components/numeros";
 import { QueVasAVivir } from "@/components/que-vas-a-vivir";
 import { Organizador } from "@/components/organizador";
 import { FormSection } from "@/components/form-section";
@@ -31,7 +30,6 @@ export default function HomePage() {
         <Ejes />
         <ParaQuien />
         <Speakers />
-        <Numeros />
         <QueVasAVivir />
         <Organizador />
         <FormSection />

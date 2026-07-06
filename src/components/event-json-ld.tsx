@@ -85,7 +85,9 @@ export function EventJsonLd() {
         url: "https://brinca.global",
         sameAs: [
           "https://www.brinca.com",
-          "https://www.linkedin.com/company/brinca",
+          "https://www.linkedin.com/company/brincaglobal/",
+          "https://www.instagram.com/brinca.global/",
+          "https://www.facebook.com/brinca.global",
         ],
         address: {
           "@type": "PostalAddress",

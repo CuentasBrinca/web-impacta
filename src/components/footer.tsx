@@ -85,6 +85,9 @@ export function Footer() {
                     ) : (
                       <a
                         href={li.a}
+                        {...(li.a?.startsWith("http")
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
                         className="font-[family-name:var(--font-body)] text-sm text-white no-underline transition-colors duration-150 hover:text-mint-500"
                       >
                         {li.t}

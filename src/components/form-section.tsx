@@ -101,37 +101,29 @@ export function FormSection() {
     <section
       id="form"
       ref={sectionRef}
-      className="relative overflow-hidden bg-night text-white px-6 sm:px-10 py-24 sm:py-32"
+      className="relative overflow-hidden bg-[#18181A] text-white px-6 sm:px-10 py-24 sm:py-32"
     >
-      <Image
-        src="/img/bg-photo-6.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover opacity-[0.22] mix-blend-screen pointer-events-none select-none"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute"
-        style={{
-          right: "-15%",
-          bottom: "-15%",
-          width: "60%",
-          height: "70%",
-          background: "radial-gradient(ellipse at center, rgba(0,0,255,0.22) 0%, rgba(0,0,255,0) 60%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-start">
           <div>
-            <div className="eyebrow text-white/60">Pre-registro</div>
-            <h2
-              className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6 text-white"
-              style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
-            >
-              Sé parte de Impacta IA.
-            </h2>
+            <div className="eyebrow text-white/60">Pre-inscripción evento</div>
+            <div className="w-fit">
+              <h2
+                className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4 text-white"
+                style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
+              >
+                Sé parte de
+              </h2>
+              <div className="relative w-full aspect-[959/188] mb-6">
+                <Image
+                  src="/img/logo-imparta-ia-formulario.png"
+                  alt="Impacta IA"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  className="object-contain object-left"
+                />
+              </div>
+            </div>
             <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
               Los cupos son limitados y cuidadosamente seleccionados. Deja tus datos y serás el primero en conocer el programa, los speakers y cómo asegurar tu invitación.
             </p>

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { speakerDays, speakersByDay, type SpeakerDay } from "@/lib/content";
 import { SpeakerCard } from "@/components/speaker-card";
-import { ButtonLink } from "@/components/ui/button";
 
 export function Speakers() {
   const [day, setDay] = useState<SpeakerDay>(speakerDays[0]);
@@ -59,12 +58,6 @@ export function Speakers() {
           ))}
         </div>
 
-        {/* CTA → página con todos los oradores */}
-        <div className="mt-16 flex justify-center">
-          <ButtonLink href="/speakers" variant="ghost-dark" size="lg">
-            Ver todos los Speakers →
-          </ButtonLink>
-        </div>
       </div>
     </section>
   );
