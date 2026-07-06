@@ -19,7 +19,7 @@ export function LegalShell({
         <div className="mx-auto max-w-[860px]">
           <div className="eyebrow text-white/60">{eyebrow}</div>
           <h1
-            className="font-[var(--font-display)] font-bold leading-[1] tracking-[-0.035em] mt-5 text-white"
+            className="font-[family-name:var(--font-display)] font-bold leading-[1] tracking-[-0.035em] mt-5 text-white"
             style={{ fontSize: "clamp(40px, 6vw, 88px)" }}
           >
             {title}

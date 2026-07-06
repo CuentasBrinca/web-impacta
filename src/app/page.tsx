@@ -11,8 +11,9 @@ import { BackedBy } from "@/components/backed-by";
 import { Problema } from "@/components/problema";
 import { Ejes } from "@/components/ejes";
 import { ParaQuien } from "@/components/para-quien";
-import { Numeros } from "@/components/numeros";
+import { Speakers } from "@/components/speakers";
 import { QueVasAVivir } from "@/components/que-vas-a-vivir";
+import { Organizador } from "@/components/organizador";
 import { FormSection } from "@/components/form-section";
 import { Footer } from "@/components/footer";
 
@@ -28,8 +29,9 @@ export default function HomePage() {
         <Problema />
         <Ejes />
         <ParaQuien />
-        <Numeros />
+        <Speakers />
         <QueVasAVivir />
+        <Organizador />
         <FormSection />
       </main>
       <Footer />

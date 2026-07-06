@@ -49,16 +49,16 @@ function StatCell({
       ].join(" ")}
     >
       <div
-        className="font-[var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] text-white"
+        className="font-[family-name:var(--font-display)] font-bold leading-[0.95] tracking-[-0.04em] text-white"
         style={{ fontSize: "clamp(64px, 9vw, 144px)" }}
       >
         {v}
         {suffix}
       </div>
-      <div className="font-[var(--font-body)] text-base font-medium text-white mt-4">
+      <div className="font-[family-name:var(--font-body)] text-base font-medium text-white mt-4">
         {lbl}
       </div>
-      <div className="font-[var(--font-body)] text-xs text-white/50 mt-1.5">
+      <div className="font-[family-name:var(--font-body)] text-xs text-white/50 mt-1.5">
         {note}
       </div>
     </div>
@@ -101,10 +101,10 @@ export function Numeros() {
       <div className="relative mx-auto max-w-[1280px]">
         <div className="eyebrow text-white/60">El evento, en números</div>
         <h2
-          className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-16 text-white max-w-[16ch]"
+          className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-16 text-white max-w-[16ch]"
           style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
         >
-          Escala íntima.
+          Formato cercano.
           <br />
           Conversaciones reales.
         </h2>

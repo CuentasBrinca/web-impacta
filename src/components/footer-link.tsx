@@ -14,7 +14,7 @@ import { dispatchFormIntent, storePendingFormIntent } from "@/lib/form-intent";
  * intent and navigate to /#form, where FormSection applies it on load.
  */
 const LINK_CLASS =
-  "font-[var(--font-body)] text-sm text-white text-left bg-transparent border-0 p-0 cursor-pointer transition-colors duration-150 hover:text-mint-500";
+  "font-[family-name:var(--font-body)] text-sm text-white text-left bg-transparent border-0 p-0 cursor-pointer transition-colors duration-150 hover:text-mint-500";
 
 export function FooterIntentLink({
   intent,

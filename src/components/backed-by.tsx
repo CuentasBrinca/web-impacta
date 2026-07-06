@@ -1,50 +1,48 @@
 import Image from "next/image";
-import { partners, type Partner } from "@/lib/content";
+import { partnerGroups, type PartnerGroup } from "@/lib/content";
 
 export function BackedBy() {
-  const visible = partners.filter((p) => !p.hidden);
   return (
-    <section className="bg-paper text-ink px-6 sm:px-10 py-16 sm:py-20 border-y border-ink-faint">
+    <section className="bg-paper text-ink px-6 sm:px-10 py-14 sm:py-16 border-y border-ink-faint">
       <div className="mx-auto max-w-[1280px]">
-        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-8 md:gap-12 items-center">
-          <div>
-            <div className="eyebrow">Con el respaldo de</div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-8 sm:gap-x-8 items-center">
-            {visible.map((p) => (
-              <PartnerSlot key={p.name} partner={p} />
-            ))}
-          </div>
+        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-10">
+          {partnerGroups.map((group) => (
+            <PartnerGroupBlock key={group.label} group={group} />
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function PartnerSlot({ partner }: { partner: Partner }) {
-  if (partner.logo) {
-    return (
-      <div className="flex items-center justify-center" title={`${partner.name} — ${partner.note}`}>
-        <Image
-          src={partner.logo}
-          alt={partner.name}
-          width={partner.width ?? 240}
-          height={partner.height ?? 80}
-          className="h-9 sm:h-10 w-auto object-contain max-w-full opacity-80 hover:opacity-100 transition-opacity duration-200"
-        />
-      </div>
-    );
-  }
-  // Wordmark fallback: pending logo
+function PartnerGroupBlock({ group }: { group: PartnerGroup }) {
+  const attribution = group.variant === "attribution";
   return (
-    <div
-      className="flex items-center justify-center h-9 sm:h-10"
-      title={`${partner.name} — ${partner.note}`}
-    >
-      <span className="font-[var(--font-display)] font-bold text-base sm:text-lg tracking-[-0.02em] text-ink-soft whitespace-nowrap">
-        {partner.name}
-      </span>
+    <div className={`flex flex-col gap-5 ${attribution ? "items-center" : "items-start"}`}>
+      {!group.hideLabel && (
+        <div
+          className={
+            attribution
+              ? "font-[family-name:var(--font-body)] text-[11px] font-medium tracking-[0.02em] text-ink-soft text-center"
+              : "eyebrow"
+          }
+        >
+          {group.label}
+        </div>
+      )}
+      <div className="flex items-center gap-8 sm:gap-10">
+        {group.logos.map((l) => (
+          <Image
+            key={l.name}
+            src={l.logo}
+            alt={l.name}
+            width={l.width}
+            height={l.height}
+            title={l.name}
+            className={`${l.sizeClass ?? "h-9 sm:h-11"} w-auto object-contain`}
+          />
+        ))}
+      </div>
     </div>
   );
 }

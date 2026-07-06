@@ -4,7 +4,15 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { formInteresOptions, formBenefits, type FormInteres } from "@/lib/content";
+import {
+  formInteresOptions,
+  formNivelOptions,
+  formAreaOptions,
+  formBenefits,
+  NIVEL_OTRO,
+  AREA_OTRO,
+  type FormInteres,
+} from "@/lib/content";
 import { preRegister } from "@/app/actions/pre-register";
 import { FORM_INTENT_EVENT, takePendingFormIntent, type FormIntentDetail } from "@/lib/form-intent";
 
@@ -12,8 +20,12 @@ type FormState = {
   nombre: string;
   email: string;
   empresa: string;
-  cargo: string;
+  nivel: string;
+  nivelOtro: string;
+  area: string;
+  areaOtro: string;
   interes: FormInteres;
+  motivacion: string;
   consent: boolean;
   website: string; // honeypot
 };
@@ -22,8 +34,12 @@ const INITIAL: FormState = {
   nombre: "",
   email: "",
   empresa: "",
-  cargo: "",
-  interes: "Asistir",
+  nivel: "",
+  nivelOtro: "",
+  area: "",
+  areaOtro: "",
+  interes: "Asistente",
+  motivacion: "",
   consent: false,
   website: "",
 };
@@ -85,43 +101,35 @@ export function FormSection() {
     <section
       id="form"
       ref={sectionRef}
-      className="relative overflow-hidden bg-night text-white px-6 sm:px-10 py-24 sm:py-32"
+      className="relative overflow-hidden bg-[#18181A] text-white px-6 sm:px-10 py-24 sm:py-32"
     >
-      <Image
-        src="/img/bg-photo-2.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover opacity-[0.22] mix-blend-screen pointer-events-none select-none"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute"
-        style={{
-          right: "-15%",
-          bottom: "-15%",
-          width: "60%",
-          height: "70%",
-          background: "radial-gradient(ellipse at center, rgba(0,0,255,0.22) 0%, rgba(0,0,255,0) 60%)",
-        }}
-      />
-
       <div className="relative mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-20 items-start">
           <div>
-            <div className="eyebrow text-white/60">Pre-registro</div>
-            <h2
-              className="font-[var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-6 text-white"
-              style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
-            >
-              Sé parte de Impacta IA.
-            </h2>
-            <p className="font-[var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
-              Los cupos son limitados y curados. Deja tus datos y serás el primero en saber del programa, los speakers y cómo asegurar tu invitación.
+            <div className="eyebrow text-white/60">Pre-inscripción evento</div>
+            <div className="w-fit">
+              <h2
+                className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] mt-5 mb-4 text-white"
+                style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
+              >
+                Sé parte de
+              </h2>
+              <div className="relative w-full aspect-[959/188] mb-6">
+                <Image
+                  src="/img/logo-imparta-ia-formulario.png"
+                  alt="Impacta IA"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  className="object-contain object-left"
+                />
+              </div>
+            </div>
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
+              Los cupos son limitados y cuidadosamente seleccionados. Deja tus datos y serás el primero en conocer el programa, los speakers y cómo asegurar tu invitación.
             </p>
             <ul className="flex flex-col gap-3.5 list-none p-0 m-0">
               {formBenefits.map((b) => (
-                <li key={b.txt} className="flex items-center gap-3 font-[var(--font-body)] text-sm text-white/70">
+                <li key={b.txt} className="flex items-center gap-3 font-[family-name:var(--font-body)] text-sm text-white/70">
                   <span
                     aria-hidden
                     className="w-2 h-2 rounded-full shrink-0"
@@ -153,7 +161,7 @@ function SuccessCard({ email }: { email: string }) {
   return (
     <div className="border border-white/20 p-12 sm:p-14 rounded-2xl bg-white/[0.03]">
       <div
-        className="font-[var(--font-display)] font-bold tracking-[-0.03em] mb-4"
+        className="font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] mb-4"
         style={{
           fontSize: "clamp(40px, 5vw, 56px)",
           background: "linear-gradient(120deg, #1DD2B3, #6666FF)",
@@ -165,7 +173,7 @@ function SuccessCard({ email }: { email: string }) {
       >
         Listo.
       </div>
-      <p className="font-[var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
+      <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
         Recibimos tu interés. Te escribiremos a <strong className="text-white">{email}</strong> con la próxima actualización del programa.
       </p>
     </div>
@@ -204,15 +212,15 @@ function FormCard({
         </label>
       </div>
 
-      <Field label="Nombre" className="sm:col-span-2">
+      <Field label="Nombre" required className="sm:col-span-2">
         <input
-          type="text" required placeholder="Tu nombre" autoComplete="name"
+          type="text" required placeholder="Nombre y Apellido" autoComplete="name"
           value={form.nombre}
           onChange={(e) => update("nombre", e.target.value)}
         />
       </Field>
 
-      <Field label="Email corporativo">
+      <Field label="Email corporativo" required>
         <input
           type="email" required placeholder="nombre@empresa.cl" autoComplete="email"
           value={form.email}
@@ -220,7 +228,7 @@ function FormCard({
         />
       </Field>
 
-      <Field label="Empresa">
+      <Field label="Organización" required>
         <input
           type="text" required placeholder="Empresa" autoComplete="organization"
           value={form.empresa}
@@ -228,15 +236,41 @@ function FormCard({
         />
       </Field>
 
-      <Field label="Cargo" className="sm:col-span-2">
-        <input
-          type="text" required placeholder="CEO, CTO, Director de Innovación..." autoComplete="organization-title"
-          value={form.cargo}
-          onChange={(e) => update("cargo", e.target.value)}
-        />
-      </Field>
+      <SelectField
+        label="Nivel de responsabilidad" required
+        value={form.nivel}
+        onChange={(v) => update("nivel", v)}
+        options={formNivelOptions}
+      />
 
-      <Field label="Quiero participar como" className="sm:col-span-2">
+      <SelectField
+        label="Área a la que pertenece" required
+        value={form.area}
+        onChange={(v) => update("area", v)}
+        options={formAreaOptions}
+      />
+
+      {form.nivel === NIVEL_OTRO && (
+        <Field label="Especifica tu cargo" required className="sm:col-span-2">
+          <input
+            type="text" required placeholder="Tu cargo" maxLength={200}
+            value={form.nivelOtro}
+            onChange={(e) => update("nivelOtro", e.target.value)}
+          />
+        </Field>
+      )}
+
+      {form.area === AREA_OTRO && (
+        <Field label="Especifica tu área" required className="sm:col-span-2">
+          <input
+            type="text" required placeholder="Tu área" maxLength={200}
+            value={form.areaOtro}
+            onChange={(e) => update("areaOtro", e.target.value)}
+          />
+        </Field>
+      )}
+
+      <Field label="Quiero participar como" required className="sm:col-span-2">
         <div className="flex flex-wrap gap-2 mt-1.5">
           {formInteresOptions.map((o) => {
             const active = form.interes === o;
@@ -255,7 +289,7 @@ function FormCard({
                 }
                 transition={{ duration: 2.4, ease: [0.4, 0, 0.2, 1], times: [0, 0.18, 0.36, 0.54, 0.72, 0.86, 1] }}
                 className={[
-                  "relative px-[18px] py-2.5 rounded-full font-[var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
+                  "relative px-[18px] py-2.5 rounded-full font-[family-name:var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
                   active
                     ? "bg-white text-ink border-white"
                     : "bg-transparent text-white/70 border-white/25 hover:text-white hover:border-white/50",
@@ -311,6 +345,14 @@ function FormCard({
         </div>
       </Field>
 
+      <Field label="Motivación para asistir" className="sm:col-span-2">
+        <input
+          type="text" placeholder="Respuesta abierta" maxLength={1000}
+          value={form.motivacion}
+          onChange={(e) => update("motivacion", e.target.value)}
+        />
+      </Field>
+
       {/* Ley 21.719 / GDPR explicit consent */}
       <label className="sm:col-span-2 flex items-start gap-3 cursor-pointer select-none">
         <input
@@ -319,7 +361,7 @@ function FormCard({
           onChange={(e) => update("consent", e.target.checked)}
           className="mt-1 w-4 h-4 accent-blue-500 cursor-pointer"
         />
-        <span className="font-[var(--font-body)] text-xs text-white/65 leading-[1.55]">
+        <span className="font-[family-name:var(--font-body)] text-xs text-white/65 leading-[1.55]">
           Acepto que Brinca trate mis datos para enviarme información sobre Impacta IA, conforme a la
           {" "}
           <a href="/privacidad" className="text-white underline underline-offset-2 hover:text-mint-500">
@@ -336,10 +378,7 @@ function FormCard({
         </div>
       )}
 
-      <div className="sm:col-span-2 mt-4 flex flex-wrap items-center justify-between gap-4">
-        <span className="font-[var(--font-body)] text-xs text-white/50">
-          Al enviar, aceptas nuestra política de privacidad.
-        </span>
+      <div className="sm:col-span-2 mt-4 flex justify-end">
         <Button type="submit" variant="inverse" size="lg" disabled={submitting}>
           {submitting ? "Enviando..." : "Quiero participar →"}
         </Button>
@@ -351,20 +390,77 @@ function FormCard({
 function Field({
   label,
   children,
+  required = false,
   className = "",
 }: {
   label: string;
   children: React.ReactNode;
+  required?: boolean;
   className?: string;
 }) {
   return (
     <label className={`flex flex-col gap-1.5 ${className}`}>
-      <span className="font-[var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60">
+      <span className="font-[family-name:var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60">
         {label}
+        {required && <span className="text-pink-500 ml-0.5">*</span>}
       </span>
-      <div className="[&_input]:w-full [&_input]:bg-transparent [&_input]:border-0 [&_input]:border-b [&_input]:border-white/25 [&_input]:text-white [&_input]:font-[var(--font-body)] [&_input]:text-base [&_input]:py-2.5 [&_input]:outline-none [&_input]:transition-colors [&_input::placeholder]:text-white/35 [&_input:focus]:border-white">
+      <div className="[&_input]:w-full [&_input]:bg-transparent [&_input]:border-0 [&_input]:border-b [&_input]:border-white/25 [&_input]:text-white [&_input]:font-[family-name:var(--font-body)] [&_input]:text-base [&_input]:py-2.5 [&_input]:outline-none [&_input]:transition-colors [&_input::placeholder]:text-white/35 [&_input:focus]:border-white">
         {children}
       </div>
     </label>
+  );
+}
+
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+  required = false,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: readonly string[];
+  required?: boolean;
+  className?: string;
+}) {
+  const empty = value === "";
+  return (
+    <Field label={label} required={required} className={className}>
+      <div className="relative">
+        <select
+          required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={[
+            "w-full appearance-none cursor-pointer bg-transparent border-0 border-b border-white/25",
+            "font-[family-name:var(--font-body)] text-base py-2.5 pr-8 outline-none transition-colors",
+            "focus:border-white [&>option]:text-ink",
+            empty ? "text-white/35" : "text-white",
+          ].join(" ")}
+        >
+          <option value="" disabled>
+            Seleccione una opción
+          </option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+        <svg
+          aria-hidden
+          viewBox="0 0 20 20"
+          className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 h-4 w-4 text-white/55"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        >
+          <path d="M6 8l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </Field>
   );
 }

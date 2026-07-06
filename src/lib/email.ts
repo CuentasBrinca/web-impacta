@@ -1,6 +1,6 @@
 import "server-only";
 import { Resend } from "resend";
-import { event } from "@/lib/content";
+import { event, NIVEL_OTRO, AREA_OTRO } from "@/lib/content";
 import type { FormInteres } from "@/lib/content";
 import type { PreRegistrationInput } from "@/lib/schema";
 
@@ -23,7 +23,7 @@ const FROM_ADDRESS = "Impacta IA <hola@correo.impactaia.cl>";
 
 /** Reply-to inbox per intent type — surfaces the right Brinca person. */
 const REPLY_TO_BY_INTENT: Record<FormInteres, string> = {
-  Asistir: event.contact.general,  // hola@impactaia.cl
+  Asistente: event.contact.general,  // hola@impactaia.cl
   Speaker: event.contact.general,  // hola@impactaia.cl
   Sponsor: event.contact.sponsors, // sponsors@impactaia.cl
   Media:   event.contact.press,    // prensa@impactaia.cl
@@ -38,6 +38,9 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
   const resend = new Resend(apiKey);
   const internalTo = process.env.NOTIFICATION_TO_EMAIL ?? "francisco.martinez@brinca.global";
   const userReplyTo = REPLY_TO_BY_INTENT[input.interes];
+  // Si el nivel/área es "Otro", mostramos el texto que escribió el usuario.
+  const nivelTxt = input.nivel === NIVEL_OTRO ? `${input.nivel}: ${input.nivelOtro}` : input.nivel;
+  const areaTxt = input.area === AREA_OTRO ? `${input.area}: ${input.areaOtro}` : input.area;
 
   // 1. Internal notification → Brinca team gets pinged with the new lead.
   //    Reply-To = the form submitter, so hitting "Responder" in Gmail goes
@@ -48,11 +51,13 @@ export async function sendPreRegistrationEmails(input: PreRegistrationInput) {
     replyTo: input.email,
     subject: `[Impacta IA] Nuevo pre-registro · ${input.interes} · ${input.empresa}`,
     text: [
-      `Nombre:   ${input.nombre}`,
-      `Email:    ${input.email}`,
-      `Empresa:  ${input.empresa}`,
-      `Cargo:    ${input.cargo}`,
-      `Interés:  ${input.interes}`,
+      `Nombre:       ${input.nombre}`,
+      `Email:        ${input.email}`,
+      `Organización: ${input.empresa}`,
+      `Nivel:        ${nivelTxt}`,
+      `Área:         ${areaTxt}`,
+      `Interés:      ${input.interes}`,
+      ...(input.motivacion ? [``, `Motivación:`, input.motivacion] : []),
       ``,
       `Consent (Ley 21.719): ${input.consent ? "sí" : "no"}`,
       ``,

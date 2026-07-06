@@ -34,6 +34,8 @@ export type Registration = {
   email: string;
   empresa: string;
   cargo: string;
+  area: string | null;
+  motivacion: string | null;
   interes: string;
   consent: boolean;
   source: string | null;

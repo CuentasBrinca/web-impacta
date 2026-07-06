@@ -40,7 +40,7 @@ function WhatsappShare() {
       target="_blank"
       rel="noopener noreferrer"
       data-share="whatsapp"
-      className="md:hidden group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-[#25D366]/40 hover:border-[#25D366] bg-paper text-ink font-[var(--font-body)] text-sm font-semibold transition-colors duration-200 active:scale-[0.98]"
+      className="md:hidden group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-[#25D366]/40 hover:border-[#25D366] bg-paper text-ink font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-200 active:scale-[0.98]"
       aria-label="Comparte por WhatsApp"
     >
       <WhatsappIcon className="text-[#25D366] transition-transform duration-200 group-hover:scale-110" />
@@ -86,7 +86,7 @@ function CopyLinkShare() {
     <button
       type="button"
       onClick={handle}
-      className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-ink-faint hover:border-ink bg-paper text-ink font-[var(--font-body)] text-sm font-semibold transition-colors duration-200 active:scale-[0.98]"
+      className="group inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-ink-faint hover:border-ink bg-paper text-ink font-[family-name:var(--font-body)] text-sm font-semibold transition-colors duration-200 active:scale-[0.98]"
       aria-label="Copiar link al portapapeles"
     >
       <svg
