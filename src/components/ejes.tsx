@@ -18,6 +18,9 @@ export function Ejes() {
 
   return (
     <section id="ejes" className="relative bg-[#CFCFCF] overflow-hidden px-6 sm:px-10 py-24 sm:py-32">
+      {/* Línea negra en el cambio de color (blanco → gris) */}
+      <div className="absolute top-0 left-0 right-0 h-5 bg-black" />
+
       <div className="relative mx-auto max-w-[1280px]">
         <div className="max-w-[1180px] mb-16">
           <div className="eyebrow">Tres ejes · un objetivo</div>
