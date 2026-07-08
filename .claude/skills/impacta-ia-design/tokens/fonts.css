@@ -1,0 +1,78 @@
+/* ============================================================
+   Impacta IA · @font-face declarations
+   Fonts pulled from the live impactaia.cl build.
+   - Funnel Display  : open (Google Fonts) — variable, weights 300–800
+   - Google Sans Flex: Google — body, weights 300–900
+   - FH Lecturis     : PROPRIETARY (subset shipped by the site). See readme.
+   - FH Lecturis Rounded : PROPRIETARY (subset). See readme.
+   ============================================================ */
+
+/* ---- Funnel Display (display / headings) ---- */
+@font-face {
+  font-family: "Funnel Display";
+  src: url("../assets/fonts/FunnelDisplay-Variable.ttf") format("truetype-variations");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Google Sans Flex (body) ---- */
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-Light.ttf") format("truetype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-Medium.ttf") format("truetype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-SemiBold.ttf") format("truetype");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-Bold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("../assets/fonts/GoogleSansFlex-Black.ttf") format("truetype");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+
+/* ---- FH Lecturis (brand / editorial accent) — SUBSET ---- */
+@font-face {
+  font-family: "FH Lecturis";
+  src: url("../assets/fonts/FHLecturis-Light.otf") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FH Lecturis";
+  src: url("../assets/fonts/FHLecturis-Regular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FH Lecturis";
+  src: url("../assets/fonts/FHLecturis-Bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* ---- FH Lecturis Rounded (labels / wordmark) — SUBSET ---- */
+@font-face {
+  font-family: "FH Lecturis Rounded";
+  src: url("../assets/fonts/FHLecturisRounded-Regular.otf") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "FH Lecturis Rounded";
+  src: url("../assets/fonts/FHLecturisRounded-Bold.otf") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}

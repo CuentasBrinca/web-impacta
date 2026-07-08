@@ -1,0 +1,47 @@
+/* ============================================================
+   Impacta IA · Spacing, radii, shadows, layout
+   ============================================================ */
+:root {
+  /* ---------- Spacing scale (4px base) ---------- */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+  --space-10: 8rem;     /* 128 — section rhythm */
+
+  /* ---------- Radii ---------- */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ---------- Border widths ---------- */
+  --border-w: 1px;  /* @kind other */
+
+  /* ---------- Shadows (subtle on dark; glow for accents) ---------- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.5);
+  --glow-pink: 0 0 0 1px #ed1e7940, 0 12px 40px #ed1e7933;
+  --glow-teal: 0 0 40px #1dd2b333;
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast: 140ms;   /* @kind other */
+  --dur: 240ms;        /* @kind other */
+  --dur-slow: 500ms;   /* @kind other */
+
+  /* ---------- Layout ---------- */
+  --container: 1200px;          /* @kind other */
+  --container-narrow: 880px;    /* @kind other */
+  --gutter: clamp(1.25rem, 4vw, 4rem);  /* @kind spacing */
+}

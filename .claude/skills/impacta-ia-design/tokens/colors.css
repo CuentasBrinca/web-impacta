@@ -1,0 +1,83 @@
+/* ============================================================
+   Impacta IA · Color tokens
+   Palette sampled directly from the impactaia.cl build.
+   The brand lives on near-black surfaces with three luminous
+   accents — magenta pink (primary), teal, electric blue —
+   the "connected nodes" network motif.
+   ============================================================ */
+:root {
+  /* ---------- Brand · Magenta Pink (primary accent) ---------- */
+  --pink-100: #fbd2e4;
+  --pink-300: #f478af;
+  --pink-400: #f14b94;
+  --pink-500: #ed1e79;   /* PRIMARY brand color */
+
+  /* ---------- Brand · Teal (secondary accent) ---------- */
+  --teal-100: #d2f6f0;
+  --teal-300: #77e4d1;
+  --teal-400: #4adbc2;
+  --teal-500: #1dd2b3;
+  --teal-700: #0f8a75;
+
+  /* ---------- Brand · Electric Blue (tertiary accent) ---------- */
+  --blue-400: #6666ff;
+  --blue-500: #3333ff;
+  --blue-600: #0000ff;
+
+  /* ---------- Neutrals · dark surfaces ---------- */
+  --ink-900: #0e0e10;    /* page background */
+  --ink-850: #111113;
+  --ink-800: #161618;
+  --ink-750: #18181a;
+  --ink-500: #747476;    /* muted gray text */
+  --paper-300: #cfcfcf;
+  --paper-200: #d1d1d1;
+  --paper-150: #d9d9d9;
+  --paper-100: #f5f5f5;
+  --white: #ffffff;
+
+  /* ---------- White alpha ladder (text/borders on dark) ---------- */
+  --w-92: #ffffffe6;
+  --w-80: #ffffffcc;
+  --w-70: #ffffffb3;
+  --w-55: #ffffff8c;
+  --w-50: #ffffff80;
+  --w-35: #ffffff59;
+  --w-25: #ffffff40;
+  --w-15: #ffffff26;
+  --w-10: #ffffff1a;
+  --w-06: #ffffff0f;
+  --w-04: #ffffff0a;
+
+  /* ---------- Semantic (utility) ---------- */
+  --whatsapp: #25d366;
+
+  /* ============================================================
+     Semantic aliases — reference these in components
+     ============================================================ */
+  --accent:            var(--pink-500);
+  --accent-hover:      var(--pink-400);
+  --accent-soft:       #ed1e791a;   /* 10% pink tint fill */
+  --accent-teal:       var(--teal-500);
+  --accent-blue:       var(--blue-400);
+
+  --surface-page:      var(--ink-900);
+  --surface-raised:    var(--ink-800);
+  --surface-card:      var(--ink-750);
+  --surface-hover:     var(--w-04);
+
+  --border-subtle:     var(--w-10);
+  --border-default:    var(--w-15);
+  --border-strong:     var(--w-25);
+
+  --text-primary:      var(--white);
+  --text-secondary:    var(--w-70);
+  --text-tertiary:     var(--w-50);
+  --text-muted:        var(--w-35);
+  --text-on-accent:    var(--white);
+
+  /* Eje / track accent mapping (used across cards + icons) */
+  --eje-innovar:       var(--pink-500);
+  --eje-adoptar:       var(--blue-400);
+  --eje-escalar:       var(--teal-500);
+}

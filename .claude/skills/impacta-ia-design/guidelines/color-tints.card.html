@@ -1,0 +1,33 @@
+<!-- @dsCard group="Colors" viewport="700x210" name="Accent tints" subtitle="Pink · teal · blue ramps for fills & states" -->
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body{margin:0;background:var(--surface-page);font-family:var(--font-body);padding:24px;}
+  .stack{display:flex;flex-direction:column;gap:12px;}
+  .ramp{display:flex;gap:8px;align-items:center;}
+  .lbl{width:64px;font-family:var(--font-lecturis-rounded);font-weight:700;font-size:12px;color:var(--text-secondary);}
+  .chip{flex:1;height:44px;border-radius:var(--radius-sm);border:1px solid var(--w-10);
+    display:flex;align-items:flex-end;padding:5px 8px;font-size:10px;color:#000;font-variant-numeric:tabular-nums;}
+</style></head><body>
+<div class="stack">
+  <div class="ramp"><span class="lbl">Pink</span>
+    <div class="chip" style="background:var(--pink-100)">100</div>
+    <div class="chip" style="background:var(--pink-300)">300</div>
+    <div class="chip" style="background:var(--pink-400)">400</div>
+    <div class="chip" style="background:var(--pink-500);color:#fff">500</div>
+  </div>
+  <div class="ramp"><span class="lbl">Teal</span>
+    <div class="chip" style="background:var(--teal-100)">100</div>
+    <div class="chip" style="background:var(--teal-300)">300</div>
+    <div class="chip" style="background:var(--teal-500)">500</div>
+    <div class="chip" style="background:var(--teal-700);color:#fff">700</div>
+  </div>
+  <div class="ramp"><span class="lbl">Blue</span>
+    <div class="chip" style="background:var(--blue-400);color:#fff">400</div>
+    <div class="chip" style="background:var(--blue-500);color:#fff">500</div>
+    <div class="chip" style="background:var(--blue-600);color:#fff">600</div>
+    <div class="chip" style="background:var(--accent-soft);color:#fff;border-color:var(--w-15)">soft</div>
+  </div>
+</div>
+</body></html>

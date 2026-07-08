@@ -1,0 +1,48 @@
+/* ============================================================
+   Impacta IA · Typography tokens
+   Display   → Funnel Display  (large headlines, statements)
+   Editorial → FH Lecturis     (brand accent / wordmark serif-less)
+   Labels    → FH Lecturis Rounded (eyebrows, buttons, tags)
+   Body      → Google Sans Flex (everything else)
+   ============================================================ */
+:root {
+  /* ---------- Font families ---------- */
+  --font-display: "Funnel Display", "Google Sans Flex", system-ui, sans-serif;
+  --font-lecturis: "FH Lecturis", "Google Sans Flex", system-ui, sans-serif;
+  --font-lecturis-rounded: "FH Lecturis Rounded", "FH Lecturis", system-ui, sans-serif;
+  --font-body: "Google Sans Flex", system-ui, -apple-system, sans-serif;
+
+  /* ---------- Weights ---------- */
+  --fw-light: 300;      /* @kind other */
+  --fw-regular: 400;    /* @kind other */
+  --fw-medium: 500;     /* @kind other */
+  --fw-semibold: 600;   /* @kind other */
+  --fw-bold: 700;       /* @kind other */
+  --fw-black: 900;      /* @kind other */
+
+  /* ---------- Type scale (rem, 16px base) ---------- */
+  --text-2xs: 0.6875rem;   /* 11px — micro labels */
+  --text-xs:  0.75rem;     /* 12px */
+  --text-sm:  0.875rem;    /* 14px */
+  --text-base:1rem;        /* 16px */
+  --text-md:  1.125rem;    /* 18px */
+  --text-lg:  1.375rem;    /* 22px */
+  --text-xl:  1.75rem;     /* 28px */
+  --text-2xl: 2.25rem;     /* 36px */
+  --text-3xl: 3rem;        /* 48px */
+  --text-4xl: 4rem;        /* 64px */
+  --text-5xl: 5.25rem;     /* 84px — hero */
+
+  /* ---------- Line heights ---------- */
+  --leading-tight: 1.02;   /* display headlines */
+  --leading-snug: 1.15;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.6;  /* body copy */
+
+  /* ---------- Letter spacing ---------- */
+  --tracking-tight: -0.03em;   /* big display @kind other */
+  --tracking-snug: -0.015em;   /* @kind other */
+  --tracking-normal: 0;        /* @kind other */
+  --tracking-wide: 0.02em;     /* @kind other */
+  --tracking-label: 0.14em;    /* uppercase eyebrows @kind other */
+}

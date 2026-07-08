@@ -1,0 +1,82 @@
+<!-- @dsCard group="Components" viewport="700x520" name="Core" subtitle="Buttons, tags, eyebrows, stats & cards" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin:0; background:var(--surface-page); color:var(--text-primary);
+    font-family:var(--font-body); padding:28px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-bottom:26px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  h4 { font-family:var(--font-lecturis-rounded); font-weight:700; font-size:11px;
+    text-transform:uppercase; letter-spacing:.14em; color:var(--text-tertiary);
+    margin:0 0 14px; }
+  a { color:var(--pink-300); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { Button, Tag, Eyebrow, Stat, Card } = window.ImpactaIADesignSystem_4dab94;
+function Demo(){
+  return (
+    <React.Fragment>
+      <h4>Buttons</h4>
+      <div className="row">
+        <Button variant="primary" arrow>Quiero participar</Button>
+        <Button variant="secondary">Ser sponsor</Button>
+        <Button variant="ghost" arrow>Ver programa</Button>
+        <Button variant="whatsapp">WhatsApp</Button>
+        <Button variant="primary" disabled>Cupos agotados</Button>
+      </div>
+      <div className="row">
+        <Button size="sm" variant="secondary">sm</Button>
+        <Button size="md" variant="secondary">md</Button>
+        <Button size="lg" variant="primary" arrow>lg</Button>
+      </div>
+
+      <h4>Eyebrows &amp; Tags</h4>
+      <div className="row">
+        <Eyebrow>El contexto</Eyebrow>
+        <Eyebrow accent={false}>Datos preliminares</Eyebrow>
+      </div>
+      <div className="row">
+        <Tag tone="pink">Innovación</Tag>
+        <Tag tone="blue">Adopción</Tag>
+        <Tag tone="teal">Escalamiento</Tag>
+        <Tag tone="neutral">Chile</Tag>
+        <Tag tone="teal" solid>Confirmado</Tag>
+      </div>
+
+      <h4>Stats</h4>
+      <div className="row" style={{gap:'40px'}}>
+        <Stat value="37%" label="de empresas chilenas usa IA de forma sistemática" />
+        <Stat value="1 de 5" label="proyectos de IA llega a producción" accent="teal" />
+        <Stat value="+400" label="cupos curados" accent="blue" />
+      </div>
+
+      <h4>Cards</h4>
+      <div className="grid2">
+        <Card hover accent="pink">
+          <Eyebrow>Eje 01</Eyebrow>
+          <div style={{fontFamily:'var(--font-display)',fontSize:'22px',margin:'10px 0 6px'}}>Innovar</div>
+          <div style={{color:'var(--text-secondary)',fontSize:'14px'}}>Emprender con IA — startups, MVPs y vibe-coding.</div>
+        </Card>
+        <Card hover accent="teal">
+          <Eyebrow>Eje 03</Eyebrow>
+          <div style={{fontFamily:'var(--font-display)',fontSize:'22px',margin:'10px 0 6px'}}>Escalar</div>
+          <div style={{color:'var(--text-secondary)',fontSize:'14px'}}>IA con I+D — supercómputo e infraestructura.</div>
+        </Card>
+      </div>
+    </React.Fragment>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script>
+</body>
+</html>
