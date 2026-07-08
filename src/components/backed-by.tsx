@@ -5,7 +5,7 @@ export function BackedBy() {
   return (
     <section className="bg-paper text-ink px-6 sm:px-10 py-14 sm:py-16 border-y border-ink-faint">
       <div className="mx-auto max-w-[1280px]">
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-10">
+        <div className="flex flex-col items-center gap-10 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-x-12 sm:gap-y-10">
           {partnerGroups.map((group) => (
             <PartnerGroupBlock key={group.label} group={group} />
           ))}
@@ -18,7 +18,7 @@ export function BackedBy() {
 function PartnerGroupBlock({ group }: { group: PartnerGroup }) {
   const attribution = group.variant === "attribution";
   return (
-    <div className={`flex flex-col gap-5 ${attribution ? "items-center" : "items-start"}`}>
+    <div className={`flex flex-col gap-5 items-center ${attribution ? "sm:items-center" : "sm:items-start"}`}>
       {!group.hideLabel && (
         <div
           className={

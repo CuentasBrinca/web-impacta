@@ -125,7 +125,7 @@ export function FormSection() {
               </div>
             </div>
             <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-white/85 max-w-[460px] mb-10">
-              Los cupos son limitados y cuidadosamente seleccionados. Deja tus datos y serás el primero en conocer el programa, los speakers y cómo asegurar tu invitación.
+              Los cupos son limitados. La organización revisará las postulaciones y comunicará posteriormente la confirmación de participación. Completa tu registro y sé de los primeros en conocer el programa, los speakers y las novedades de Impacta IA.
             </p>
             <ul className="flex flex-col gap-3.5 list-none p-0 m-0">
               {formBenefits.map((b) => (
@@ -383,6 +383,10 @@ function FormCard({
           {submitting ? "Enviando..." : "Quiero participar →"}
         </Button>
       </div>
+
+      <p className="sm:col-span-2 font-[family-name:var(--font-body)] text-xs text-white/50 leading-[1.55]">
+        Completar este formulario no garantiza la participación en el evento. Debido a la disponibilidad limitada de cupos, todas las postulaciones serán revisadas por la organización y los resultados serán comunicados posteriormente por correo electrónico.
+      </p>
     </form>
   );
 }

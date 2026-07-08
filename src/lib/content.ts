@@ -95,17 +95,17 @@ export const partnerGroups: readonly PartnerGroup[] = [
     ],
   },
   {
-    label: "Proyecto apoyado por",
-    hideLabel: true, // El texto "Proyecto apoyado por" ya viene dentro del logo de CORFO.
-    logos: [{ name: "CORFO", logo: "/img/partners/corfo-v2.png", width: 276, height: 125, sizeClass: "h-[52px] sm:h-[64px]" }],
-  },
-  {
     label: "Colaboran",
     logos: [{ name: "Universidad Adolfo Ibáñez", logo: "/img/partners/uai.png", width: 360, height: 82 }],
   },
   {
     label: "Media partner",
     logos: [{ name: "Diario Financiero", logo: "/img/partners/diario-financiero.png", width: 98, height: 85 }],
+  },
+  {
+    label: "Proyecto apoyado por",
+    hideLabel: true, // El texto "Proyecto apoyado por" ya viene dentro del logo de CORFO.
+    logos: [{ name: "CORFO", logo: "/img/partners/corfo-v2.png", width: 276, height: 125, sizeClass: "h-[52px] sm:h-[64px]" }],
   },
 ];
 
@@ -338,9 +338,9 @@ export const formAreaOptions = [
 export type FormArea = (typeof formAreaOptions)[number];
 
 export const formBenefits = [
-  { dot: "var(--color-mint-500)", txt: "Prioridad para asegurar tu cupo en la primera ola de invitaciones" },
-  { dot: "var(--color-blue-300)", txt: "Programa completo y line-up de speakers en mayo" },
-  { dot: "var(--color-pink-500)", txt: "Newsletter mensual con casos chilenos de IA" },
+  { dot: "var(--color-mint-500)", txt: "Prioridad para ser considerado en la primera ola de invitaciones." },
+  { dot: "var(--color-blue-300)", txt: "Acceso anticipado al programa y line-up de speakers." },
+  { dot: "var(--color-pink-500)", txt: "Actualizaciones y contenidos exclusivos sobre Impacta IA." },
 ] as const;
 
 /**
@@ -378,7 +378,6 @@ export const footerColumns: ReadonlyArray<{ readonly h: string; readonly l: Read
     l: [
       { t: "LinkedIn",  a: "https://www.linkedin.com/company/brincaglobal/" },
       { t: "Instagram", a: "https://www.instagram.com/brinca.global/" },
-      { t: "Facebook",  a: "https://www.facebook.com/brinca.global" },
     ],
   },
 ];

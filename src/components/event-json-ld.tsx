@@ -87,7 +87,6 @@ export function EventJsonLd() {
           "https://www.brinca.com",
           "https://www.linkedin.com/company/brincaglobal/",
           "https://www.instagram.com/brinca.global/",
-          "https://www.facebook.com/brinca.global",
         ],
         address: {
           "@type": "PostalAddress",
