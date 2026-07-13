@@ -329,7 +329,7 @@ export const agendaFranjas = [
 export const agenda: readonly AgendaDay[] = [
   {
     day: "Día 1",
-    date: "Martes 01 Sep",
+    date: "Miércoles 02 Sep",
     blocks: [
       {
         n: "01",
@@ -359,7 +359,7 @@ export const agenda: readonly AgendaDay[] = [
   },
   {
     day: "Día 2",
-    date: "Miércoles 02 Sep",
+    date: "Jueves 03 Sep",
     blocks: [
       {
         n: "03",
