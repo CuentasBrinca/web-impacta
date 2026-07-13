@@ -10,7 +10,7 @@ export function Organizador() {
   return (
     <section
       id="organizador"
-      className="bg-ink text-white px-6 sm:px-10 py-24 sm:py-32 scroll-mt-24"
+      className="bg-ink text-white px-6 sm:px-10 pt-24 sm:pt-32 pb-8 sm:pb-10 scroll-mt-24"
     >
       <div className="mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-20 items-end">
