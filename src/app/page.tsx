@@ -29,9 +29,9 @@ export default function HomePage() {
         <BackedBy />
         <Problema />
         <Ejes />
-        <ParaQuien />
         <Jornadas />
         <Speakers />
+        <ParaQuien />
         <QueVasAVivir />
         <Organizador />
         <FormSection />

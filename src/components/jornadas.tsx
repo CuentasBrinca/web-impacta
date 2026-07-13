@@ -91,7 +91,7 @@ export function Jornadas() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="programa" className="bg-night text-white px-6 sm:px-10 py-24 sm:py-32 scroll-mt-24">
+    <section id="programa" className="bg-night text-white px-6 sm:px-10 pt-24 sm:pt-32 pb-8 sm:pb-10 scroll-mt-24">
       <div className="mx-auto max-w-[1280px]">
         {/* Encabezado */}
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6 mb-14">

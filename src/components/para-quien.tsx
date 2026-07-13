@@ -2,7 +2,7 @@ import { profiles } from "@/lib/content";
 
 export function ParaQuien() {
   return (
-    <section id="para-quien" className="bg-paper px-6 sm:px-10 py-24 sm:py-32">
+    <section id="para-quien" className="bg-paper px-6 sm:px-10 pt-24 sm:pt-32 pb-12 sm:pb-16">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start mb-14">
           <div>
