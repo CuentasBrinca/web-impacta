@@ -14,8 +14,8 @@ export function ParaQuien() {
               Diseñado para quienes lideran la transformación.
             </h2>
           </div>
-          <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft lg:mt-16">
-            400 cupos curados — un piso de seniority y una mezcla intencional de industrias. Networking entre pares reales.
+          <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft lg:mt-16 lg:ml-5">
+            Dirigido a tomadores de decisión de las principales empresas del país, con participación multisectorial y speakers nacionales e internacionales. Un punto de encuentro único donde se toman decisiones, se cierran acuerdos y nacen las colaboraciones que impulsan el crecimiento de tu empresa.
           </p>
         </div>
 

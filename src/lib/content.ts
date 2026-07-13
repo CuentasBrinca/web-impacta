@@ -123,7 +123,7 @@ export const ejes = [
     title: "Innovar",
     sub: "Emprender con IA",
     desc:
-      "Startups, MVPs y la práctica del vibe-coding. Cómo construir productos nuevos sobre modelos generativos en 2026.",
+      "Tendencias globales, expertos internacionales, startups del ecosistema y talleres de vibe-coding para transformar los desafíos en nuevas oportunidades de negocio.",
     icon: "/img/icon-innovar-v2.png",
     color: "#B11362",
     tint: "var(--color-pink-100)",
@@ -135,7 +135,7 @@ export const ejes = [
     title: "Adoptar",
     sub: "IA en la empresa",
     desc:
-      "Casos reales, paneles por función y mediciones concretas de ROI. Para equipos que están dando los primeros pasos con IA generativa.",
+      "Gobernanza corporativa, futuro del trabajo y casos reales que muestran cómo pasar de iniciativas de IA fragmentadas a una adopción estratégica que se traduce en impacto real en la rentabilidad del negocio.",
     icon: "/img/icon-adoptar-v2.png",
     color: "var(--color-blue-500)",
     tint: "var(--color-blue-100)",
@@ -147,7 +147,7 @@ export const ejes = [
     title: "Escalar",
     sub: "IA con I+D",
     desc:
-      "Supercómputo, Ley I+D, datasets nacionales y la infraestructura que sostiene la IA a escala industrial.",
+      "Cómo llevar la IA del piloto a la operación y convertirla en ventaja competitiva a través de rediseño de procesos, eficiencia operativa e infraestructura que escala el crecimiento.",
     icon: "/img/icon-escalar-v2.png",
     color: "#0F8A75",
     tint: "var(--color-mint-100)",
