@@ -290,6 +290,99 @@ export const numeros = [
   { num: 2,   suffix: "",  lbl: "días de inmersión",  note: "2 y 3 de septiembre" },
 ] as const;
 
+/**
+ * Agenda por día. Columnas = día; filas = franja (AM / PM). Cada bloque
+ * declara su color de acento (hex, para derivar tintes con alfa) y el color de
+ * texto que va sobre el pill "BLOQUE 0X".
+ */
+export type AgendaFranja = "AM" | "PM";
+
+export type AgendaBlock = {
+  readonly n: string;
+  readonly franja: AgendaFranja;
+  /** Acento del bloque (hex) — borde, flechas, pill y "Ver detalle". */
+  readonly accent: string;
+  /** Color de texto sobre el pill de color sólido. */
+  readonly onAccent: string;
+  readonly title: string;
+  readonly points: readonly string[];
+};
+
+export type AgendaDay = {
+  readonly day: string;
+  readonly date: string;
+  /** Bloques en orden [AM, PM]. */
+  readonly blocks: readonly AgendaBlock[];
+};
+
+export const agendaFranjas = [
+  { key: "AM", label: "AM · Mañana" },
+  { key: "PM", label: "PM · Tarde" },
+] as const;
+
+export const agenda: readonly AgendaDay[] = [
+  {
+    day: "Día 1",
+    date: "Martes 01 Sep",
+    blocks: [
+      {
+        n: "01",
+        franja: "AM",
+        accent: "#ED1E79",
+        onAccent: "#ffffff",
+        title: "IA como decisión estratégica: del gobierno corporativo al retorno",
+        points: [
+          "Gobierno corporativo, ética y transparencia desde la alta dirección.",
+          "Del piloto al impacto: rentabilidad y el costo de no actuar.",
+          "Dimensión público-privada: IA en el Estado y competitividad.",
+        ],
+      },
+      {
+        n: "02",
+        franja: "PM",
+        accent: "#ED1E79",
+        onAccent: "#ffffff",
+        title: "Personas al centro: liderar la transformación cultural con IA",
+        points: [
+          "El futuro del trabajo con IA: impacto en las personas y gestión del cambio.",
+          "Inteligencia Aumentada: multiplicador del talento humano.",
+          "Herramientas de IA para RR.HH. y una adopción responsable.",
+        ],
+      },
+    ],
+  },
+  {
+    day: "Día 2",
+    date: "Miércoles 02 Sep",
+    blocks: [
+      {
+        n: "03",
+        franja: "AM",
+        accent: "#1DD2B3",
+        onAccent: "#0E0E10",
+        title: "Arquitectura del futuro: escalar la IA con gobernanza y seguridad",
+        points: [
+          "Nuevos paradigmas TI: el futuro del SaaS y la IA como motor de productividad.",
+          "Gobernanza, seguridad y mitigación de riesgos en la IA agéntica.",
+          "Del dato al valor: calidad y conectividad de la información.",
+        ],
+      },
+      {
+        n: "04",
+        franja: "PM",
+        accent: "#1DD2B3",
+        onAccent: "#0E0E10",
+        title: "IA en la operación: rediseñar procesos y medir el impacto",
+        points: [
+          "Rediseño y automatización de procesos con IA: casos reales de impacto.",
+          "Medición de impacto y fuerza de trabajo híbrida (humanos + IA).",
+          "Agentes de IA y No-Code. Encuentro con startups para desafíos concretos.",
+        ],
+      },
+    ],
+  },
+] as const;
+
 export const programa = [
   { tag: "Keynotes",          title: "Keynotes con voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.webp" },
   { tag: "Paneles",           title: "Paneles por función ejecutiva",      desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.webp" },

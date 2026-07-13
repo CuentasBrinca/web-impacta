@@ -11,6 +11,7 @@ import { BackedBy } from "@/components/backed-by";
 import { Problema } from "@/components/problema";
 import { Ejes } from "@/components/ejes";
 import { ParaQuien } from "@/components/para-quien";
+import { Jornadas } from "@/components/jornadas";
 import { Speakers } from "@/components/speakers";
 import { QueVasAVivir } from "@/components/que-vas-a-vivir";
 import { Organizador } from "@/components/organizador";
@@ -29,6 +30,7 @@ export default function HomePage() {
         <Problema />
         <Ejes />
         <ParaQuien />
+        <Jornadas />
         <Speakers />
         <QueVasAVivir />
         <Organizador />
