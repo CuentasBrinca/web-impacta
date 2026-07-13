@@ -17,7 +17,7 @@ export function Problema() {
             <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[540px] text-pretty mb-6">
               Pero en Chile, la adopción empresarial apenas comienza.
               <br />
-              Impacta IA reúne a quienes están liderando el cambio,
+              Impacta IA reúne a quienes están liderando el cambio.
             </p>
           </Reveal>
 
