@@ -194,6 +194,8 @@ export type Speaker = {
   readonly country: string;
   /** Tema/track de la charla — usado por el filtro en la página /speakers. */
   readonly tema?: SpeakerTema;
+  /** URL de LinkedIn del orador (opcional). */
+  readonly linkedin?: string;
 };
 
 /** Temas (tracks) de las charlas — alineados a los tres ejes del evento. */
@@ -252,6 +254,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Italia",
     tema: "Innovación",
+    linkedin: "https://www.linkedin.com/in/stefanopuntoni/",
   },
   {
     name: "Daniel Strode",
@@ -259,6 +262,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Reino Unido",
     tema: "Innovación",
+    linkedin: "https://www.linkedin.com/in/danstrode/",
   },
   {
     name: "Jeannette Escudero",
@@ -266,6 +270,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Chile",
     tema: "Escalamiento",
+    linkedin: "https://www.linkedin.com/in/jeannette-escudero-vasquez/",
   },
   {
     name: "Nicolás Rivas",
@@ -273,6 +278,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Chile",
     tema: "Adopción",
+    linkedin: "https://www.linkedin.com/in/nicolasrivasabud/",
   },
   ...placeholderSpeakers(16, 2),
 ]);

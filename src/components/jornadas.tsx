@@ -61,13 +61,6 @@ function BlockCard({ block, className, delay }: { block: AgendaBlock; className?
         ))}
       </ul>
 
-      <div
-        className="mt-6 inline-flex items-center gap-1.5 text-[13px] font-bold font-[family-name:var(--font-body)]"
-        style={{ color: accent }}
-      >
-        Ver detalle
-        <span aria-hidden>→</span>
-      </div>
     </motion.article>
   );
 }
