@@ -18,8 +18,6 @@ export function Speakers() {
             className="font-[family-name:var(--font-display)] font-bold leading-[0.96] tracking-[-0.035em] m-0 text-white"
             style={{ fontSize: "clamp(44px, 6.5vw, 96px)" }}
           >
-            Conversaciones reales
-            <br />
             Speakers.
           </h2>
 

@@ -38,29 +38,24 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
       <p className="font-[family-name:var(--font-body)] text-[15px] leading-[1.5] text-white/60 m-0">
         {speaker.role}
       </p>
-      {(speaker.country || speaker.tema) && (
+      {/* Tag principal: bandera + institución de origen (el eje/tema ya no se
+          muestra — sigue existiendo en los datos solo para el filtro de /speakers). */}
+      {speaker.country && (
         <div className="mt-auto pt-5 flex flex-wrap items-center gap-2">
-          {speaker.country && (
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 py-1.5 pl-1.5 pr-4">
-              {countryFlags[speaker.country] && (
-                <Image
-                  src={countryFlags[speaker.country]}
-                  alt=""
-                  width={22}
-                  height={22}
-                  className="h-[22px] w-[22px] rounded-full shrink-0"
-                />
-              )}
-              <span className="font-[family-name:var(--font-body)] text-[13px] text-white/80">
-                {speaker.country}
-              </span>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 py-1.5 pl-1.5 pr-4">
+            {countryFlags[speaker.country] && (
+              <Image
+                src={countryFlags[speaker.country]}
+                alt={speaker.country}
+                width={22}
+                height={22}
+                className="h-[22px] w-[22px] rounded-full shrink-0"
+              />
+            )}
+            <span className="font-[family-name:var(--font-body)] text-[13px] text-white/80">
+              {speaker.institucion ?? speaker.country}
             </span>
-          )}
-          {speaker.tema && (
-            <span className="inline-flex items-center rounded-full border border-white/25 px-4 py-1.5 font-[family-name:var(--font-body)] text-[13px] text-white/80">
-              {speaker.tema}
-            </span>
-          )}
+          </span>
         </div>
       )}
     </article>

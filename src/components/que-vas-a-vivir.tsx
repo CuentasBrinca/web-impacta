@@ -21,9 +21,6 @@ export function QueVasAVivir() {
               </h2>
             </div>
             <div className="flex flex-col gap-4 max-w-[360px]">
-              <p className="font-[family-name:var(--font-body)] text-[15px] leading-[1.5] text-ink-soft m-0">
-                Programa completo en junio. Pre-regístrate para recibirlo primero — y para asegurar tu cupo en la primera ola de invitaciones.
-              </p>
               <ShareButton />
             </div>
           </div>
@@ -42,7 +39,8 @@ export function QueVasAVivir() {
         />
 
         <div className="relative z-10 mx-auto max-w-[1280px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+          {/* 4 actividades → 2×2 en pantallas medianas y grandes */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
             {programa.map((it) => (
               <article
                 key={it.title}

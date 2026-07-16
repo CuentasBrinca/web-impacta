@@ -195,7 +195,10 @@ export type Speaker = {
   readonly role: string;
   readonly photo: string | null;
   readonly country: string;
-  /** Tema/track de la charla — usado por el filtro en la página /speakers. */
+  /** Institución de origen — se muestra junto a la bandera en la tarjeta. */
+  readonly institucion?: string;
+  /** Tema/track de la charla — SOLO para el filtro de /speakers (ya no se
+      muestra como tag en la tarjeta). */
   readonly tema?: SpeakerTema;
   /** URL de LinkedIn del orador (opcional). */
   readonly linkedin?: string;
@@ -211,6 +214,7 @@ export const countryFlags: Record<string, string> = {
   Italia: "/img/flags/it.svg",
   "Reino Unido": "/img/flags/gb.svg",
   Chile: "/img/flags/cl.svg",
+  USA: "/img/flags/us.svg",
 };
 
 export const speakerDays = ["Día 1", "Día 2"] as const;
@@ -253,17 +257,19 @@ function withPhotos(
 const speakersDia1: readonly Speaker[] = withPhotos([
   {
     name: "Stefano Puntoni",
-    role: "Codirector del programa de investigación sobre inteligencia artificial humana de Wharton.",
+    role: "Experto global en la intersección de IA, negocios y ciencia del comportamiento. Lidera la investigación sobre cómo la automatización y la IA generativa transforman la productividad corporativa.",
     photo: null,
-    country: "Italia",
+    country: "USA",
+    institucion: "Wharton, Penn U.",
     tema: "Innovación",
     linkedin: "https://www.linkedin.com/in/stefanopuntoni/",
   },
   {
     name: "Daniel Strode",
-    role: "Autor del best seller “La ventaja del innovador”. Experto en transformación del trabajo en la era de la IA.",
+    role: "Experto en IA y RR.HH. y profesor de Duke University. Asesora a empresas globales en la integración de IA y talento. Autor de The Quiet Reckoning, una guía para liderar la transformación digital y el futuro del trabajo.",
     photo: null,
-    country: "Reino Unido",
+    country: "USA",
+    institucion: "Duke University",
     tema: "Innovación",
     linkedin: "https://www.linkedin.com/in/danstrode/",
   },
@@ -272,6 +278,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     role: "Directora Ejecutiva Talento Digital para Chile. Experta en innovación y desarrollo de equipos para la adopción tecnológica.",
     photo: null,
     country: "Chile",
+    institucion: "Talento Digital",
     tema: "Escalamiento",
     linkedin: "https://www.linkedin.com/in/jeannette-escudero-vasquez/",
   },
@@ -280,6 +287,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     role: "Líder de datos, inteligencia de negocios e inteligencia artificial en startups, Gerente de Soluciones IA en Brinca.",
     photo: null,
     country: "Chile",
+    institucion: "Brinca",
     tema: "Adopción",
     linkedin: "https://www.linkedin.com/in/nicolasrivasabud/",
   },
@@ -392,13 +400,12 @@ export const agenda: readonly AgendaDay[] = [
   },
 ] as const;
 
+/** Los 4 tipos de actividad del evento — textos finales (jul 2026). */
 export const programa = [
-  { tag: "Keynotes",          title: "Keynotes con voces internacionales", desc: "Speakers de referencia mundial en IA aplicada — anuncios en mayo.",                    img: "/img/Group-1.webp" },
-  { tag: "Paneles",           title: "Paneles por función ejecutiva",      desc: "Mesas paralelas para CEO, CTO, CFO y Dir. de Innovación. Sin teoría, casos reales.",   img: "/img/Group-2.webp" },
-  { tag: "Challenge briefs",  title: "Challenge Briefs en equipo",         desc: "Grupos curados resuelven un brief real de una empresa chilena.",                       img: "/img/Group-3.webp" },
-  { tag: "Demos",             title: "Talleres de IA",                     desc: "Implementaciones que ya están funcionando — código y métricas a la vista.",            img: "/img/Group.webp"   },
-  { tag: "Networking",        title: "Matchmaking y networking",           desc: "Rondas de conexión dirigida entre empresas, proveedores y startups.",                 img: "/img/Group-4.webp" },
-  { tag: "Afterparty",        title: "Afterparty: cierre exclusivo",       desc: "Espacio íntimo para cerrar negocios y construir alianzas.",                            img: "/img/Group-5.webp" },
+  { tag: "Charlas",    title: "Charlas Magistrales",               desc: "Referentes de vanguardia exponen visiones y tendencias, inspirando a la audiencia a redefinir sus límites tecnológicos.",              img: "/img/Group-1.webp" },
+  { tag: "Paneles",    title: "Paneles de Expertos",               desc: "Líderes y expertos debaten sobre tendencias y desafíos, compartiendo mejores prácticas desde la experiencia.",                          img: "/img/Group-2.webp" },
+  { tag: "Talleres",   title: "Talleres y Resolución de Desafíos", desc: "Espacios prácticos y hands-on donde líderes, expertos y startups trabajan codo a codo sobre desafíos reales del negocio.",              img: "/img/Group-3.webp" },
+  { tag: "Networking", title: "Matchmaking y Networking",          desc: "Encuentros diseñados para conectar tomadores de decisión, referentes y soluciones del ecosistema.",                                     img: "/img/Group-4.webp" },
 ] as const;
 
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
