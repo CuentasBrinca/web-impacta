@@ -33,6 +33,7 @@ type FormState = {
   diaSep3: boolean;
   motivacion: string;
   consent: boolean;
+  consentSponsors: boolean;
   website: string; // honeypot
 };
 
@@ -49,6 +50,7 @@ const INITIAL: FormState = {
   diaSep3: false,
   motivacion: "",
   consent: false,
+  consentSponsors: false,
   website: "",
 };
 
@@ -501,6 +503,23 @@ function FormCard({
           (Ley 21.719). Puedo darme de baja en cualquier momento.
         </span>
       </label>
+
+      {/* Opt-in OPCIONAL: compartir contacto con sponsors (solo Asistente) */}
+      {form.interes === "Asistente" && (
+        <label className="sm:col-span-2 flex items-start gap-3 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            checked={form.consentSponsors}
+            onChange={(e) => update("consentSponsors", e.target.checked)}
+            className="mt-1 w-4 h-4 accent-blue-500 cursor-pointer"
+          />
+          <span className="font-[family-name:var(--font-body)] text-xs text-white/65 leading-[1.55]">
+            Acepto que Brinca comparta mis datos de contacto (nombre y correo) con los sponsors
+            oficiales del evento para que me envíen información sobre sus servicios.{" "}
+            <span className="text-white/40">(opcional)</span>
+          </span>
+        </label>
+      )}
 
       {error && (
         <div role="alert" className="sm:col-span-2 text-sm text-pink-400 bg-pink-500/10 border border-pink-500/30 rounded-lg px-4 py-3">

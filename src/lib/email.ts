@@ -169,6 +169,7 @@ async function sendInternalNotification(args: {
       ...(input.motivacion ? [``, `Motivación:`, input.motivacion] : []),
       ``,
       `Consent (Ley 21.719): ${input.consent ? "sí" : "no"}`,
+      `Comparte contacto con sponsors: ${input.consentSponsors ? "SÍ" : "no"}`,
       ``,
       `Admin: https://www.impactaia.cl/admin`,
     ].join("\n"),

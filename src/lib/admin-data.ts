@@ -16,7 +16,7 @@ export {
 export type { Status, DayStatus, Registration, Filters } from "@/lib/admin-shared";
 
 const SELECT_COLS =
-  "id, created_at, nombre, email, empresa, cargo, area, motivacion, interes, consent, source, status, notes, " +
+  "id, created_at, nombre, email, empresa, cargo, area, motivacion, interes, consent, consent_sponsors, source, status, notes, " +
   "dia_sep2, dia_sep3, is_test, email_type, email_status, email_error, email_sent_at";
 
 const DAY_COL: Record<EventDayKey, "dia_sep2" | "dia_sep3"> = {

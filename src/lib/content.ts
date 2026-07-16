@@ -96,7 +96,10 @@ export const partnerGroups: readonly PartnerGroup[] = [
   },
   {
     label: "Colaboran",
-    logos: [{ name: "Universidad Adolfo Ibáñez", logo: "/img/partners/uai.png", width: 360, height: 82 }],
+    logos: [
+      { name: "Universidad Adolfo Ibáñez", logo: "/img/partners/uai.png", width: 360, height: 82 },
+      { name: "DEC", logo: "/img/partners/dec.png", width: 375, height: 190, sizeClass: "h-11 sm:h-14" },
+    ],
   },
   {
     label: "Media partner",

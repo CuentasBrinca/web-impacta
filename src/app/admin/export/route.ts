@@ -63,6 +63,7 @@ export async function GET(request: Request) {
     { header: "Notas", key: "notas", width: 40 },
     { header: "Fuente", key: "source", width: 16 },
     { header: "Consentimiento", key: "consent", width: 15 },
+    { header: "Comparte con sponsors", key: "consentSponsors", width: 20 },
   ];
 
   for (const r of rows) {
@@ -82,6 +83,7 @@ export async function GET(request: Request) {
       notas: r.notes ?? "",
       source: r.source ?? "",
       consent: r.consent ? "Sí" : "No",
+      consentSponsors: r.consent_sponsors ? "Sí" : "No",
     });
   }
 
@@ -93,7 +95,7 @@ export async function GET(request: Request) {
   header.eachCell((cell) => {
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0000FF" } };
   });
-  ws.autoFilter = { from: "A1", to: "O1" };
+  ws.autoFilter = { from: "A1", to: "P1" };
 
   const buf = await wb.xlsx.writeBuffer();
 

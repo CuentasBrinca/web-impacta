@@ -1,0 +1,20 @@
+/** Verifica el CTA de calendario en la pantalla de éxito de producción (1 inscripción test). */
+import { chromium } from "playwright";
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto("https://www.impactaia.cl/#form", { waitUntil: "networkidle" });
+await page.reload({ waitUntil: "networkidle" });
+await page.fill('input[placeholder="Nombre y Apellido"]', "Prueba CTA Web");
+await page.fill('input[placeholder="nombre@empresa.cl"]', "francisco.martinez@brinca.global");
+await page.fill('input[placeholder="Empresa"]', "Brinca (prueba interna)");
+await page.selectOption("select >> nth=0", "Gerente");
+await page.selectOption("select >> nth=1", "Innovación");
+await page.click('button[role="checkbox"]:has-text("Miércoles 2 de septiembre")');
+await page.check('input[type="checkbox"][required]');
+await page.click('button[type="submit"]');
+await page.waitForSelector("text=Confirmado.", { timeout: 25000 });
+const cta = await page.locator("text=Haz click aquí para agregar a tu calendario").count();
+console.log(cta === 1 ? "PASS: CTA visible en producción" : "FAIL: CTA no encontrado");
+await page.locator("#form").screenshot({ path: "/tmp/prod-cta.png" });
+await browser.close();
+process.exit(cta === 1 ? 0 : 1);

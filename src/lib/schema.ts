@@ -31,6 +31,8 @@ export const preRegistrationSchema = z
     consent: z.literal(true, {
       error: "Necesitamos tu consentimiento para procesar tu inscripción.",
     }),
+    // Opt-in OPCIONAL: compartir nombre y correo con sponsors oficiales.
+    consentSponsors: z.boolean().optional().default(false),
     // Honeypot — bots fill this; humans don't see it. Server rejects if non-empty.
     website: z.string().max(0).optional().default(""),
     // Turnstile token — verified server-side. Optional in dev (falls back to honeypot only).
