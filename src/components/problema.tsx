@@ -5,7 +5,7 @@ export function Problema() {
   return (
     <section id="evento" className="bg-paper px-6 sm:px-10 py-24 sm:py-32">
       <div className="mx-auto max-w-[1280px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-start">
           <Reveal>
             <div className="eyebrow">El contexto</div>
             <h2
@@ -14,20 +14,11 @@ export function Problema() {
             >
               La IA está transformando todas las industrias.
             </h2>
-            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[460px] mb-6">
+            <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[540px] text-pretty mb-6">
               Pero en Chile, la adopción empresarial apenas comienza.
               <br />
-              Impacta IA reúne a quienes están cerrando esa brecha.
+              Impacta IA reúne a quienes están liderando el cambio.
             </p>
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-paper-soft border border-ink-faint">
-              <span
-                className="w-2 h-2 rounded-full bg-mint-500"
-                style={{ boxShadow: "0 0 0 4px rgba(29,210,179,0.2)" }}
-              />
-              <span className="font-[family-name:var(--font-body)] text-[13px] font-medium text-ink">
-                Datos preliminares — informe completo en mayo
-              </span>
-            </div>
           </Reveal>
 
           <Reveal delay={0.08}>

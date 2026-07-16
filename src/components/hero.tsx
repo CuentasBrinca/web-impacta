@@ -9,10 +9,10 @@ import { dispatchFormIntent } from "@/lib/form-intent";
 const EASE = [0.2, 0, 0, 1] as const;
 
 const heroMeta = [
-  { value: "02 y 03", value2: "Septiembre", sub: undefined, big: true },
+  { value: "02 y 03", value2: "Septiembre", sub: "2026", big: true },
   { value: event.venue, value2: undefined, sub: event.venueAddress, big: false },
   { value: "2 días", value2: undefined, sub: "Presencial y gratuito.", big: true },
-  { value: "+400 cupos", value2: undefined, sub: "Exclusivo C-level, previa inscripción.", big: false },
+  { value: "Cupos limitados", value2: undefined, sub: "Exclusivo C-level, previa inscripción.", big: false },
 ] as const;
 
 export function Hero() {
@@ -52,13 +52,13 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE }}
             className="font-[family-name:var(--font-display)] font-bold leading-[1.12] tracking-[-0.035em] text-white max-w-[30ch] m-0"
-            style={{ fontSize: "clamp(34px, 5.4vw, 72px)" }}
+            style={{ fontSize: "clamp(38px, 6vw, 80px)" }}
           >
-            La conferencia de inteligencia
+            El punto de encuentro
             <br />
-            artificial para quienes
+            de IA para quienes
             <br />
-            <span className="shimmer-text">toman decisiones.</span>
+            <span className="shimmer-text">toman decisiones</span>
           </motion.h1>
 
           {/* Sub-head + CTAs */}

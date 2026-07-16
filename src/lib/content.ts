@@ -95,17 +95,17 @@ export const partnerGroups: readonly PartnerGroup[] = [
     ],
   },
   {
-    label: "Proyecto apoyado por",
-    hideLabel: true, // El texto "Proyecto apoyado por" ya viene dentro del logo de CORFO.
-    logos: [{ name: "CORFO", logo: "/img/partners/corfo-v2.png", width: 276, height: 125, sizeClass: "h-[52px] sm:h-[64px]" }],
-  },
-  {
     label: "Colaboran",
     logos: [{ name: "Universidad Adolfo Ibáñez", logo: "/img/partners/uai.png", width: 360, height: 82 }],
   },
   {
     label: "Media partner",
     logos: [{ name: "Diario Financiero", logo: "/img/partners/diario-financiero.png", width: 98, height: 85 }],
+  },
+  {
+    label: "Proyecto apoyado por",
+    hideLabel: true, // El texto "Proyecto apoyado por" ya viene dentro del logo de CORFO.
+    logos: [{ name: "CORFO", logo: "/img/partners/corfo-v2.png", width: 276, height: 125, sizeClass: "h-[52px] sm:h-[64px]" }],
   },
 ];
 
@@ -123,7 +123,7 @@ export const ejes = [
     title: "Innovar",
     sub: "Emprender con IA",
     desc:
-      "Startups, MVPs y la práctica del vibe-coding. Cómo construir productos nuevos sobre modelos generativos en 2026.",
+      "Tendencias globales, expertos internacionales, startups del ecosistema y talleres de vibe-coding para transformar los desafíos en nuevas oportunidades de negocio.",
     icon: "/img/icon-innovar-v2.png",
     color: "#B11362",
     tint: "var(--color-pink-100)",
@@ -135,7 +135,7 @@ export const ejes = [
     title: "Adoptar",
     sub: "IA en la empresa",
     desc:
-      "Casos reales, paneles por función y mediciones concretas de ROI. Para equipos que están dando los primeros pasos con IA generativa.",
+      "Gobernanza corporativa, futuro del trabajo y casos reales que muestran cómo pasar de iniciativas de IA fragmentadas a una adopción estratégica que se traduce en impacto real en la rentabilidad del negocio.",
     icon: "/img/icon-adoptar-v2.png",
     color: "var(--color-blue-500)",
     tint: "var(--color-blue-100)",
@@ -147,7 +147,7 @@ export const ejes = [
     title: "Escalar",
     sub: "IA con I+D",
     desc:
-      "Supercómputo, Ley I+D, datasets nacionales y la infraestructura que sostiene la IA a escala industrial.",
+      "Cómo llevar la IA del piloto a la operación y convertirla en ventaja competitiva a través de rediseño de procesos, eficiencia operativa e infraestructura que escala el crecimiento.",
     icon: "/img/icon-escalar-v2.png",
     color: "#0F8A75",
     tint: "var(--color-mint-100)",
@@ -194,6 +194,8 @@ export type Speaker = {
   readonly country: string;
   /** Tema/track de la charla — usado por el filtro en la página /speakers. */
   readonly tema?: SpeakerTema;
+  /** URL de LinkedIn del orador (opcional). */
+  readonly linkedin?: string;
 };
 
 /** Temas (tracks) de las charlas — alineados a los tres ejes del evento. */
@@ -252,6 +254,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Italia",
     tema: "Innovación",
+    linkedin: "https://www.linkedin.com/in/stefanopuntoni/",
   },
   {
     name: "Daniel Strode",
@@ -259,6 +262,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Reino Unido",
     tema: "Innovación",
+    linkedin: "https://www.linkedin.com/in/danstrode/",
   },
   {
     name: "Jeannette Escudero",
@@ -266,6 +270,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Chile",
     tema: "Escalamiento",
+    linkedin: "https://www.linkedin.com/in/jeannette-escudero-vasquez/",
   },
   {
     name: "Nicolás Rivas",
@@ -273,6 +278,7 @@ const speakersDia1: readonly Speaker[] = withPhotos([
     photo: null,
     country: "Chile",
     tema: "Adopción",
+    linkedin: "https://www.linkedin.com/in/nicolasrivasabud/",
   },
   ...placeholderSpeakers(16, 2),
 ]);
@@ -288,6 +294,99 @@ export const numeros = [
   { num: 12,  suffix: "+", lbl: "industrias",         note: "Banca, retail, salud, minería..." },
   { num: 3,   suffix: "",  lbl: "ejes temáticos",     note: "Adoptar · Escalar · Innovar" },
   { num: 2,   suffix: "",  lbl: "días de inmersión",  note: "2 y 3 de septiembre" },
+] as const;
+
+/**
+ * Agenda por día. Columnas = día; filas = franja (AM / PM). Cada bloque
+ * declara su color de acento (hex, para derivar tintes con alfa) y el color de
+ * texto que va sobre el pill "BLOQUE 0X".
+ */
+export type AgendaFranja = "AM" | "PM";
+
+export type AgendaBlock = {
+  readonly n: string;
+  readonly franja: AgendaFranja;
+  /** Acento del bloque (hex) — borde, flechas, pill y "Ver detalle". */
+  readonly accent: string;
+  /** Color de texto sobre el pill de color sólido. */
+  readonly onAccent: string;
+  readonly title: string;
+  readonly points: readonly string[];
+};
+
+export type AgendaDay = {
+  readonly day: string;
+  readonly date: string;
+  /** Bloques en orden [AM, PM]. */
+  readonly blocks: readonly AgendaBlock[];
+};
+
+export const agendaFranjas = [
+  { key: "AM", label: "AM · Mañana" },
+  { key: "PM", label: "PM · Tarde" },
+] as const;
+
+export const agenda: readonly AgendaDay[] = [
+  {
+    day: "Día 1",
+    date: "Miércoles 02 Sep",
+    blocks: [
+      {
+        n: "01",
+        franja: "AM",
+        accent: "#ED1E79",
+        onAccent: "#ffffff",
+        title: "IA como decisión estratégica: del gobierno corporativo al retorno",
+        points: [
+          "Gobierno corporativo, ética y transparencia desde la alta dirección.",
+          "Del piloto al impacto: rentabilidad y el costo de no actuar.",
+          "Dimensión público-privada: IA en el Estado y competitividad.",
+        ],
+      },
+      {
+        n: "02",
+        franja: "PM",
+        accent: "#ED1E79",
+        onAccent: "#ffffff",
+        title: "Personas al centro: liderar la transformación cultural con IA",
+        points: [
+          "El futuro del trabajo con IA: impacto en las personas y gestión del cambio.",
+          "Inteligencia Aumentada: multiplicador del talento humano.",
+          "Herramientas de IA para RR.HH. y una adopción responsable.",
+        ],
+      },
+    ],
+  },
+  {
+    day: "Día 2",
+    date: "Jueves 03 Sep",
+    blocks: [
+      {
+        n: "03",
+        franja: "AM",
+        accent: "#1DD2B3",
+        onAccent: "#0E0E10",
+        title: "Arquitectura del futuro: escalar la IA con gobernanza y seguridad",
+        points: [
+          "Nuevos paradigmas TI: el futuro del SaaS y la IA como motor de productividad.",
+          "Gobernanza, seguridad y mitigación de riesgos en la IA agéntica.",
+          "Del dato al valor: calidad y conectividad de la información.",
+        ],
+      },
+      {
+        n: "04",
+        franja: "PM",
+        accent: "#1DD2B3",
+        onAccent: "#0E0E10",
+        title: "IA en la operación: rediseñar procesos y medir el impacto",
+        points: [
+          "Rediseño y automatización de procesos con IA: casos reales de impacto.",
+          "Medición de impacto y fuerza de trabajo híbrida (humanos + IA).",
+          "Agentes de IA y No-Code. Encuentro con startups para desafíos concretos.",
+        ],
+      },
+    ],
+  },
 ] as const;
 
 export const programa = [
@@ -338,9 +437,9 @@ export const formAreaOptions = [
 export type FormArea = (typeof formAreaOptions)[number];
 
 export const formBenefits = [
-  { dot: "var(--color-mint-500)", txt: "Prioridad para asegurar tu cupo en la primera ola de invitaciones" },
-  { dot: "var(--color-blue-300)", txt: "Programa completo y line-up de speakers en mayo" },
-  { dot: "var(--color-pink-500)", txt: "Newsletter mensual con casos chilenos de IA" },
+  { dot: "var(--color-mint-500)", txt: "Prioridad para ser considerado en la primera ola de invitaciones." },
+  { dot: "var(--color-blue-300)", txt: "Acceso anticipado al programa y line-up de speakers." },
+  { dot: "var(--color-pink-500)", txt: "Actualizaciones y contenidos exclusivos sobre Impacta IA." },
 ] as const;
 
 /**
@@ -378,7 +477,6 @@ export const footerColumns: ReadonlyArray<{ readonly h: string; readonly l: Read
     l: [
       { t: "LinkedIn",  a: "https://www.linkedin.com/company/brincaglobal/" },
       { t: "Instagram", a: "https://www.instagram.com/brinca.global/" },
-      { t: "Facebook",  a: "https://www.facebook.com/brinca.global" },
     ],
   },
 ];

@@ -27,8 +27,8 @@ export function Ejes() {
           >
             Innova. Adopta. Escala.
           </h2>
-          <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft max-w-[620px]">
-            Que la IA funcione en tu empresa. Tres tracks paralelos durante dos días — escoge tu camino o cruza entre ellos.
+          <p className="font-[family-name:var(--font-body)] text-[clamp(17px,1.4vw,22px)] leading-[1.45] text-ink-soft">
+            Tres ejes donde el mundo corporativo, la academia y el sector público convergen: conoce dónde estás frente a tus pares, identifica oportunidades de negocio y acelera la transformación con IA en tu organización.
           </p>
         </div>
 
