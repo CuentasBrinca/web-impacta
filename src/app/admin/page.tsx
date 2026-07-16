@@ -3,14 +3,17 @@ import type { Metadata } from "next";
 import { isAuthed } from "@/lib/admin-auth";
 import {
   fetchRegistrations,
+  fetchDayStats,
   parseFilters,
   summarize,
   statusOptions,
   statusLabels,
+  dayStatusLabels,
 } from "@/lib/admin-data";
-import { formInteresOptions } from "@/lib/content";
+import { formInteresOptions, eventDays } from "@/lib/content";
 import { logout } from "./actions";
 import { RegistrationsTable } from "./registrations-table";
+import { DayStatCard, PurgeTestsButton } from "./admin-controls";
 
 export const metadata: Metadata = {
   title: "Inscritos · Impacta IA",
@@ -29,7 +32,7 @@ export default async function AdminPage({
 
   const sp = await searchParams;
   const filters = parseFilters(sp);
-  const rows = await fetchRegistrations(filters);
+  const [rows, dayStats] = await Promise.all([fetchRegistrations(filters), fetchDayStats()]);
   const stats = summarize(rows);
 
   // Build the export URL preserving the current filters.
@@ -37,9 +40,10 @@ export default async function AdminPage({
   if (filters.q) exportParams.set("q", filters.q);
   if (filters.interes) exportParams.set("interes", filters.interes);
   if (filters.status) exportParams.set("status", filters.status);
+  if (filters.dia) exportParams.set("dia", filters.dia);
   const exportHref = `/admin/export${exportParams.toString() ? `?${exportParams}` : ""}`;
 
-  const hasFilters = Boolean(filters.q || filters.interes || filters.status);
+  const hasFilters = Boolean(filters.q || filters.interes || filters.status || filters.dia || filters.test);
 
   return (
     <main className="min-h-dvh bg-paper-soft text-ink">
@@ -53,6 +57,7 @@ export default async function AdminPage({
             <h1 className="font-display text-xl font-bold leading-tight">Inscritos</h1>
           </div>
           <div className="flex items-center gap-2">
+            <PurgeTestsButton testCount={stats.tests} />
             <a
               href={exportHref}
               className="rounded-lg bg-mint-500 px-4 py-2 text-sm font-semibold text-night transition hover:bg-mint-400"
@@ -72,8 +77,15 @@ export default async function AdminPage({
       </header>
 
       <div className="mx-auto max-w-7xl px-6 py-6">
+        {/* Ocupación por día — cupo editable, cuenta real de la DB (sin pruebas) */}
+        <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {dayStats.map((d) => (
+            <DayStatCard key={d.key} stats={d} />
+          ))}
+        </section>
+
         {/* Summary cards */}
-        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <section className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           <StatCard label="Total" value={stats.total} accent="ink" big />
           {formInteresOptions.map((opt) => (
             <StatCard key={opt} label={opt} value={stats.byInteres[opt] ?? 0} />
@@ -145,6 +157,41 @@ export default async function AdminPage({
                   {statusLabels[s]}
                 </option>
               ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="dia" className="mb-1 block text-xs font-medium text-ink-soft">
+              Día
+            </label>
+            <select
+              id="dia"
+              name="dia"
+              defaultValue={filters.dia ?? ""}
+              className="rounded-lg border border-ink-faint bg-paper px-3 py-2 text-sm outline-none focus:border-blue-500"
+            >
+              <option value="">Todos</option>
+              {eventDays.map((d) =>
+                (["confirmed", "waitlisted", "selected", "cancelled"] as const).map((st) => (
+                  <option key={`${d.key}:${st}`} value={`${d.key}:${st}`}>
+                    {d.short} · {dayStatusLabels[st]}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="test" className="mb-1 block text-xs font-medium text-ink-soft">
+              Pruebas
+            </label>
+            <select
+              id="test"
+              name="test"
+              defaultValue={filters.test ?? ""}
+              className="rounded-lg border border-ink-faint bg-paper px-3 py-2 text-sm outline-none focus:border-blue-500"
+            >
+              <option value="">Mostrar todas</option>
+              <option value="ocultar">Ocultar pruebas</option>
+              <option value="solo">Solo pruebas</option>
             </select>
           </div>
           <button

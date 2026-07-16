@@ -1,5 +1,12 @@
 import { z } from "zod";
-import { formInteresOptions, formNivelOptions, formAreaOptions, NIVEL_OTRO, AREA_OTRO } from "@/lib/content";
+import {
+  formInteresOptions,
+  formNivelOptions,
+  formAreaOptions,
+  NIVEL_OTRO,
+  AREA_OTRO,
+  type EventDayKey,
+} from "@/lib/content";
 
 /**
  * Validation schema for the pre-registration form.
@@ -18,6 +25,9 @@ export const preRegistrationSchema = z
     areaOtro: z.string().trim().max(200).optional().default(""),
     motivacion: z.string().trim().max(1000).optional().default(""),
     interes: z.enum(formInteresOptions),
+    // Días de asistencia — solo aplican a interés "Asistente" (refine abajo).
+    diaSep2: z.boolean().optional().default(false),
+    diaSep3: z.boolean().optional().default(false),
     consent: z.literal(true, {
       error: "Necesitamos tu consentimiento para procesar tu inscripción.",
     }),
@@ -33,10 +43,29 @@ export const preRegistrationSchema = z
   .refine((d) => d.area !== AREA_OTRO || d.areaOtro.length >= 2, {
     error: "Especifica tu área",
     path: ["areaOtro"],
+  })
+  .refine((d) => d.interes !== "Asistente" || d.diaSep2 || d.diaSep3, {
+    error: "Selecciona al menos un día de asistencia",
+    path: ["diaSep2"],
   });
 
 export type PreRegistrationInput = z.infer<typeof preRegistrationSchema>;
 
+/**
+ * Resultado de la inscripción, del que dependen el correo enviado y la
+ * pantalla de éxito:
+ *  - confirmed_full:    ejecutivo confirmado en todos los días que marcó.
+ *  - confirmed_partial: confirmado en al menos uno; el resto en lista de espera.
+ *  - waitlisted:        ejecutivo sin cupo en ninguno de sus días.
+ *  - generic:           no ejecutivo u otros intereses (flujo actual).
+ */
+export type RegistrationOutcome = "confirmed_full" | "confirmed_partial" | "waitlisted" | "generic";
+
 export type FormResult =
-  | { ok: true }
+  | {
+      ok: true;
+      outcome: RegistrationOutcome;
+      confirmedDays: EventDayKey[];
+      waitlistedDays: EventDayKey[];
+    }
   | { ok: false; error: string; field?: keyof PreRegistrationInput };

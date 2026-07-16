@@ -401,6 +401,24 @@ export const programa = [
 export const formInteresOptions = ["Asistente", "Speaker", "Sponsor", "Media"] as const;
 export type FormInteres = (typeof formInteresOptions)[number];
 
+/**
+ * Días del evento — fuente única para el formulario, los correos de
+ * confirmación, los .ics de calendario y el panel admin. `date` debe calzar
+ * con las filas de `event_days` en la DB (migración 20260716).
+ */
+export const eventDays = [
+  { key: "sep2", date: "2026-09-02", label: "Miércoles 2 de septiembre", short: "2 sep" },
+  { key: "sep3", date: "2026-09-03", label: "Jueves 3 de septiembre", short: "3 sep" },
+] as const;
+export type EventDayKey = (typeof eventDays)[number]["key"];
+
+/** Horario de cada jornada (hora de Santiago) — usado por los eventos de calendario. */
+export const eventSchedule = {
+  start: "09:00",
+  end: "18:00",
+  timezone: "America/Santiago",
+} as const;
+
 /** Opción que dispara un campo de texto abierto en el formulario. */
 export const NIVEL_OTRO = "Otro";
 
@@ -417,6 +435,18 @@ export const formNivelOptions = [
   NIVEL_OTRO,
 ] as const;
 export type FormNivel = (typeof formNivelOptions)[number];
+
+/**
+ * Niveles que se auto-confirman al inscribirse como Asistente, mientras haya
+ * cupo en los días elegidos. "Otro" (texto libre) NUNCA auto-confirma, aunque
+ * el texto diga "gerente": la decisión queda en manos del equipo vía admin.
+ */
+export const nivelesEjecutivos = [
+  "Gerente General / CEO",
+  "Director(a)",
+  "Gerente",
+  "Subgerente",
+] as const satisfies readonly FormNivel[];
 
 /** Opción que dispara un campo de texto abierto para el área. */
 export const AREA_OTRO = "Otro";

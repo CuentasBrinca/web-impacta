@@ -9,11 +9,15 @@ import {
   formNivelOptions,
   formAreaOptions,
   formBenefits,
+  eventDays,
   NIVEL_OTRO,
   AREA_OTRO,
   type FormInteres,
+  type EventDayKey,
 } from "@/lib/content";
+import { googleCalendarUrl, outlookCalendarUrl, icsDownloadPath } from "@/lib/calendar";
 import { preRegister } from "@/app/actions/pre-register";
+import type { FormResult } from "@/lib/schema";
 import { FORM_INTENT_EVENT, takePendingFormIntent, type FormIntentDetail } from "@/lib/form-intent";
 
 type FormState = {
@@ -25,6 +29,8 @@ type FormState = {
   area: string;
   areaOtro: string;
   interes: FormInteres;
+  diaSep2: boolean;
+  diaSep3: boolean;
   motivacion: string;
   consent: boolean;
   website: string; // honeypot
@@ -39,14 +45,19 @@ const INITIAL: FormState = {
   area: "",
   areaOtro: "",
   interes: "Asistente",
+  diaSep2: false,
+  diaSep3: false,
   motivacion: "",
   consent: false,
   website: "",
 };
 
+/** Resultado exitoso del server action — define la variante de la pantalla de éxito. */
+type SuccessResult = Extract<FormResult, { ok: true }>;
+
 export function FormSection() {
   const [form, setForm] = useState<FormState>(INITIAL);
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<SuccessResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // pulseKey changes whenever an external "set-form-intent" event fires —
@@ -86,14 +97,20 @@ export function FormSection() {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (submitting) return;
+    // Los checkboxes de día no pueden expresar "al menos uno" con `required`
+    // nativo — se valida aquí (y de nuevo en el server via zod).
+    if (form.interes === "Asistente" && !form.diaSep2 && !form.diaSep3) {
+      setError("Selecciona al menos un día de asistencia.");
+      return;
+    }
     setError(null);
     setSubmitting(true);
-    const result = await preRegister(form);
+    const res = await preRegister(form);
     setSubmitting(false);
-    if (result.ok) {
-      setSent(true);
+    if (res.ok) {
+      setResult(res);
     } else {
-      setError(result.error);
+      setError(res.error);
     }
   };
 
@@ -141,7 +158,7 @@ export function FormSection() {
             </ul>
           </div>
 
-          {sent ? <SuccessCard email={form.email} /> : (
+          {result ? <SuccessCard email={form.email} result={result} /> : (
             <FormCard
               form={form}
               update={update}
@@ -157,7 +174,21 @@ export function FormSection() {
   );
 }
 
-function SuccessCard({ email }: { email: string }) {
+const DAY_LABEL = Object.fromEntries(eventDays.map((d) => [d.key, d.label])) as Record<EventDayKey, string>;
+
+/** "el miércoles 2 de septiembre" / "el miércoles 2 y el jueves 3 de septiembre" */
+function dayPhrase(keys: EventDayKey[]): string {
+  const lower = keys.map((k) => DAY_LABEL[k].charAt(0).toLowerCase() + DAY_LABEL[k].slice(1));
+  if (lower.length === 1) return `el ${lower[0]}`;
+  return `el ${lower[0].replace(" de septiembre", "")} y el ${lower[1]}`;
+}
+
+function SuccessCard({ email, result }: { email: string; result: SuccessResult }) {
+  const { outcome, confirmedDays, waitlistedDays } = result;
+  const confirmed = outcome === "confirmed_full" || outcome === "confirmed_partial";
+
+  const heading = confirmed ? "Confirmado." : outcome === "waitlisted" ? "En lista de espera." : "Listo.";
+
   return (
     <div className="border border-white/20 p-12 sm:p-14 rounded-2xl bg-white/[0.03]">
       <div
@@ -171,12 +202,65 @@ function SuccessCard({ email }: { email: string }) {
           color: "transparent",
         }}
       >
-        Listo.
+        {heading}
       </div>
-      <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
-        Recibimos tu interés. Te escribiremos a <strong className="text-white">{email}</strong> con la próxima actualización del programa.
-      </p>
+
+      {confirmed ? (
+        <>
+          <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
+            Tu cupo está confirmado para <strong className="text-white">{dayPhrase(confirmedDays)}</strong>.
+            {outcome === "confirmed_partial" && (
+              <>
+                {" "}Para {dayPhrase(waitlistedDays)} los cupos están completos: quedaste en lista de espera
+                y te avisaremos si se libera un lugar.
+              </>
+            )}
+            {" "}Te enviamos los detalles a <strong className="text-white">{email}</strong>.
+          </p>
+          <div className="mt-8 flex flex-col gap-4">
+            {confirmedDays.map((k) => (
+              <div key={k}>
+                <div className="font-[family-name:var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60 mb-2.5">
+                  {DAY_LABEL[k]} · 09:00–18:00
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <CalendarButton href={googleCalendarUrl(k)} external label="Google Calendar" />
+                  <CalendarButton href={outlookCalendarUrl(k)} external label="Outlook" />
+                  <CalendarButton href={icsDownloadPath(k)} label="Apple / .ics" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : outcome === "waitlisted" ? (
+        <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
+          Los cupos para {dayPhrase(waitlistedDays)} están completos, así que quedaste en{" "}
+          <strong className="text-white">lista de espera</strong>. Si se libera un lugar, te escribiremos
+          de inmediato a <strong className="text-white">{email}</strong>.
+        </p>
+      ) : (
+        <p className="font-[family-name:var(--font-body)] text-base sm:text-[17px] leading-[1.5] text-white/85 m-0 max-w-[440px]">
+          Recibimos tu interés. Te escribiremos a <strong className="text-white">{email}</strong> para
+          confirmar tu invitación.
+        </p>
+      )}
     </div>
+  );
+}
+
+function CalendarButton({ href, label, external = false }: { href: string; label: string; external?: boolean }) {
+  return (
+    <a
+      href={href}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      className="inline-flex items-center gap-2 px-[18px] py-2.5 rounded-full font-[family-name:var(--font-body)] text-sm border border-white/25 text-white/85 hover:text-white hover:border-white/60 transition-colors duration-150"
+    >
+      <svg aria-hidden viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="4.5" width="14" height="12" rx="2" />
+        <path d="M3 8.5h14M7 3v3M13 3v3" strokeLinecap="round" />
+      </svg>
+      {label}
+    </a>
   );
 }
 
@@ -344,6 +428,49 @@ function FormCard({
           })}
         </div>
       </Field>
+
+      {form.interes === "Asistente" && (
+        <Field label="Día(s) de asistencia" required className="sm:col-span-2">
+          <div className="flex flex-wrap gap-2 mt-1.5">
+            {eventDays.map((d) => {
+              const checked = d.key === "sep2" ? form.diaSep2 : form.diaSep3;
+              return (
+                <button
+                  type="button"
+                  key={d.key}
+                  role="checkbox"
+                  aria-checked={checked}
+                  onClick={() => update(d.key === "sep2" ? "diaSep2" : "diaSep3", !checked)}
+                  className={[
+                    "flex items-center gap-2.5 px-[18px] py-2.5 rounded-full font-[family-name:var(--font-body)] text-sm transition-colors duration-150 border cursor-pointer",
+                    checked
+                      ? "bg-white text-ink border-white"
+                      : "bg-transparent text-white/70 border-white/25 hover:text-white hover:border-white/50",
+                  ].join(" ")}
+                >
+                  <span
+                    aria-hidden
+                    className={[
+                      "flex items-center justify-center w-4 h-4 rounded border transition-colors",
+                      checked ? "bg-ink border-ink" : "border-white/40",
+                    ].join(" ")}
+                  >
+                    {checked && (
+                      <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M2.5 6.5l2.5 2.5 4.5-5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                  </span>
+                  {d.label}
+                </button>
+              );
+            })}
+          </div>
+          <p className="font-[family-name:var(--font-body)] text-xs text-white/45 mt-2 mb-0">
+            Puedes marcar ambos días.
+          </p>
+        </Field>
+      )}
 
       <Field label="Motivación para asistir" className="sm:col-span-2">
         <input
