@@ -24,6 +24,7 @@ type FormState = {
   nombre: string;
   email: string;
   empresa: string;
+  telefono: string;
   nivel: string;
   nivelOtro: string;
   area: string;
@@ -41,6 +42,7 @@ const INITIAL: FormState = {
   nombre: "",
   email: "",
   empresa: "",
+  telefono: "",
   nivel: "",
   nivelOtro: "",
   area: "",
@@ -56,6 +58,32 @@ const INITIAL: FormState = {
 
 /** Resultado exitoso del server action — define la variante de la pantalla de éxito. */
 type SuccessResult = Extract<FormResult, { ok: true }>;
+
+/**
+ * Formatea el teléfono al escribir con la convención chilena:
+ * "+56 9 1234 5678" (código país fijo, dígito, bloque de 4, bloque de 4).
+ * Vacío se mantiene vacío — el campo es opcional.
+ */
+function formatTelefono(raw: string): string {
+  // Prefijo a medio escribir ("+", "+5", "+56"): se conserva tal cual para
+  // que la siguiente tecla se siga interpretando como parte del código de
+  // país y no como dígito del número.
+  if (/^\+5?6?$/.test(raw)) return raw;
+  // Si el valor trae el prefijo (+, +5, +56 — completo o a medio escribir),
+  // se quita TEXTUALMENTE antes de extraer dígitos: así un "5" o "6" del
+  // código de país nunca se confunde con dígitos del número.
+  const rest = raw.startsWith("+") ? raw.replace(/^\+5?6?/, "") : raw;
+  let digits = rest.replace(/\D/g, "");
+  // Pegado sin "+": "56912345678" → quitar el 56 solo si sobran dígitos.
+  if (!raw.startsWith("+") && digits.startsWith("56") && digits.length > 9) {
+    digits = digits.slice(2);
+  }
+  digits = digits.slice(0, 9);
+  if (!digits) return "";
+  return `+56 ${[digits.slice(0, 1), digits.slice(1, 5), digits.slice(5, 9)]
+    .filter(Boolean)
+    .join(" ")}`;
+}
 
 export function FormSection() {
   const [form, setForm] = useState<FormState>(INITIAL);
@@ -322,6 +350,14 @@ function FormCard({
           type="text" required placeholder="Empresa" autoComplete="organization"
           value={form.empresa}
           onChange={(e) => update("empresa", e.target.value)}
+        />
+      </Field>
+
+      <Field label="Teléfono" className="sm:col-span-2">
+        <input
+          type="tel" placeholder="+56 9 1234 5678" autoComplete="tel" inputMode="tel"
+          value={form.telefono}
+          onChange={(e) => update("telefono", formatTelefono(e.target.value))}
         />
       </Field>
 
