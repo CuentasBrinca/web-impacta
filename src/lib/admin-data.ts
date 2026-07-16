@@ -27,7 +27,10 @@ const DAY_COL: Record<EventDayKey, "dia_sep2" | "dia_sep3"> = {
 /** Fetch registrations (newest first) matching the given filters. */
 export async function fetchRegistrations(filters: Filters): Promise<Registration[]> {
   const sb = supabaseAdmin();
-  let query = sb.from("pre_registrations").select(SELECT_COLS).order("created_at", { ascending: false });
+  // Al filtrar por lista de espera, el orden es de llegada (asc): el primero
+  // de la lista es el primero a promover. En el resto, lo más nuevo arriba.
+  const waitlistView = filters.dia?.endsWith(":waitlisted") ?? false;
+  let query = sb.from("pre_registrations").select(SELECT_COLS).order("created_at", { ascending: waitlistView });
 
   if (filters.interes) query = query.eq("interes", filters.interes);
   if (filters.status) query = query.eq("status", filters.status);
