@@ -91,6 +91,7 @@ export async function preRegister(input: unknown): Promise<FormResult> {
     p_dia3: isAsistente && data.diaSep3,
     p_auto_confirm: autoConfirm,
     p_is_test: isTest,
+    p_consent_sponsors: isAsistente && data.consentSponsors,
   });
 
   if (error) {

@@ -68,6 +68,7 @@ export type Registration = {
   motivacion: string | null;
   interes: string;
   consent: boolean;
+  consent_sponsors: boolean;
   source: string | null;
   status: Status;
   notes: string | null;

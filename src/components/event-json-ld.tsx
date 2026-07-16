@@ -72,6 +72,7 @@ export function EventJsonLd() {
             name: "Universidad Adolfo Ibáñez",
             url: "https://www.uai.cl",
           },
+          { "@type": "Organization", name: "DEC" },
           { "@type": "Organization", name: "SCAI-Lab" },
         ],
       },
