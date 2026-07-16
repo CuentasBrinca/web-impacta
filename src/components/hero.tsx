@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button, ButtonLink } from "@/components/ui/button";
+import { Countdown } from "@/components/countdown";
 import { event } from "@/lib/content";
 import { dispatchFormIntent } from "@/lib/form-intent";
 
@@ -82,12 +83,22 @@ export function Hero() {
           </motion.div>
         </div>
 
+        {/* Cuenta regresiva al evento */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+          className="mt-14"
+        >
+          <Countdown />
+        </motion.div>
+
         {/* Bottom meta row */}
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.24 }}
-          className="mt-16 pt-7 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6"
+          className="mt-10 pt-7 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-6"
         >
           {heroMeta.map((m) => (
             <div key={m.value}>
