@@ -3,14 +3,34 @@
 import { headers } from "next/headers";
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { NIVEL_OTRO, AREA_OTRO } from "@/lib/content";
-import { preRegistrationSchema, type FormResult } from "@/lib/schema";
+import { NIVEL_OTRO, AREA_OTRO, nivelesEjecutivos, type EventDayKey } from "@/lib/content";
+import { preRegistrationSchema, type FormResult, type RegistrationOutcome } from "@/lib/schema";
 import { verifyTurnstile } from "@/lib/turnstile";
-import { sendPreRegistrationEmails } from "@/lib/email";
+import { sendRegistrationEmail } from "@/lib/email";
+
+/**
+ * Dominios cuyo correo marca la fila como prueba del equipo: pueden
+ * inscribirse N veces, no cuentan cupo y se excluyen del export.
+ * Configurable sin deploy vía TEST_EMAIL_DOMAINS (coma-separado).
+ */
+function isTestEmail(email: string): boolean {
+  const domains = (process.env.TEST_EMAIL_DOMAINS ?? "brinca.global,brinca.com")
+    .split(",")
+    .map((d) => d.trim().toLowerCase())
+    .filter(Boolean);
+  const domain = email.split("@")[1]?.toLowerCase();
+  return !!domain && domains.includes(domain);
+}
 
 /**
  * Server Action invoked by FormSection on submit.
  * Returns a serializable result that the client maps to UI state.
+ *
+ * La decisión de confirmación (cupo por día) vive en la RPC
+ * `register_attendee` de Postgres: el conteo y la inserción son una sola
+ * transacción, así dos inscripciones simultáneas no pueden confirmar ambas
+ * el último cupo. Aquí solo se decide QUIÉN califica (ejecutivo + Asistente)
+ * y se traduce el resultado a UI + correo.
  */
 export async function preRegister(input: unknown): Promise<FormResult> {
   // 1. Validate
@@ -28,7 +48,7 @@ export async function preRegister(input: unknown): Promise<FormResult> {
   // 2. Honeypot — bots fill it; humans never see the field
   if (data.website && data.website.length > 0) {
     // Fail silently — pretend success to the bot
-    return { ok: true };
+    return { ok: true, outcome: "generic", confirmedDays: [], waitlistedDays: [] };
   }
 
   // 3. Read headers (UA + IP) for audit + rate-limit signal
@@ -47,38 +67,76 @@ export async function preRegister(input: unknown): Promise<FormResult> {
   const salt = process.env.IP_HASH_SALT ?? "impacta-ia-default-salt";
   const ipHash = ip ? createHash("sha256").update(ip + salt).digest("hex") : null;
 
-  // 6. Insert
+  // 6. Insert vía RPC atómica (chequeo de cupo + escritura en una transacción)
+  const isAsistente = data.interes === "Asistente";
+  const autoConfirm =
+    isAsistente && (nivelesEjecutivos as readonly string[]).includes(data.nivel);
+  const isTest = isTestEmail(data.email);
+
   const sb = supabaseAdmin();
-  const { error } = await sb.from("pre_registrations").insert({
-    nombre: data.nombre,
-    email: data.email,
-    empresa: data.empresa,
+  const { data: rpc, error } = await sb.rpc("register_attendee", {
+    p_nombre: data.nombre,
+    p_email: data.email,
+    p_empresa: data.empresa,
     // `cargo` (columna legacy) almacena el nivel; si es "Otro", el texto libre.
-    cargo: data.nivel === NIVEL_OTRO ? data.nivelOtro : data.nivel,
-    area: data.area === AREA_OTRO ? data.areaOtro : data.area,
-    motivacion: data.motivacion || null,
-    interes: data.interes,
-    consent: data.consent,
-    source: "landing-form",
-    user_agent: userAgent,
-    ip_hash: ipHash,
+    p_cargo: data.nivel === NIVEL_OTRO ? data.nivelOtro : data.nivel,
+    p_area: data.area === AREA_OTRO ? data.areaOtro : data.area,
+    p_motivacion: data.motivacion || null,
+    p_interes: data.interes,
+    p_consent: data.consent,
+    p_source: "landing-form",
+    p_user_agent: userAgent,
+    p_ip_hash: ipHash,
+    p_dia2: isAsistente && data.diaSep2,
+    p_dia3: isAsistente && data.diaSep3,
+    p_auto_confirm: autoConfirm,
+    p_is_test: isTest,
   });
 
   if (error) {
-    // Postgres unique_violation = "23505"
-    if (error.code === "23505") {
-      return {
-        ok: false,
-        error: "Este email ya está registrado. Te escribiremos cuando publiquemos el programa.",
-        field: "email",
-      };
-    }
-    console.error("[pre-register] insert failed", error);
+    console.error("[pre-register] rpc failed", error);
     return { ok: false, error: "No pudimos registrar tu interés ahora. Intenta de nuevo en unos minutos." };
   }
 
-  // 7. Emails — fire and forget; don't block the UX on email failures
-  void sendPreRegistrationEmails(data).catch((e) => console.error("[pre-register] email error", e));
+  if (!rpc?.ok) {
+    if (rpc?.error === "duplicate") {
+      return {
+        ok: false,
+        error: "Este email ya está registrado. Te escribiremos para confirmar tu invitación.",
+        field: "email",
+      };
+    }
+    console.error("[pre-register] rpc rejected", rpc);
+    return { ok: false, error: "No pudimos registrar tu interés ahora. Intenta de nuevo en unos minutos." };
+  }
 
-  return { ok: true };
+  // 7. Traducir estados por día → resultado para UI y correo
+  const confirmedDays: EventDayKey[] = [];
+  const waitlistedDays: EventDayKey[] = [];
+  if (rpc.dia_sep2 === "confirmed") confirmedDays.push("sep2");
+  if (rpc.dia_sep2 === "waitlisted") waitlistedDays.push("sep2");
+  if (rpc.dia_sep3 === "confirmed") confirmedDays.push("sep3");
+  if (rpc.dia_sep3 === "waitlisted") waitlistedDays.push("sep3");
+
+  const outcome: RegistrationOutcome = !autoConfirm
+    ? "generic"
+    : confirmedDays.length > 0 && waitlistedDays.length === 0
+      ? "confirmed_full"
+      : confirmedDays.length > 0
+        ? "confirmed_partial"
+        : "waitlisted";
+
+  // 8. Correo según resultado. Se espera (no fire-and-forget): en serverless
+  //    una promesa suelta puede morir con la función, y además registramos
+  //    el éxito/fallo del envío en la fila para poder reenviar desde el admin.
+  //    Un fallo de correo NO bota la inscripción: ya está en la base.
+  await sendRegistrationEmail({
+    input: data,
+    registrationId: rpc.id as string,
+    outcome,
+    confirmedDays,
+    waitlistedDays,
+  }).catch((e) => console.error("[pre-register] email error", e));
+
+  return { ok: true, outcome, confirmedDays, waitlistedDays };
 }

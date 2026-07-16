@@ -1,6 +1,15 @@
 import ExcelJS from "exceljs";
 import { isAuthed } from "@/lib/admin-auth";
-import { fetchRegistrations, parseFilters, statusLabels, type Status } from "@/lib/admin-data";
+import {
+  fetchRegistrations,
+  parseFilters,
+  statusLabels,
+  dayStatusLabels,
+  type Status,
+  type DayStatus,
+} from "@/lib/admin-data";
+
+const dayLabel = (st: DayStatus) => (st ? dayStatusLabels[st] : "—");
 
 // Node runtime (exceljs + Buffer); never cache — live data.
 export const runtime = "nodejs";
@@ -25,6 +34,9 @@ export async function GET(request: Request) {
     q: url.searchParams.get("q") ?? undefined,
     interes: url.searchParams.get("interes") ?? undefined,
     status: url.searchParams.get("status") ?? undefined,
+    dia: url.searchParams.get("dia") ?? undefined,
+    // El export SIEMPRE excluye las filas de prueba del equipo.
+    test: "ocultar",
   });
 
   const rows = await fetchRegistrations(filters);
@@ -44,7 +56,10 @@ export async function GET(request: Request) {
     { header: "Área", key: "area", width: 26 },
     { header: "Motivación", key: "motivacion", width: 40 },
     { header: "Interés", key: "interes", width: 12 },
-    { header: "Estado", key: "estado", width: 14 },
+    { header: "Día 2 sep", key: "dia2", width: 12 },
+    { header: "Día 3 sep", key: "dia3", width: 12 },
+    { header: "Estado", key: "estado", width: 16 },
+    { header: "Último correo", key: "correo", width: 18 },
     { header: "Notas", key: "notas", width: 40 },
     { header: "Fuente", key: "source", width: 16 },
     { header: "Consentimiento", key: "consent", width: 15 },
@@ -60,7 +75,10 @@ export async function GET(request: Request) {
       area: r.area ?? "",
       motivacion: r.motivacion ?? "",
       interes: r.interes,
+      dia2: dayLabel(r.dia_sep2),
+      dia3: dayLabel(r.dia_sep3),
       estado: statusLabels[r.status as Status] ?? r.status,
+      correo: r.email_status === "sent" ? "Enviado" : r.email_status === "failed" ? "FALLÓ" : "—",
       notas: r.notes ?? "",
       source: r.source ?? "",
       consent: r.consent ? "Sí" : "No",
@@ -75,7 +93,7 @@ export async function GET(request: Request) {
   header.eachCell((cell) => {
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0000FF" } };
   });
-  ws.autoFilter = { from: "A1", to: "L1" };
+  ws.autoFilter = { from: "A1", to: "O1" };
 
   const buf = await wb.xlsx.writeBuffer();
 
