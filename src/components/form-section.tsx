@@ -217,7 +217,10 @@ function SuccessCard({ email, result }: { email: string; result: SuccessResult }
             )}
             {" "}Te enviamos los detalles a <strong className="text-white">{email}</strong>.
           </p>
-          <div className="mt-8 flex flex-col gap-4">
+          <p className="font-[family-name:var(--font-body)] text-sm font-semibold text-white mt-8 mb-4">
+            Haz click aquí para agregar a tu calendario:
+          </p>
+          <div className="flex flex-col gap-4">
             {confirmedDays.map((k) => (
               <div key={k}>
                 <div className="font-[family-name:var(--font-body)] text-xs font-semibold tracking-[0.12em] uppercase text-white/60 mb-2.5">
