@@ -46,23 +46,30 @@ export function Countdown() {
   if (parts === null) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-2.5 sm:gap-3" role="timer" aria-label="Cuenta regresiva al evento">
-      {UNITS.map((u) => (
-        <div
-          key={u.key}
-          className="flex flex-col items-center justify-center rounded-2xl border border-white/15 bg-white/[0.05] backdrop-blur-sm px-4 py-3 sm:px-5 sm:py-4 min-w-[76px] sm:min-w-[96px]"
-        >
-          <span
-            className="font-[family-name:var(--font-display)] font-bold leading-none tracking-[-0.02em] text-pink-500 tabular-nums"
-            style={{ fontSize: "clamp(28px, 3.2vw, 44px)" }}
+    <div role="timer" aria-label="Cuenta regresiva al inicio del evento">
+      <div className="font-[family-name:var(--font-body)] text-[11px] font-semibold tracking-[0.16em] uppercase text-white/60 mb-3">
+        El evento comienza en
+      </div>
+      {/* grid-cols-4 fijo: las 4 tarjetas SIEMPRE miden lo mismo y nunca
+          caen a una segunda fila (la etiqueta más larga no estira su celda) */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-[420px] sm:max-w-none sm:w-fit">
+        {UNITS.map((u) => (
+          <div
+            key={u.key}
+            className="flex flex-col items-center justify-center rounded-2xl border border-white/15 bg-white/[0.05] backdrop-blur-sm px-2 py-3 sm:py-4 sm:w-[112px]"
           >
-            {parts === "ssr" ? "--" : String(parts[u.key]).padStart(2, "0")}
-          </span>
-          <span className="font-[family-name:var(--font-body)] text-[11px] font-semibold tracking-[0.14em] uppercase text-white/55 mt-2">
-            {u.label}
-          </span>
-        </div>
-      ))}
+            <span
+              className="font-[family-name:var(--font-display)] font-bold leading-none tracking-[-0.02em] text-pink-500 tabular-nums"
+              style={{ fontSize: "clamp(26px, 3.2vw, 44px)" }}
+            >
+              {parts === "ssr" ? "--" : String(parts[u.key]).padStart(2, "0")}
+            </span>
+            <span className="font-[family-name:var(--font-body)] text-[10px] sm:text-[11px] font-semibold tracking-[0.12em] uppercase text-white/55 mt-2">
+              {u.label}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
