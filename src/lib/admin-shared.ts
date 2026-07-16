@@ -62,6 +62,7 @@ export type Registration = {
   created_at: string;
   nombre: string;
   email: string;
+  telefono: string | null;
   empresa: string;
   cargo: string;
   area: string | null;

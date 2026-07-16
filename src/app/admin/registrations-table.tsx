@@ -104,6 +104,9 @@ function Row({ r }: { r: Registration }) {
           <a href={`mailto:${r.email}`} className="text-blue-500 hover:underline">
             {r.email}
           </a>
+          {r.telefono && (
+            <span className="block text-xs text-ink-soft whitespace-nowrap">{r.telefono}</span>
+          )}
         </td>
         <td className="px-4 py-3">{r.empresa}</td>
         <td className="px-4 py-3 text-ink-soft">

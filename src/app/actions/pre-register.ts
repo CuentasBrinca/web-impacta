@@ -92,6 +92,7 @@ export async function preRegister(input: unknown): Promise<FormResult> {
     p_auto_confirm: autoConfirm,
     p_is_test: isTest,
     p_consent_sponsors: isAsistente && data.consentSponsors,
+    p_telefono: data.telefono || null,
   });
 
   if (error) {

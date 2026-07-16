@@ -51,6 +51,7 @@ export async function GET(request: Request) {
     { header: "Fecha", key: "fecha", width: 18 },
     { header: "Nombre", key: "nombre", width: 26 },
     { header: "Email", key: "email", width: 30 },
+    { header: "Teléfono", key: "telefono", width: 18 },
     { header: "Empresa", key: "empresa", width: 26 },
     { header: "Nivel", key: "cargo", width: 26 },
     { header: "Área", key: "area", width: 26 },
@@ -71,6 +72,7 @@ export async function GET(request: Request) {
       fecha: dateFmt.format(new Date(r.created_at)),
       nombre: r.nombre,
       email: r.email,
+      telefono: r.telefono ?? "",
       empresa: r.empresa,
       cargo: r.cargo,
       area: r.area ?? "",
@@ -95,7 +97,7 @@ export async function GET(request: Request) {
   header.eachCell((cell) => {
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0000FF" } };
   });
-  ws.autoFilter = { from: "A1", to: "P1" };
+  ws.autoFilter = { from: "A1", to: "Q1" };
 
   const buf = await wb.xlsx.writeBuffer();
 

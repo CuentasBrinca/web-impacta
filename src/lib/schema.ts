@@ -17,6 +17,16 @@ export const preRegistrationSchema = z
     nombre: z.string().trim().min(2, "Nombre muy corto").max(200),
     email: z.email("Email inválido").trim().toLowerCase().max(320),
     empresa: z.string().trim().min(2, "Organización muy corta").max(200),
+    // Teléfono OPCIONAL, formato canónico chileno "+56 9 1234 5678" (el input
+    // lo formatea al escribir; aquí solo se valida que esté completo o vacío).
+    telefono: z
+      .string()
+      .trim()
+      .optional()
+      .default("")
+      .refine((v) => v === "" || /^\+56 \d \d{4} \d{4}$/.test(v), {
+        error: "Completa el teléfono (+56 9 1234 5678) o déjalo vacío",
+      }),
     nivel: z.enum(formNivelOptions, { error: "Selecciona tu nivel de responsabilidad" }),
     // Texto libre cuando nivel === NIVEL_OTRO (validado en el refine de abajo).
     nivelOtro: z.string().trim().max(200).optional().default(""),

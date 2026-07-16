@@ -160,6 +160,7 @@ async function sendInternalNotification(args: {
     text: [
       `Nombre:       ${input.nombre}`,
       `Email:        ${input.email}`,
+      `Teléfono:     ${input.telefono || "—"}`,
       `Organización: ${input.empresa}`,
       `Nivel:        ${nivelTxt}`,
       `Área:         ${areaTxt}`,
