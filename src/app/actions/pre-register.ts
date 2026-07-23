@@ -3,7 +3,7 @@
 import { headers } from "next/headers";
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { NIVEL_OTRO, AREA_OTRO, nivelesEjecutivos, type EventDayKey } from "@/lib/content";
+import { NIVEL_OTRO, AREA_OTRO, type EventDayKey } from "@/lib/content";
 import { preRegistrationSchema, type FormResult, type RegistrationOutcome } from "@/lib/schema";
 import { verifyTurnstile } from "@/lib/turnstile";
 import { sendRegistrationEmail } from "@/lib/email";
@@ -69,8 +69,10 @@ export async function preRegister(input: unknown): Promise<FormResult> {
 
   // 6. Insert vía RPC atómica (chequeo de cupo + escritura en una transacción)
   const isAsistente = data.interes === "Asistente";
-  const autoConfirm =
-    isAsistente && (nivelesEjecutivos as readonly string[]).includes(data.nivel);
+  // Auto-confirmación por nivel DESHABILITADA: toda inscripción queda en
+  // revisión manual (admin). Para reactivarla, restaurar:
+  //   isAsistente && (nivelesEjecutivos as readonly string[]).includes(data.nivel)
+  const autoConfirm = false;
   const isTest = isTestEmail(data.email);
 
   const sb = supabaseAdmin();
